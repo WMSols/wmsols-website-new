@@ -44,9 +44,8 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
   return (
     <div className="hidden lg:flex items-center justify-between w-full h-full">
       <Logo />
-
       {/* Main Nav Links */}
-      <nav className="flex items-center text-base font-serif space-x-8 h-full">
+      <nav className="flex items-center text-base space-x-8 h-full ">
         {navigationData.map((navItem) => {
           const isActive = currentPath === navItem.href || currentPath.startsWith(navItem.href + '/');
           const hasChildren = navItem.children && navItem.children.length > 0;

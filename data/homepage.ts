@@ -52,6 +52,7 @@
     // Add more logos here as the list grows
   ];
 
+import { InsightCardProps } from '@/components/common/InsightCard';
   import { Zap, User, RefreshCcw, Users } from 'lucide-react';
   
   // --- TYPES ---
@@ -89,4 +90,32 @@
       description: 'Working seamlessly as an extension of your internal team to achieve greatness.',
       icon: Users,
     },
+  ];
+
+  // Temporary data array - you can swap imageUrls with your actual assets
+  export const insightsData: InsightCardProps[] = [
+    {
+      category: 'Engineering',
+      date: 'Oct 15, 2023',
+      title: 'The Future of AI in Web Development',
+      excerpt: 'Exploring how artificial intelligence is shaping the way we build and interact with modern web applications and transforming developer workflows.',
+      imageUrl: '/images/insights/blog-1.webp', 
+      slug: 'future-of-ai-in-web-development'
+    },
+    {
+      category: 'Design',
+      date: 'Oct 2, 2023',
+      title: 'Designing for Accessibility First',
+      excerpt: 'Why prioritizing accessibility from the start creates better digital experiences for everyone, not just those with disabilities.',
+      imageUrl: '/images/insights/blog-2.jpg',
+      slug: 'designing-for-accessibility'
+    },
+    {
+      category: 'Strategy',
+      date: 'Sep 20, 2023',
+      title: 'Scaling Your Tech Stack',
+      excerpt: 'A strategic guide to choosing the right technologies as your startup grows from initial launch to serving millions of users.',
+      imageUrl: '/images/insights/blog-3.png',
+      slug: 'scaling-your-tech-stack'
+    }
   ];

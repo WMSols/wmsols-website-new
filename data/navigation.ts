@@ -101,8 +101,8 @@ export const navigationData = [
     item: "About",
     href: "/about"
   },
-  { item: "Careers", href: "/about/careers" },
-   { item: "Blogs/Newsroom", href: "/about/blogs-newsroom" },
+  { item: "Careers", href: "/careers" },
+   { item: "Blogs/Newsroom", href: "/blogs-newsroom" },
   {
     item: "Contact",
     href: "/contact"

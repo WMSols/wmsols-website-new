@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
 
   return (
     <footer 
-      className="w-full text-white pt-20 pb-8 px-4 sm:px-6 lg:px-8 border-t border-gray-800/50"
+      className="w-full text-white pt-20 pb-8 px-4 sm:px-6 lg:px-8 "
       style={{
         // Gradient extracted exactly from your screenshot stops
         background: 'linear-gradient(180deg, #000000 20%, #110227 54%, #0C045F 100%)'
