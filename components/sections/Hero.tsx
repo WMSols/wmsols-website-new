@@ -6,7 +6,7 @@ import { CircleArrowOutUpRight } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center bg-[#070714] overflow-hidden px-4 py-20 sm:py-32">
+    <section className="relative min-h-screen flex items-center justify-center bg-[#070714] overflow-hidden px-4 py-20 sm:py-32">
       {/* Background Grid Texture */}
       <div 
         className="absolute inset-0 opacity-[0.03] pointer-events-none"

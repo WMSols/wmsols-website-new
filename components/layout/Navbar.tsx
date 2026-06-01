@@ -75,7 +75,7 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
               {hasChildren && isHovered && (
                 <div className="absolute top-full left-0 w-full bg-white text-gray-900 shadow-2xl border-t-4 border-[#3b82f6]">
                   {/* Inner wrapper aligns the dropdown columns with the main navbar layout */}
-                  <div className="max-w-7xl mx-auto flex w-full min-h-[300px]">
+                  <div className="max-w-7xl mx-auto flex w-full min-h-75">
                     
                     {/* Column 1: Title */}
                     <div className="w-1/4 p-8 bg-gray-50 border-r border-gray-200">

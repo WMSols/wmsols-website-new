@@ -4,7 +4,7 @@ import { servicesData } from '@/data/services';
 
 export const ServicesCardsGrid: React.FC = () => {
   return (
-    <section className="bg-[#070410] py-20 md:py-32 px-4 sm:px-6 lg:px-8 w-full">
+    <section className="bg-linear-to-b from-[#030015] from-0% via-[#18022D] via-40% to-[#080112] to-100% py-20 md:py-32 px-4 sm:px-6 lg:px-8 w-full">
       <div className="max-w-7xl mx-auto">
         
         {/* --- HEADER SECTION --- */}
@@ -26,9 +26,6 @@ export const ServicesCardsGrid: React.FC = () => {
               description={service.description}
               href={service.href}
               variant="dark"
-              // Note: Since we didn't specify distinct icons in the array earlier, 
-              // this will use the default <Code /> icon defined inside the ServiceCard.
-              // You can easily pass custom icons here by adding them to your servicesData.
             />
           ))}
         </div>
