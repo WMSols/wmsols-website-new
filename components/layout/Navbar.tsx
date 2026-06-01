@@ -44,8 +44,9 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
   return (
     <div className="hidden lg:flex items-center justify-between w-full h-full">
       <Logo />
+
       {/* Main Nav Links */}
-      <nav className="flex items-center text-base space-x-8 h-full ">
+      <nav className="flex items-center text-base space-x-8 h-full">
         {navigationData.map((navItem) => {
           const isActive = currentPath === navItem.href || currentPath.startsWith(navItem.href + '/');
           const hasChildren = navItem.children && navItem.children.length > 0;
@@ -54,8 +55,6 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
           return (
             <div 
               key={navItem.item}
-              // Removed 'relative' to allow mega menu to bind to the <header> bounds
-              // Used h-full flex items-center instead of py-6 to prevent hover gaps
               className="h-full flex items-center"
               onMouseEnter={() => handleMouseEnter(navItem)}
               onMouseLeave={() => setHoveredItem(null)}
@@ -71,8 +70,15 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
               </a>
 
               {/* Mega Menu Dropdown */}
-              {hasChildren && isHovered && (
-                <div className="absolute top-full left-0 w-full bg-white text-gray-900 shadow-2xl border-t-4 border-[#3b82f6]">
+              {hasChildren && (
+                <div 
+                  className={`absolute top-full left-0 w-full bg-white text-gray-900 shadow-2xl border-t-4 border-[#3b82f6] 
+                    transition-all duration-300 ease-out transform
+                    ${isHovered 
+                      ? 'opacity-100 translate-y-0 pointer-events-auto visible' 
+                      : 'opacity-0 -translate-y-4 pointer-events-none invisible'
+                    }`}
+                >
                   {/* Inner wrapper aligns the dropdown columns with the main navbar layout */}
                   <div className="max-w-7xl mx-auto flex w-full min-h-75">
                     
@@ -252,9 +258,7 @@ export const Navbar: React.FC = () => {
   }, []);
 
   return (
-    // Removed horizontal padding from header to ensure absolute positioning hits the raw screen edges
     <header className="absolute top-0 left-0 right-0 w-full z-50 bg-transparent">
-      {/* Moved horizontal padding to this inner wrapper */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-24 flex items-center">
         <DesktopNavbar currentPath={currentPath} />
         <MobileNavbar currentPath={currentPath} />

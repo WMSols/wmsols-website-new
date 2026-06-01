@@ -61,7 +61,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         <div className="grow flex items-center justify-center">
           <p 
             className={`
-              text-center text-[1.1rem] leading-[1.8] font-medium
+              text-center text-xl leading-[1.8] font-medium
               ${isDark ? 'text-gray-300' : 'text-gray-600'}
             `}
           >

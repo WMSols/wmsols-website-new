@@ -101,12 +101,12 @@ export const navigationData = [
     item: "About",
     href: "/about"
   },
-  { item: "Careers", href: "/careers" },
-   { item: "Blogs/Newsroom", href: "/blogs-newsroom" },
   {
     item: "Contact",
     href: "/contact"
-  }
+  },
+  { item: "Careers", href: "/careers" },
+   { item: "Blogs/Newsroom", href: "/blogs-newsroom" }
 ];
 export const footerData = [
   {
