@@ -18,13 +18,14 @@ export const ServicesCardsGrid: React.FC = () => {
         </div>
 
         {/* --- GRID SECTION --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 justify-items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 px-4 sm:px-6 lg:px-8 justify-items-center">
           {servicesData.map((service, index) => (
             <ServiceCard 
               key={index}
               title={service.title}
               description={service.description}
               href={service.href}
+              Icon={service.icon}
               variant="dark"
             />
           ))}

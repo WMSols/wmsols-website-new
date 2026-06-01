@@ -1,30 +1,10 @@
+import { Computer, LucideIcon } from 'lucide-react';
 import React from 'react';
-
-// --- DEFAULT ICON MATCHING THE SCREENSHOT ---
-const DefaultCodeIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-6 h-6"
-  >
-    <rect width="20" height="14" x="2" y="3" rx="2" />
-    <line x1="8" x2="16" y1="21" y2="21" />
-    <line x1="12" x2="12" y1="17" y2="21" />
-    <polyline points="10 8 8 10 10 12" />
-    <polyline points="14 8 16 10 14 12" />
-  </svg>
-);
-
 // --- TYPES ---
 export interface ServiceCardProps {
   title?: string;
   description?: string;
-  icon?: React.ReactNode;
+  Icon?: React.ElementType; // Accepting the icon component directly
   variant?: 'dark' | 'light';
   href?: string;
 }
@@ -33,7 +13,7 @@ export interface ServiceCardProps {
 export const ServiceCard: React.FC<ServiceCardProps> = ({
   title = "Web Development",
   description = "High-performance websites and web applications built on modern stacks — Next.js, React, Node.js — for speed, scale, and exceptional user experiences.",
-  icon = <DefaultCodeIcon />,
+  Icon = Computer ,
   variant = "light",
   href = "#"
 }) => {
@@ -43,7 +23,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     <a 
       href={href}
       className={`
-        group relative flex flex-col w-full max-w-[550px] min-h-[500px] sm:h-[600px] 
+        group relative flex flex-col w-full max-w-137.5 min-h-125 sm:h-150 
         rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-2
         ${isDark 
           ? 'bg-[#150229] border border-[#1c028f63] shadow-2xl' 
@@ -51,10 +31,6 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         }
       `}
     >
-      {/* HEADER SECTION
-        Light variant uses a full-width blue background block. 
-        Dark variant uses a transparent background block.
-      */}
       <div 
         className={`
           flex items-center justify-center gap-4 pt-16 pb-12 px-6
@@ -71,16 +47,16 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             }
           `}
         >
-          {icon}
+          <Icon size={35}/>
         </div>
         
-        <h3 className="text-3xl font-bold text-white tracking-wide">
+        <h3 className=" text-xl sm:text-3xl font-bold text-white tracking-wide">
           {title}
         </h3>
       </div>
 
       {/* BODY SECTION */}
-      <div className="flex flex-col grow px-10 md:px-14">
+      <div className="flex flex-col grow px-2 sm:px-10 md:px-14">
         {/* Description */}
         <div className="grow flex items-center justify-center">
           <p 
