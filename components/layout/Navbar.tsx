@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { navigationData } from "@/data/navigation"
+
 // --- TYPES ---
 export interface NavItem {
   item: string;
@@ -41,11 +42,11 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
   };
 
   return (
-    <div className="hidden lg:flex items-center justify-between w-full">
+    <div className="hidden lg:flex items-center justify-between w-full h-full">
       <Logo />
 
       {/* Main Nav Links */}
-      <nav className="flex items-center text-base font-serif space-x-8">
+      <nav className="flex items-center text-base font-serif space-x-8 h-full">
         {navigationData.map((navItem) => {
           const isActive = currentPath === navItem.href || currentPath.startsWith(navItem.href + '/');
           const hasChildren = navItem.children && navItem.children.length > 0;
@@ -54,7 +55,9 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
           return (
             <div 
               key={navItem.item}
-              className="relative py-6"
+              // Removed 'relative' to allow mega menu to bind to the <header> bounds
+              // Used h-full flex items-center instead of py-6 to prevent hover gaps
+              className="h-full flex items-center"
               onMouseEnter={() => handleMouseEnter(navItem)}
               onMouseLeave={() => setHoveredItem(null)}
             >
@@ -70,10 +73,11 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
 
               {/* Mega Menu Dropdown */}
               {hasChildren && isHovered && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-white text-gray-900 shadow-2xl rounded-md overflow-hidden border-t-4 border-[#3b82f6]">
-                  <div className="flex min-h-[300px]">
+                <div className="absolute top-full left-0 w-full bg-white text-gray-900 shadow-2xl border-t-4 border-[#3b82f6]">
+                  {/* Inner wrapper aligns the dropdown columns with the main navbar layout */}
+                  <div className="max-w-7xl mx-auto flex w-full min-h-[300px]">
                     
-                    {/* Column 1: Title (e.g., "Explore Services") */}
+                    {/* Column 1: Title */}
                     <div className="w-1/4 p-8 bg-gray-50 border-r border-gray-200">
                       <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider block mb-2">Explore</span>
                       <h3 className="text-3xl font-bold text-black">{navItem.item}</h3>
@@ -112,7 +116,6 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
                             </a>
                           </li>
                         )) || (
-                          // Fallback if the active category has no grandchildren (e.g., About -> Careers)
                           <li className="text-sm text-gray-500 italic">
                             Select an option to view details.
                           </li>
@@ -145,7 +148,6 @@ const MobileNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
-  // Prevent scrolling when mobile menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -155,14 +157,14 @@ const MobileNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
   }, [isOpen]);
 
   const toggleExpand = (item: string, e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent navigation when just expanding the accordion
+    e.preventDefault(); 
     setExpandedItems(prev => 
       prev.includes(item) ? prev.filter(i => i !== item) : [...prev, item]
     );
   };
 
   return (
-    <div className="flex lg:hidden items-center justify-between w-full">
+    <div className="flex lg:hidden items-center justify-between w-full h-full">
       <Logo />
       
       <button 
@@ -201,13 +203,11 @@ const MobileNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
                   )}
                 </div>
 
-                {/* Mobile Submenu (Accordion) */}
                 {hasChildren && isExpanded && (
                   <div className="pl-4 pb-3 space-y-4">
                     {navItem.children?.map(child => (
                       <div key={child.item}>
                         <a href={child.href} className="text-md font-medium text-gray-300 block mb-2">{child.item}</a>
-                        {/* Mobile Grandchildren */}
                         {child.children && (
                           <div className="pl-4 space-y-2 border-l border-gray-700">
                             {child.children.map(grandchild => (
@@ -248,17 +248,15 @@ const MobileNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
 export const Navbar: React.FC = () => {
   const [currentPath, setCurrentPath] = useState('');
 
-  // Hydrate current path on mount to ensure active links work
   useEffect(() => {
-    // This assumes standard window.location. If using Next.js, 
-    // replace this with the useRouter / usePathname hook.
     setCurrentPath(window.location.pathname);
   }, []);
 
   return (
-    // absolute and z-50 ensures it sits directly on top of the hero section
-    <header className="absolute top-0 left-0 right-0 w-full z-50 px-4 md:px-8 bg-transparent">
-      <div className="max-w-7xl mx-auto h-24 flex items-center">
+    // Removed horizontal padding from header to ensure absolute positioning hits the raw screen edges
+    <header className="absolute top-0 left-0 right-0 w-full z-50 bg-transparent">
+      {/* Moved horizontal padding to this inner wrapper */}
+      <div className="max-w-7xl mx-auto px-4 md:px-8 h-24 flex items-center">
         <DesktopNavbar currentPath={currentPath} />
         <MobileNavbar currentPath={currentPath} />
       </div>

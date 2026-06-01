@@ -98,18 +98,11 @@ export const navigationData = [
     href: "/case-studies"
   },
   {
-    item: "Portfolio",
-    href: "/portfolio"
-  },
-  {
     item: "About",
-    href: "/about",
-    children: [
-      { item: "Careers", href: "/about/careers" },
-      { item: "Blogs/Newsroom", href: "/about/blogs-newsroom" },
-      { item: "Board of Directors", href: "/about/board-of-directors" }
-    ]
+    href: "/about"
   },
+  { item: "Careers", href: "/about/careers" },
+   { item: "Blogs/Newsroom", href: "/about/blogs-newsroom" },
   {
     item: "Contact",
     href: "/contact"
