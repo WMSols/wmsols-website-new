@@ -13,7 +13,7 @@ export interface StatItem {
 // --- COMPONENT ---
 export const CompanyStats: React.FC = () => {
   return (
-    <section className="w-full bg-white py-16 md:py-24 flex justify-center">
+    <section className="w-full bg-white py-16 md:py-24 h-95 flex items-center justify-center">
       <div className="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Container with automatic dividers */}
@@ -22,9 +22,9 @@ export const CompanyStats: React.FC = () => {
           {trustStats.map((stat, index) => (
             <div 
               key={index} 
-              className="flex flex-col items-center justify-center w-full md:w-1/4 py-8 md:py-0"
+              className="flex flex-col items-center justify-center w-full md:w-1/4 py-8 md:py-0 group cursor-pointer"
             >
-              <h3 className="text-4xl md:text-[3.25rem] font-bold text-theme mb-3 tracking-tight">
+              <h3 className="text-4xl md:text-[3.25rem] font-bold text-theme mb-3 tracking-tight group-hover:text-[60px] transition-all duration-300">
                 {/* Note: Because we separated value and suffix in the data structure, 
                   you can easily wrap `stat.value` in an animation library like 
                   <CountUp end={Number(stat.value)} /> right here later if desired.

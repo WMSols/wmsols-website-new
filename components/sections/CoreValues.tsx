@@ -24,7 +24,7 @@ const CoreValues: React.FC = () => {
             - 2 columns on sm screens (tablet) and up. 
             - The staggered effect is created by pushing every even child down on sm screens.
           */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 place-items-center gap-4 w-full max-w-2xl sm:px-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 place-items-center gap-6 w-full max-w-2xl sm:px-16">
             {valuesData.map((card, index) => {
               const Icon = card.icon;
               // Apply a top margin/translation to the 2nd and 4th cards (index 1 and 3) on tablet/desktop
@@ -33,12 +33,12 @@ const CoreValues: React.FC = () => {
               return (
                 <div 
                   key={card.id} 
-                  className={`bg-white w-60 rounded-3xl p-8 sm:py-10  flex flex-col items-center text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] ${
+                  className={`bg-white w-60 rounded-3xl p-6 group hover:border hover:border-[#3b82f6]  sm:py-10  flex flex-col items-center text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] ${
                     isEven ? 'sm:translate-y-16' : ''
                   }`}
                 >
                   {/* Icon Wrapper */}
-                  <div className="w-14 h-14 rounded-full bg-[#ECFDF5] flex items-center justify-center mb-6">
+                  <div className="w-14 h-14 rounded-full bg-[#ecf1fd] flex items-center justify-center mb-6 ">
                     <Icon className="w-6 h-6 text-[#3b82f6]" strokeWidth={2} />
                   </div>
                   

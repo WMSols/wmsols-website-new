@@ -27,7 +27,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WMsols",
+  title: "WMSols | Digital Solutions that Matter",
   description: "WMsols builds world-class web apps, mobile apps, AI automation, and digital strategies for ambitious businesses. 100+ projects. 98% client satisfaction. Let's build together.",
 };
 

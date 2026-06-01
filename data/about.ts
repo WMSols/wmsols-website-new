@@ -1,0 +1,5 @@
+export const ourStory: string[] = [
+  "Founded five years ago, WMsols began as a small group of passionate engineers determined to bridge the gap between complex technology and practical business needs. Our early days were defined by a relentless focus on solving hard technical problems with elegant, scalable solutions.",
+  "Today, we have grown into a multidisciplinary global partner, serving ambitious enterprises across multiple continents. While our footprint has expanded, our core philosophy remains unchanged: technology should be an enabler, not an obstacle. We bring a bespoke approach to every challenge, ensuring that our architectural choices directly align with long-term strategic objectives.",
+  "Based in San Francisco but operating with a global reach, our team combines the agility of a startup with the rigorous standards of enterprise engineering. We are united by a shared commitment to transparency, craftsmanship, and delivering tangible impact for our clients."
+];

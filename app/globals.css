@@ -6,6 +6,7 @@
 
 @theme inline {
   --color-background: var(--background);
+  --color-blue-gradient: var(--blue-gradient);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
@@ -52,6 +53,7 @@
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+  --blue-gradient: linear-gradient(to bottom, #030015 0%, #0C0438 100%);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
