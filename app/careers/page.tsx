@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button'
 import WhyUs from './components/WhyUs'
 import JobsListClient from './components/JobsListClient'
 import OpenApplicationCTA from './components/OpenApplicationCta'

@@ -9,7 +9,7 @@ const page = () => {
     return (
         <div>
             {/* Hero Section */}
-            <div className='h-screen  flex items-center justify-center overflow-hidden relative'
+            <div className='h-screen  pt-14  flex items-center justify-center overflow-hidden relative'
                 style={{
                     background: 'linear-gradient(180deg, #030015 0%, #0C0438 100%)'
                 }}>

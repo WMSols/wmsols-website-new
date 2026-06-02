@@ -2,12 +2,13 @@ import { GradientLight } from '@/components/common/GradientLight'
 import React from 'react'
 import ProjectListClient from './components/ProjectListClient'
 import { caseStudies } from '@/data/case-studies'
+import CtaSection from './components/CtaSection'
 
 const page = () => {
     return (
         <div>
             {/* Hero Section */}
-            <div className='h-screen  flex items-center justify-center overflow-hidden relative'
+            <div className='h-screen pt-14  flex items-center justify-center overflow-hidden relative'
                 style={{
                     background: 'linear-gradient(180deg, #030015 0%, #0C0438 100%)'
                 }}>
@@ -41,10 +42,11 @@ const page = () => {
                     <p className="text-lg text-center max-w-2xl px-4 text-muted-foreground">
                         From early-stage startups to scaling enterprises, explore how WMsols turns complex challenges into elegant digital solutions
                     </p>
-                    <a  className='bg-transparent text-white  py-3 px-5 mt-6 border border-white rounded-md' href="#">Explore Our Work &rarr;</a>
+                    <a  className='bg-transparent text-white  py-3 px-5 mt-6 border border-white rounded-md' href="#projects">Explore Our Work &rarr;</a>
                 </div>
             </div>
             <ProjectListClient projects={caseStudies} />
+            <CtaSection/>
         </div>
     )
 }

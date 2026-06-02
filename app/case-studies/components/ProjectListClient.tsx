@@ -29,7 +29,7 @@ const ProjectListClient: React.FC<ProjectListProps> = ({ projects }) => {
   const totalPages = Math.ceil(filteredProjects.length / POSTS_PER_PAGE);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-12 py-16 font-sans">
+    <div id="projects" className="max-w-7xl mx-auto px-4 sm:px-12 py-16 font-sans">
       <h1 className="text-4xl md:text-5xl font-medium text-center text-gray-900 mb-12">
         Explore Our Work
       </h1>

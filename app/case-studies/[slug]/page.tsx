@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { caseStudies } from '@/data/case-studies';
 import { CheckCircle2 } from 'lucide-react';
 import React from 'react';
+import ProjectCTA from '../components/ProjectCta';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -118,7 +119,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
           </div>
         </div>
       </section>
-
+      <ProjectCTA />
     </div>
   );
 }
