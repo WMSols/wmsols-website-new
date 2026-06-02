@@ -28,7 +28,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
     <div className="min-h-screen bg-white text-gray-900 font-sans py-10">
       <div className="max-w-4xl mx-auto px-4 py-12">
         {/* Back Link */}
-        <Link href="/careers" className="text-sm text-gray-600 hover:text-black mb-8 inline-block">
+        <Link href="/careers" className="text-sm hover:underline text-gray-600 hover:text-black mb-8 inline-block">
           &larr; Back to Jobs list
         </Link>
 

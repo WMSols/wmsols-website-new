@@ -99,7 +99,7 @@ import { InsightCardProps } from '@/components/common/InsightCard';
       date: 'Oct 15, 2023',
       title: 'The Future of AI in Web Development',
       excerpt: 'Exploring how artificial intelligence is shaping the way we build and interact with modern web applications and transforming developer workflows.',
-      imageUrl: '/images/insights/blog-1.webp', 
+      imageUrl: 'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8dGVjaHxlbnwwfDF8MHx8fDA%3D', 
       slug: 'future-of-ai-in-web-development'
     },
     {
@@ -107,7 +107,7 @@ import { InsightCardProps } from '@/components/common/InsightCard';
       date: 'Oct 2, 2023',
       title: 'Designing for Accessibility First',
       excerpt: 'Why prioritizing accessibility from the start creates better digital experiences for everyone, not just those with disabilities.',
-      imageUrl: '/images/insights/blog-2.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dGVjaHxlbnwwfDF8MHx8fDA%3D',
       slug: 'designing-for-accessibility'
     },
     {
@@ -115,7 +115,7 @@ import { InsightCardProps } from '@/components/common/InsightCard';
       date: 'Sep 20, 2023',
       title: 'Scaling Your Tech Stack',
       excerpt: 'A strategic guide to choosing the right technologies as your startup grows from initial launch to serving millions of users.',
-      imageUrl: '/images/insights/blog-3.png',
+      imageUrl: 'https://images.unsplash.com/photo-1597239450996-ea7c2c564412?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fHRlY2h8ZW58MHwxfDB8fHww',
       slug: 'scaling-your-tech-stack'
     }
   ];

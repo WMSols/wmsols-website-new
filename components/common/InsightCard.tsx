@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export interface InsightCardProps {
   category: string;
@@ -8,6 +9,7 @@ export interface InsightCardProps {
   excerpt: string;
   imageUrl: string;
   slug: string;
+  readTime?: string;
 }
 
 const InsightCard: React.FC<InsightCardProps> = ({ 
@@ -16,41 +18,48 @@ const InsightCard: React.FC<InsightCardProps> = ({
   title, 
   excerpt, 
   imageUrl, 
-  slug 
+  slug,
+  readTime = "5 min read"
 }) => {
   return (
-    <a 
+    <Link 
       href={`/blogs-newsroom/${slug}`} 
-      className="flex flex-col w-full max-w-100 bg-white rounded-2xl border border-gray-200 shadow-sm shadow-[0_4px_25px_rgb(0,0,0,0.08)] transition-all duration-300 overflow-hidden group mx-auto"
+      className="flex flex-col w-full bg-white rounded-2xl border border-gray-100 shadow-sm transition-all duration-300 overflow-hidden group hover:shadow-md hover:border-gray-200"
     >
-      {/* Image Container - Fixed at 380px height */}
-      <div className="relative w-full h-95 overflow-hidden bg-gray-50">
+      {/* Image Container */}
+      <div className="relative w-full h-64 overflow-hidden bg-gray-50">
         <Image 
           src={imageUrl} 
           alt={title} 
           fill 
-          className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+          className="object-cover group-hover:scale-103 transition-transform duration-500 ease-in-out"
           sizes="(max-width: 768px) 100vw, 400px"
         />
       </div>
       
       {/* Content Container */}
-      <div className="p-6 md:p-8 flex flex-col grow bg-white">
-        <div className="flex items-center text-sm mb-4">
-          <span className="text-[#3b82f6] font-medium">{category}</span>
-          <span className="mx-3 text-gray-300">•</span>
-          <span className="text-gray-500">{date}</span>
+      <div className="p-6 flex flex-col justify-between grow bg-white">
+        <div>
+          <div className="flex items-center text-xs font-medium tracking-wide uppercase mb-3">
+            <span className="text-blue-500">{category}</span>
+            <span className="mx-2 text-gray-300">•</span>
+            <span className="text-gray-400">{date}</span>
+          </div>
+          
+          <h3 className="text-xl font-bold text-gray-900 mb-3 leading-snug group-hover:text-blue-600 transition-colors line-clamp-2">
+            {title}
+          </h3>
+          
+          <p className="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
+            {excerpt}
+          </p>
         </div>
-        
-        <h3 className="text-2xl font-bold text-gray-900 mb-4 leading-snug line-clamp-2">
-          {title}
-        </h3>
-        
-        <p className="text-gray-500 leading-relaxed line-clamp-3">
-          {excerpt}
-        </p>
+
+        <div className="text-xs text-gray-400 font-medium">
+          {readTime}
+        </div>
       </div>
-    </a>
+    </Link>
   );
 };
 
