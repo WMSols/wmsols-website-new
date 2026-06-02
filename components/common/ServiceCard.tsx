@@ -26,7 +26,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         group relative flex flex-col w-full max-w-137.5 min-h-125 sm:h-150 
         rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-2
         ${isDark 
-          ? 'bg-[#150229] border border-[#1c028f63] shadow-2xl shadow-blue-800/20' 
+          ? 'bg-[#0C0229] border border-[#1c028f63] shadow-2xl shadow-blue-800/20' 
           : 'bg-white border border-gray-200 shadow-xl drop-shadow-sm'
         }
       `}
