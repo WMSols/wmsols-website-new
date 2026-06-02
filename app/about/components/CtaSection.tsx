@@ -28,7 +28,7 @@ const CtaSection: React.FC = () => {
       {/* Main Glass Card */}
       <div className="relative z-10 w-full max-w-4xl  border border-white/4 backdrop-blur-md rounded-[2rem] p-10 md:p-20 flex flex-col items-center shadow-2xl">
         
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white text-center mb-6 tracking-tight leading-tight">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white text-center mb-6 tracking-tight leading-tight">
           Want to Work With a Team That <br className="hidden md:block" /> Cares?
         </h2>
         

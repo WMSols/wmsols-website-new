@@ -1,13 +1,13 @@
 import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
-import React from 'react'
 import WhyUs from './components/WhyUs'
+import JobsListClient from './components/JobsListClient'
+import OpenApplicationCTA from './components/OpenApplicationCta'
 
 const page = () => {
     return (
         <div className="flex flex-col">
             {/* Hero Section */}
-            <div className='h-[90vh] pt-14 flex items-center justify-center overflow-hidden relative'
+            <div className='h-screen pt-14 flex items-center justify-center overflow-hidden relative'
                 style={{
                     background: 'linear-gradient(180deg, #030015 0%, #0C0438 100%)'
                 }}>
@@ -27,10 +27,12 @@ const page = () => {
                     <p className="text-lg text-center max-w-2xl px-4 text-muted-foreground">
                         We're a team of engineers, designers, strategists, and innovators who believe technology should do more. If you're driven by craft and motivated by impact, we'd love to meet you.
                     </p>
-                    <Button className='bg-transparent text-white p-5 mt-6' variant="outline">View Open Roles <ArrowRight /></Button>
+                    <a  className='bg-transparent text-white  py-3 px-5 mt-6 border border-white rounded-md' href="#jobslist">View Open Roles &rarr;</a>
                 </div>
             </div>
             <WhyUs/>
+            <JobsListClient/>
+            <OpenApplicationCTA/>
         </div>
     )
 }
