@@ -23,7 +23,7 @@ export const GradientLight: React.FC<GradientLightProps> = ({
   return (
     <div
       aria-hidden="true"
-      className={`absolute rounded-full pointer-events-none -z-0 blur-[100px] ${className}`}
+      className={`absolute rounded-full pointer-events-none z-0 blur-[100px] ${className}`}
       style={{
         width: typeof size === 'number' ? `${size}px` : size,
         height: typeof size === 'number' ? `${size}px` : size,
