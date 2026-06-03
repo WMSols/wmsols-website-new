@@ -25,7 +25,7 @@ export const navigationData = [
       },
       {
         item: "Mobile App Development",
-        href: "/services/mobile-app-development",
+        href: "/services/mobile-development",
         children: [
           { item: "iOS App Development", href: "/services/mobile-app-development" },
           { item: "Android App Development", href: "/services/mobile-app-development" },

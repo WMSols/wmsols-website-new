@@ -35,10 +35,10 @@ const page = () => {
                         <div className='flex flex-col items-center sm:gap-4 gap-2 justify-center h-full sm:px-0 px-2'>
                             <h1 className=" max-w-4xl text-5xl text-center sm:text-6xl md:text-7xl font-bold text-white  ">Solutions Engineered for Your <span className="text-blue-500">Success</span></h1>
                             <p className="text-lg text-center max-w-2xl px-4 text-muted-foreground">
-                               A Senior React Developer is an experienced front-end or full-stack engineer who designs scalable architectures, mentors junior team members, and drives high-level technical decisions. They typically have 4+ years of hands-on experience, a deep understanding of React, TypeScript, and state management, and are adept at solving complex production-level challenges
+                              At WMsols, we transform complex business challenges into seamless digital experiences. Whether you need a high-performance web application, an intelligent automation system, or an intuitive mobile interface, our engineering-first approach ensures your product is built for scale. We combine modern technology stacks with purposeful design to deliver solutions that not only look exceptional but drive measurable growth for your business.
                             </p>
                         </div>
-                        <Mouse size={24} className='absolute bottom-10 animate-bounce text-white'/>
+                        <Mouse size={34} className='absolute bottom-10 animate-bounce text-white'/>
                     </div>
                     <ServicesGrid/>
                     <CtaSection/>

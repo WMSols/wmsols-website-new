@@ -93,15 +93,16 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
                       <ul className="space-y-4">
                         {navItem.children?.map((child) => (
                           <li key={child.item}>
-                            <button 
-                              className={`flex items-center gap-3 text-sm font-medium w-full text-left transition-colors ${
+                            <a
+                              href={child.href} 
+                              className={`flex items-center cursor-pointer gap-3 text-sm font-medium w-full text-left transition-colors ${
                                 activeCategory === child.item ? 'text-[#3b82f6]' : 'text-gray-700 hover:text-[#3b82f6]'
                               }`}
                               onMouseEnter={() => setActiveCategory(child.item)}
                             >
                               <span className="text-gray-400">•</span>
                               {child.item}
-                            </button>
+                            </a>
                           </li>
                         ))}
                       </ul>
