@@ -62,7 +62,7 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
               <a 
                 href={navItem.href}
                 className={`flex items-center text-sm font-medium transition-colors ${
-                  isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+                  isActive ? 'text-blue-500' : 'text-gray-300 hover:text-blue-500'
                 }`}
               >
                 {navItem.item}

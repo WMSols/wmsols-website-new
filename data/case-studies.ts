@@ -13,8 +13,6 @@ export interface CaseStudy {
   client: string;
   industry: string;
   techStackSummary: string[];
-  
-  // Detailed Content
   overview: string;
   challenge: string;
   solutionItems: string[];
