@@ -13,7 +13,7 @@ export interface StatItem {
 // --- COMPONENT ---
 export const CompanyStats: React.FC = () => {
   return (
-    <section className="w-full bg-white py-16 md:py-24 h-95 flex items-center justify-center">
+    <section className="w-full bg-white py-16 md:py-24 min-h-95 flex items-center justify-center">
       <div className="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Container with automatic dividers */}
