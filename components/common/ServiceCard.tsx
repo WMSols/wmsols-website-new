@@ -20,21 +20,22 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   const isDark = variant === 'dark';
 
   return (
+    // 
     <a 
       href={href}
       className={`
-        group relative flex flex-col w-full max-w-137.5 min-h-125 sm:h-150 
+        group relative flex flex-col w-full max-w-105 h-100 
         rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-2
         ${isDark 
-          ? 'bg-[#0C0229] border border-[#1c028f63] shadow-2xl shadow-blue-800/20' 
+          ? 'bg-[#00193D] border border-[#0a009963] shadow-2xl shadow-blue-800/20' 
           : 'bg-white border border-gray-200 shadow-xl drop-shadow-sm'
         }
       `}
     >
       <div 
         className={`
-          flex items-center justify-center gap-4 pt-16 pb-12 px-6
-          ${isDark ? 'bg-transparent' : 'bg-[#3b82f6]'}
+          flex items-center justify-center gap-4 pt-4 pb-3 px-6
+          ${isDark ? 'bg-transparent' : 'bg-[#3680f8] '}
         `}
       >
         {/* Icon Wrapper */}
@@ -47,21 +48,21 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             }
           `}
         >
-          <Icon size={35}/>
+          <Icon size={30}/>
         </div>
         
-        <h3 className=" text-xl sm:text-3xl font-bold text-white tracking-wide">
+        <h3 className=" text-xl  font-bold text-white tracking-wide">
           {title}
         </h3>
       </div>
 
       {/* BODY SECTION */}
-      <div className="flex flex-col grow px-2 sm:px-10 md:px-14">
+      <div className="flex flex-col grow px-2 ">
         {/* Description */}
         <div className="grow flex items-center justify-center">
           <p 
             className={`
-              text-center text-xl leading-[1.8] font-medium
+              text-center  leading-[1.8] font-medium
               ${isDark ? 'text-gray-300' : 'text-gray-600'}
             `}
           >
@@ -75,8 +76,8 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             className={`
               flex items-center gap-2 text-sm font-semibold transition-colors duration-300
               ${isDark 
-                ? 'text-gray-300 group-hover:text-white' 
-                : 'text-gray-600 group-hover:text-[#3b82f6]'
+                ? 'text-gray-300 group-hover:text-white ' 
+                : 'text-gray-600 group-hover:text-[#3b82f6] '
               }
             `}
           >
@@ -90,6 +91,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </span>
+         {
+          !isDark &&
+           <span className="absolute bottom-0 h-2 w-full bg-[#3680f8]"></span>
+         }
         </div>
       </div>
     </a>

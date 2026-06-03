@@ -12,13 +12,13 @@ export const ServicesCardsGrid: React.FC = () => {
           <span className="text-[#3b82f6] text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-4 block">
             What We Do
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight max-w-2xl">
+          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight max-w-3xl">
             Solutions Engineered for Your Success
           </h2>
         </div>
 
         {/* --- GRID SECTION --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 px-4 sm:px-6 lg:px-8 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-4 sm:px-6 lg:px-8 justify-items-center">
           {servicesData.map((service, index) => (
             <ServiceCard 
               key={index}
