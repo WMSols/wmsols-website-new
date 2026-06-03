@@ -11,84 +11,84 @@ export const navigationData = [
         item: "Web Development",
         href: "/services/web-development",
         children: [
-          { item: "Custom Web Solutions", href: "/services/web-development/custom-web-solutions" },
-          { item: "WordPress to Next.Js", href: "/services/web-development/wordpress-to-nextjs" },
-          { item: "Progressive Web Apps", href: "/services/web-development/progressive-web-apps" },
-          { item: "Web-Based ERPs", href: "/services/web-development/web-based-erps" },
-          { item: "MERN Stack Development", href: "/services/web-development/mern-stack-development" },
-          { item: "NextJs Development", href: "/services/web-development/nextjs-development" },
-          { item: "Shopify Development", href: "/services/web-development/shopify-development" },
-          { item: "Wordpress Development", href: "/services/web-development/wordpress-development" },
-          { item: "Performance Optimization", href: "/services/web-development/performance-optimization" },
-          { item: "API development & integration", href: "/services/web-development/api-development-and-integration" }
+          { item: "Custom Web Solutions", href: "/services/web-development" },
+          { item: "WordPress to Next.Js", href: "/services/web-development" },
+          { item: "Progressive Web Apps", href: "/services/web-development" },
+          { item: "Web-Based ERPs", href: "/services/web-development" },
+          { item: "MERN Stack Development", href: "/services/web-development" },
+          { item: "NextJs Development", href: "/services/web-development" },
+          { item: "Shopify Development", href: "/services/web-development" },
+          { item: "Wordpress Development", href: "/services/web-development" },
+          { item: "Performance Optimization", href: "/services/web-development" },
+          { item: "API development & integration", href: "/services/web-development" }
         ]
       },
       {
         item: "Mobile App Development",
         href: "/services/mobile-app-development",
         children: [
-          { item: "iOS App Development", href: "/services/mobile-app-development/ios-app-development" },
-          { item: "Android App Development", href: "/services/mobile-app-development/android-app-development" },
-          { item: "Flutter Development", href: "/services/mobile-app-development/flutter-development" },
-          { item: "Mobile UI/UX Design", href: "/services/mobile-app-development/mobile-ui-ux-design" },
-          { item: "App Store Optimization", href: "/services/mobile-app-development/app-store-optimization" },
-          { item: "React Native Development", href: "/services/mobile-app-development/react-native-development" }
+          { item: "iOS App Development", href: "/services/mobile-app-development" },
+          { item: "Android App Development", href: "/services/mobile-app-development" },
+          { item: "Flutter Development", href: "/services/mobile-app-development" },
+          { item: "Mobile UI/UX Design", href: "/services/mobile-app-development" },
+          { item: "App Store Optimization", href: "/services/mobile-app-development" },
+          { item: "React Native Development", href: "/services/mobile-app-development" }
         ]
       },
       {
         item: "AI Automation",
         href: "/services/ai-automation",
         children: [
-          { item: "Workflow Automations with AI", href: "/services/ai-automation/workflow-automations-with-ai" },
-          { item: "Chatbots & Virtual Assistants", href: "/services/ai-automation/chatbots-and-virtual-assistants" },
-          { item: "Ai-Powered Data Processing", href: "/services/ai-automation/ai-powered-data-processing" },
-          { item: "Make.com Automations", href: "/services/ai-automation/make-com-automations" },
-          { item: "Zapier Automations", href: "/services/ai-automation/zapier-automations" },
-          { item: "N8n Automations", href: "/services/ai-automation/n8n-automations" },
-          { item: "Document & Email Automations", href: "/services/ai-automation/document-and-email-automations" },
-          { item: "Custom Ai Integrations", href: "/services/ai-automation/custom-ai-integrations" }
+          { item: "Workflow Automations with AI", href: "/services/ai-automation" },
+          { item: "Chatbots & Virtual Assistants", href: "/services/ai-automation" },
+          { item: "Ai-Powered Data Processing", href: "/services/ai-automation" },
+          { item: "Make.com Automations", href: "/services/ai-automation" },
+          { item: "Zapier Automations", href: "/services/ai-automation" },
+          { item: "N8n Automations", href: "/services/ai-automation" },
+          { item: "Document & Email Automations", href: "/services/ai-automation" },
+          { item: "Custom Ai Integrations", href: "/services/ai-automation" }
         ]
       },
       {
         item: "UI/UX Design",
         href: "/services/ui-ux-design",
         children: [
-          { item: "Website Design", href: "/services/ui-ux-design/website-design" },
-          { item: "Mobile UI/UX Design", href: "/services/ui-ux-design/mobile-ui-ux-design" },
-          { item: "Wireframing & Prototyping", href: "/services/ui-ux-design/wireframing-and-prototyping" }
+          { item: "Website Design", href: "/services/ui-ux-design" },
+          { item: "Mobile UI/UX Design", href: "/services/ui-ux-design" },
+          { item: "Wireframing & Prototyping", href: "/services/ui-ux-design" }
         ]
       },
       {
         item: "Database Architecture",
         href: "/services/database-architecture",
         children: [
-          { item: "Database Design & Modeling", href: "/services/database-architecture/database-design-and-modeling" },
-          { item: "SQL & NoSQL Solutions", href: "/services/database-architecture/sql-and-nosql-solutions" },
-          { item: "Data Migrations Services", href: "/services/database-architecture/data-migrations-services" },
-          { item: "Firebase & Supabase", href: "/services/database-architecture/firebase-and-supabase" },
-          { item: "Query Optimization", href: "/services/database-architecture/query-optimization" }
+          { item: "Database Design & Modeling", href: "/services/database-architecture" },
+          { item: "SQL & NoSQL Solutions", href: "/services/database-architecture" },
+          { item: "Data Migrations Services", href: "/services/database-architecture" },
+          { item: "Firebase & Supabase", href: "/services/database-architecture" },
+          { item: "Query Optimization", href: "/services/database-architecture" }
         ]
       },
       {
         item: "Digital Strategy",
         href: "/services/digital-strategy",
         children: [
-          { item: "Technology Road-mapping", href: "/services/digital-strategy/technology-road-mapping" },
-          { item: "Digital Transformation", href: "/services/digital-strategy/digital-transformation" },
-          { item: "Product Strategy", href: "/services/digital-strategy/product-strategy" },
-          { item: "Market Analysis", href: "/services/digital-strategy/market-analysis" },
-          { item: "Innovation Workshops", href: "/services/digital-strategy/innovation-workshops" }
+          { item: "Technology Road-mapping", href: "/services/digital-strategy" },
+          { item: "Digital Transformation", href: "/services/digital-strategy" },
+          { item: "Product Strategy", href: "/services/digital-strategy" },
+          { item: "Market Analysis", href: "/services/digital-strategy" },
+          { item: "Innovation Workshops", href: "/services/digital-strategy" }
         ]
       },
       {
         item: "Data Analytics",
         href: "/services/data-analytics",
         children: [
-          { item: "Business Intelligence", href: "/services/data-analytics/business-intelligence" },
-          { item: "Data Visualization", href: "/services/data-analytics/data-visualization" },
-          { item: "Predictive Analytics", href: "/services/data-analytics/predictive-analytics" },
-          { item: "Real-Time Dashboards", href: "/services/data-analytics/real-time-dashboards" },
-          { item: "Custom Reporting", href: "/services/data-analytics/custom-reporting" }
+          { item: "Business Intelligence", href: "/services/data-analytics" },
+          { item: "Data Visualization", href: "/services/data-analytics" },
+          { item: "Predictive Analytics", href: "/services/data-analytics" },
+          { item: "Real-Time Dashboards", href: "/services/data-analytics" },
+          { item: "Custom Reporting", href: "/services/data-analytics" }
         ]
       }
     ]
@@ -106,7 +106,7 @@ export const navigationData = [
     href: "/contact"
   },
   { item: "Careers", href: "/careers" },
-   { item: "Blogs/Newsroom", href: "/blogs-newsroom" }
+  { item: "Blogs/Newsroom", href: "/blogs-newsroom" }
 ];
 export const footerData = [
   {
