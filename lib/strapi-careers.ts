@@ -1,16 +1,17 @@
 // ─── Job Types ───────────────────────────────────────────────────────────────
 
-import { buildHeaders, PaginationMeta, strapiUrl } from "./strapi";
+import { buildHeaders, strapiUrl } from "./strapi";
 
 export interface Job {
   id: number;
   documentId: string;
   title: string;
-  overview: unknown; // rich text blocks
-  responsiblities: unknown; // rich text blocks (note: keeping exact spelling from JSON)
-  requirements: unknown; // rich text blocks
-  skills: string; // Comma-separated string
-  benefits: unknown; // rich text blocks
+  slug: string; // <-- Added slug
+  overview: unknown; 
+  responsiblities: unknown; 
+  requirements: unknown; 
+  skills: string; 
+  benefits: unknown; 
   extras: string;
   domain: string;
   type: string;
@@ -22,7 +23,7 @@ export interface Job {
 
 export interface JobsResponse {
   data: Job[];
-  meta: { pagination: PaginationMeta };
+  meta: { pagination: { page: number; pageSize: number; pageCount: number; total: number } };
 }
 
 // ─── Job fetchers ────────────────────────────────────────────────────────────
@@ -37,8 +38,7 @@ export async function fetchJobs(
   }
 ): Promise<JobsResponse> {
   const url = new URL(strapiUrl('/api/job-posts'));
-  url.searchParams.set('populate', '*');
-  // Always fetch from page 1, but increase the size to handle the "Load More" logic 
+  // Removed url.searchParams.set('populate', '*');
   url.searchParams.set('pagination[page]', '1');
   url.searchParams.set('pagination[pageSize]', String(pageSize));
 
@@ -53,7 +53,6 @@ export async function fetchJobs(
       url.searchParams.set('filters[type][$eqi]', filters.type);
     }
     if (filters.searchTerm) {
-      // Using $contains for partial text matching on the title
       url.searchParams.set('filters[title][$contains]', filters.searchTerm);
     }
   }
@@ -65,4 +64,38 @@ export async function fetchJobs(
   
   if (!res.ok) throw new Error(`Failed to fetch jobs: ${res.status} ${res.statusText}`);
   return res.json() as Promise<JobsResponse>;
+}
+
+export async function getJobBySlug(slug: string): Promise<Job | null> {
+  const url = new URL(strapiUrl('/api/job-posts'));
+  // Removed url.searchParams.set('populate', '*');
+  
+  // Filter by the new slug field instead of documentId
+  url.searchParams.set('filters[slug][$eq]', slug);
+
+  const res = await fetch(url.toString(), {
+    headers: buildHeaders(),
+    next: { revalidate: 60 },
+  });
+  
+  if (!res.ok) return null;
+
+  const json: JobsResponse = await res.json();
+  return json.data?.[0] ?? null;
+}
+
+// Helper to parse Strapi Rich Text arrays into simple string arrays for lists
+export function parseRichTextBlocks(blocks: unknown): string[] {
+  if (!Array.isArray(blocks)) return [];
+  return blocks
+    .map((block) => {
+      if (block.type === 'paragraph' && Array.isArray(block.children)) {
+        return block.children
+          .map((c: any) => (typeof c === 'object' && c !== null && 'text' in c ? c.text : ''))
+          .join('')
+          .trim();
+      }
+      return '';
+    })
+    .filter(Boolean); // Remove empty strings
 }

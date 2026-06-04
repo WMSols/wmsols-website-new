@@ -53,7 +53,7 @@ const JobsListClient: React.FC = () => {
 
   // Reset page size to 10 whenever a filter changes
   useEffect(() => {
-    setPageSize(10);
+    setPageSize(1);
   }, [searchTerm, department, location, jobType]);
 
   const handleLoadMore = () => {
@@ -161,7 +161,7 @@ const JobsListClient: React.FC = () => {
             return (
               <div key={job.id} className="border border-gray-200 rounded-xl p-6 bg-white shadow-sm hover:shadow-md transition-shadow">
                 {/* Notice the route uses documentId because the JSON doesn't contain a slug */}
-                <Link href={`/careers/${job.documentId}`}>
+                <Link href={`/careers/${job.slug}`}>
                   <h2 className="text-2xl font-bold text-blue-500 hover:text-blue-600 mb-3 cursor-pointer">
                     {job.title}
                   </h2>
@@ -182,7 +182,7 @@ const JobsListClient: React.FC = () => {
                     ))}
                   </div>
                   <Link
-                    href={`/careers/${job.documentId}`}
+                    href={`/careers/${job.slug}`}
                     className="text-gray-800 text-sm font-medium hover:underline whitespace-nowrap"
                   >
                     View Job Details &rarr;
@@ -210,7 +210,7 @@ const JobsListClient: React.FC = () => {
           <button 
             onClick={handleLoadMore}
             disabled={isFetchingMore}
-            className="text-gray-600 text-sm font-medium hover:underline underline-offset-4 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="text-gray-600 text-sm font-medium cursor-pointer hover:underline underline-offset-4 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isFetchingMore ? 'Loading...' : 'Load more jobs'}
           </button>

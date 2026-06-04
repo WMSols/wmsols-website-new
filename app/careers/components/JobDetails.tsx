@@ -1,8 +1,9 @@
 'use client';
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Briefcase, MapPin, Clock, UploadCloud, CheckCircle2, X } from 'lucide-react';
-import { Job } from '@/data/careers';
+import { Job, parseRichTextBlocks } from "@/lib/strapi-careers"  // Adjust import path to your types/helpers
 
 interface JobDetailsProps {
   job: Job;
@@ -24,6 +25,17 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
     setTimeout(() => setIsSubmitted(false), 300);
   };
 
+  // ─── Data Mapping ─────────────────────────────────────────────────────────
+  const overviewText = parseRichTextBlocks(job.overview).join('\n\n');
+  const responsibilitiesList = parseRichTextBlocks(job.responsiblities); // Note: keeping your backend spelling
+  const requirementsList = parseRichTextBlocks(job.requirements);
+  const benefitsList = parseRichTextBlocks(job.benefits);
+  
+  // Clean up the comma/newline separated string into an array
+  const extrasList = job.extras 
+    ? job.extras.split(/,|\n/).map(s => s.trim()).filter(Boolean)
+    : [];
+
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans py-10">
       <div className="max-w-4xl mx-auto px-4 py-12">
@@ -37,7 +49,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
           <h1 className="text-3xl md:text-5xl font-semibold mb-4">{job.title}</h1>
           <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500">
             <span className="flex items-center gap-2">
-              <Briefcase className="w-4 h-4" /> {job.department}
+              <Briefcase className="w-4 h-4" /> {job.domain}
             </span>
             <span className="flex items-center gap-2">
               <MapPin className="w-4 h-4" /> {job.location}
@@ -51,59 +63,74 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
         {/* Details Sections */}
         <div className="space-y-12">
           {/* About */}
-          <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
-            <h3 className="text-lg font-medium text-gray-900">About the Role :</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">{job.aboutRole}</p>
-          </div>
+          {overviewText && (
+            <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
+              <h3 className="text-lg font-medium text-gray-900">About the Role :</h3>
+              <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-wrap">
+                {overviewText}
+              </p>
+            </div>
+          )}
 
           {/* What You'll Do */}
-          <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
-            <h3 className="text-lg font-medium text-gray-900">What You'll Do :</h3>
-            <ul className="space-y-3">
-              {job.whatYoullDo.map((item, idx) => (
-                <li key={idx} className="text-sm text-gray-600 flex items-start">
-                  <span className="mr-2 mt-1 text-gray-400">•</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {responsibilitiesList.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
+              <h3 className="text-lg font-medium text-gray-900">What You'll Do :</h3>
+              <ul className="space-y-3">
+                {responsibilitiesList.map((item, idx) => (
+                  <li key={idx} className="text-sm text-gray-600 flex items-start">
+                    <span className="mr-2 mt-1 text-gray-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* What We're Looking For */}
-          <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
-            <h3 className="text-lg font-medium text-gray-900">What We're Looking For :</h3>
-            <ul className="space-y-3">
-              {job.whatWereLookingFor.map((item, idx) => (
-                <li key={idx} className="text-sm text-gray-600 flex items-start">
-                  <span className="mr-2 mt-1 text-gray-400">•</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {requirementsList.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
+              <h3 className="text-lg font-medium text-gray-900">What We're Looking For :</h3>
+              <ul className="space-y-3">
+                {requirementsList.map((item, idx) => (
+                  <li key={idx} className="text-sm text-gray-600 flex items-start">
+                    <span className="mr-2 mt-1 text-gray-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Nice to Have */}
-          <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
-            <h3 className="text-lg font-medium text-gray-900">Nice to Have :</h3>
-            <ul className="space-y-3">
-              {job.niceToHave.map((item, idx) => (
-                <li key={idx} className="text-sm text-gray-600">{item}</li>
-              ))}
-            </ul>
-          </div>
+          {extrasList.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
+              <h3 className="text-lg font-medium text-gray-900">Nice to Have :</h3>
+              <ul className="space-y-3">
+                {extrasList.map((item, idx) => (
+                  <li key={idx} className="text-sm text-gray-600 flex items-start">
+                    <span className="mr-2 mt-1 text-gray-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* What We Offer */}
-          <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
-            <h3 className="text-lg font-medium text-gray-900">What We Offer :</h3>
-            <ul className="space-y-3">
-              {job.whatWeOffer.map((item, idx) => (
-                <li key={idx} className="text-sm text-gray-600 flex items-start">
-                  <span className="mr-2 mt-1 text-gray-400">•</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {benefitsList.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
+              <h3 className="text-lg font-medium text-gray-900">What We Offer :</h3>
+              <ul className="space-y-3">
+                {benefitsList.map((item, idx) => (
+                  <li key={idx} className="text-sm text-gray-600 flex items-start">
+                    <span className="mr-2 mt-1 text-gray-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* Apply Button */}
@@ -133,7 +160,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
             {!isSubmitted ? (
               <>
                 <div className="mb-6">
-                  <span className="text-xs font-bold text-blue-500 uppercase tracking-wider">{job.department}</span>
+                  <span className="text-xs font-bold text-blue-500 uppercase tracking-wider">{job.domain}</span>
                   <h2 className="text-2xl font-bold mt-1 text-gray-900">Apply For {job.title}</h2>
                 </div>
 
