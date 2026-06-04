@@ -36,7 +36,6 @@ export const Hero: React.FC = () => {
       />
 
       {/* Main Content */}
-      <div className="relative z-10  pt-10 max-w-6xl mx-auto flex flex-col items-center text-center">
         <StaggerFadeUpInView className="relative z-10  pt-10 max-w-6xl mx-auto flex flex-col items-center text-center">
         {/* Headline */}
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.15]">
@@ -68,7 +67,6 @@ export const Hero: React.FC = () => {
           </a>
         </div>
         </StaggerFadeUpInView>
-      </div>
     </section>
   );
 };

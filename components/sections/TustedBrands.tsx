@@ -2,12 +2,14 @@ import React from 'react';
 import Image from 'next/image';
 
 import { brands } from '@/data/homepage';
+import { StaggerFadeUpInView } from '../animations/StaggerFadeUpInView';
 
 const TrustedBrands: React.FC = () => {
   return (
     <section className="w-full bg-white py-16 md:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
         
+        <StaggerFadeUpInView>
         {/* Heading Section */}
         <div className="text-center max-w-4xl mb-12">
           <h2 className="text-3xl md:text-4xl font-medium text-gray-900 mb-4">
@@ -40,7 +42,7 @@ const TrustedBrands: React.FC = () => {
             </div>
           ))}
         </div>
-
+</StaggerFadeUpInView>
       </div>
     </section>
   );

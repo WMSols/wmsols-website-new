@@ -1,6 +1,7 @@
 import React from 'react';
 import { ServiceCard } from "@/components/common/ServiceCard"
 import { servicesData } from '@/data/services';
+import { StaggerGrid } from '../animations/StaggerGrid';
 
 export const ServicesCardsGrid: React.FC = () => {
   return (
@@ -18,7 +19,8 @@ export const ServicesCardsGrid: React.FC = () => {
         </div>
 
         {/* --- GRID SECTION --- */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-4 sm:px-6 lg:px-8 justify-items-center">
+   
+         <StaggerGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-4 sm:px-6 lg:px-8 justify-items-center">
           {servicesData.map((service, index) => (
             <ServiceCard 
               key={index}
@@ -29,7 +31,8 @@ export const ServicesCardsGrid: React.FC = () => {
               variant="dark"
             />
           ))}
-        </div>
+          </StaggerGrid>
+  
 
         {/* --- FOOTER CTA --- */}
         <div className="mt-16 md:mt-24 flex justify-center">

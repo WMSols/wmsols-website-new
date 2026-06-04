@@ -1,11 +1,11 @@
 import React from 'react';
 import { X } from 'lucide-react';
+import { StaggerFadeUpInView } from '../animations/StaggerFadeUpInView';
 
 const BottomCta: React.FC = () => {
   return (
     <section className="w-full h-162.5 bg-linear-to-b  from-[#08034C] to-[#050109] flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto flex flex-col items-center">
-        
+        <StaggerFadeUpInView className="max-w-4xl mx-auto flex flex-col items-center">
         {/* Heading Area */}
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center leading-tight mb-8">
           Ready to Build <br /> Something <br className="hidden sm:block" /> Extraordinary?
@@ -30,8 +30,7 @@ const BottomCta: React.FC = () => {
             View Case Studies
           </a>
         </div>
-
-      </div>
+    </StaggerFadeUpInView>
     </section>
   );
 };
