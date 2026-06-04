@@ -10,17 +10,18 @@ const nextConfig = {
         pathname: '/**',
       },
       // 2. Dynamic pattern for Strapi (only added if the env variable exists)
-      ...(process.env.STRAPI_HOSTNAME
+      ...(process.env.NEXT_PUBLIC_STRAPI_HOSTNAME
         ? [
             {
-              protocol: process.env.STRAPI_PROTOCOL || 'https',
-              hostname: process.env.STRAPI_HOSTNAME,
-              port: process.env.STRAPI_PORT || '',
+              protocol: process.env.NEXT_PUBLIC_STRAPI_PROTOCOL || 'http',
+              hostname: process.env.NEXT_PUBLIC_STRAPI_HOSTNAME || 'localhost',
+              port: process.env.NEXT_PUBLIC_STRAPI_PORT || '1337',
               pathname: '/uploads/**', // Specifically targets Strapi's media folder
             },
           ]
         : []),
     ],
+    unoptimized: true, // Disable Next.js's built-in image optimizationn
   },
 };
 
