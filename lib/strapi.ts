@@ -110,7 +110,7 @@ export interface CaseStudiesResponse {
 
 // ─── Shared internals ─────────────────────────────────────────────────────────
 
-function buildHeaders(): HeadersInit {
+export function buildHeaders(): HeadersInit {
   const token = process.env.NEXT_PUBLIC_API_TOKEN ?? '';
   return {
     'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ function buildHeaders(): HeadersInit {
   };
 }
 
-function strapiUrl(path: string): string {
+export function strapiUrl(path: string): string {
   return (process.env.NEXT_PUBLIC_STRAPI_URL ?? '').replace(/\/$/, '') + path;
 }
 
