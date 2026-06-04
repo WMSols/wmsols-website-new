@@ -53,7 +53,7 @@ const JobsListClient: React.FC = () => {
 
   // Reset page size to 10 whenever a filter changes
   useEffect(() => {
-    setPageSize(1);
+    setPageSize(10);
   }, [searchTerm, department, location, jobType]);
 
   const handleLoadMore = () => {
