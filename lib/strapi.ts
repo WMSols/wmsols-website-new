@@ -131,7 +131,7 @@ async function fetchBlogs(page: number, pageSize: number): Promise<BlogsResponse
 // ─── useBlogs hook ────────────────────────────────────────────────────────────
 
 export function useBlogs(options: UseBlogsOptions = {}): UseBlogsResult {
-  const { page = 1, pageSize = 25 } = options;
+  const { page = 1, pageSize = 9 } = options; // 9 fits 3x3 grid cleanly
 
   const [data, setData] = useState<Blog[] | null>(null);
   const [pagination, setPagination] = useState<PaginationMeta | null>(null);
@@ -157,21 +157,15 @@ export function useBlogs(options: UseBlogsOptions = {}): UseBlogsResult {
           setError(err instanceof Error ? err.message : 'Unknown error occurred');
         }
       } finally {
-        if (!cancelled) {
-          setIsLoading(false);
-        }
+        if (!cancelled) setIsLoading(false);
       }
     };
 
     load();
-
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [page, pageSize, tick]);
 
   const refetch = () => setTick(t => t + 1);
-
   return { data, pagination, isLoading, error, refetch };
 }
 
@@ -224,4 +218,82 @@ export async function fetchBlogBySlug(slug: string): Promise<Blog | null> {
 
   const json: BlogsResponse = await response.json();
   return json.data?.[0] ?? null;
+}
+// ─── Hook options ─────────────────────────────────────────────────────────────
+
+export interface UseBlogsByPageOptions {
+  pageSize?: number;
+  category?: string;
+}
+
+export interface UseBlogsByPageResult {
+  data: Blog[] | null;
+  pagination: PaginationMeta | null;
+  isLoading: boolean;
+  error: string | null;
+  currentPage: number;
+  goToPage: (page: number) => void;
+}
+
+export function useBlogsByPage(options: UseBlogsByPageOptions = {}): UseBlogsByPageResult {
+  const { pageSize = 9, category } = options;
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [data, setData] = useState<Blog[] | null>(null);
+  const [pagination, setPagination] = useState<PaginationMeta | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const load = async () => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const base = (process.env.NEXT_PUBLIC_STRAPI_URL ?? '').replace(/\/$/, '');
+        const token = process.env.NEXT_PUBLIC_API_TOKEN ?? '';
+
+        const url = new URL(`${base}/api/blogs`);
+        url.searchParams.set('populate', '*');
+        url.searchParams.set('pagination[page]', String(currentPage));
+        url.searchParams.set('pagination[pageSize]', String(pageSize));
+
+        // Filter by category slug on the backend if provided
+        if (category && category !== 'All') {
+          url.searchParams.set('filters[category][name][$eqi]', category);
+        }
+
+        const response = await fetch(url.toString(), {
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+        });
+
+        if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+
+        const result: BlogsResponse = await response.json();
+
+        if (!cancelled) {
+          setData(result.data);
+          setPagination(result.meta.pagination);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : 'Unknown error occurred');
+        }
+      } finally {
+        if (!cancelled) setIsLoading(false);
+      }
+    };
+
+    load();
+    return () => { cancelled = true; };
+  }, [currentPage, pageSize, category]);
+
+  const goToPage = (page: number) => setCurrentPage(page);
+
+  return { data, pagination, isLoading, error, currentPage, goToPage };
 }
