@@ -1,4 +1,6 @@
+'use client';
 import React, { useState } from 'react';
+import { submitContactForm } from '@/lib/strapi-contact';
 
 interface ContactFormProps {
   onSuccess: () => void;
@@ -16,19 +18,49 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
     source: '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    // Clear error as soon as the user starts editing again
+    if (errorMsg) setErrorMsg(null);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    onSuccess();
+    setIsSubmitting(true);
+    setErrorMsg(null);
+
+    try {
+      await submitContactForm({
+        name: formData.name,
+        email: formData.email,
+        projectDetails: formData.description,
+        budget: formData.budget,
+        company: formData.company,
+        reference: formData.source,
+        phone: formData.phone,
+        requiredService: formData.service,
+      });
+      onSuccess();
+    } catch (err) {
+      setErrorMsg(
+        err instanceof Error
+          ? err.message
+          : 'Something went wrong. Please try again.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 max-w-2xl w-full">
       <form onSubmit={handleSubmit} className="space-y-6">
+
         {/* Row 1 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
@@ -94,14 +126,14 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
         {/* Row 3 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium  mb-1">
+            <label className="block text-sm font-medium mb-1">
               Service You are Interested in
             </label>
             <select
               name="service"
               value={formData.service}
               onChange={handleChange}
-              className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white text-gray-500"
+              className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white "
             >
               <option value="" disabled>Select a service of your choice</option>
               <option value="web-dev">Web Development</option>
@@ -113,14 +145,14 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium  mb-1">
+            <label className="block text-sm font-medium mb-1">
               Project Budget
             </label>
             <select
               name="budget"
               value={formData.budget}
               onChange={handleChange}
-              className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white "
+              className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white"
             >
               <option value="" disabled>Choose your amount</option>
               <option value="under-5k">Under $5K</option>
@@ -134,25 +166,25 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
 
         {/* Row 4 */}
         <div>
-          <label className="block text-sm font-medium  mb-1">
+          <label className="block text-sm font-medium mb-1">
             Tell us about your project <span className="text-red-500">*</span>
           </label>
           <textarea
             name="description"
             required
             rows={5}
-            placeholder="Please write a detail description about your project"
+            placeholder="Please write a detailed description about your project"
             value={formData.description}
             onChange={handleChange}
             className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"
-          ></textarea>
+          />
         </div>
 
         {/* Row 5 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
           <div>
             <label className="block text-sm font-medium text-gray-900 mb-1">
-              How did you hear about us? ( Optional )
+              How did you hear about us? (Optional)
             </label>
             <select
               name="source"
@@ -166,15 +198,45 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
               <option value="other">Other</option>
             </select>
           </div>
-          <div className="flex justify-end">
+          <div className="flex flex-col gap-2 items-end">
+            {/* Error message */}
+            {errorMsg && (
+              <p className="text-xs text-red-500 text-right w-full">{errorMsg}</p>
+            )}
             <button
               type="submit"
-              className="w-full md:w-32 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              disabled={isSubmitting}
+              className="w-full md:w-36 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Send
+              {isSubmitting ? (
+                <>
+                  <svg
+                    className="animate-spin h-4 w-4 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12" cy="12" r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                    />
+                  </svg>
+                  Sending…
+                </>
+              ) : (
+                'Send'
+              )}
             </button>
           </div>
         </div>
+
       </form>
     </div>
   );
