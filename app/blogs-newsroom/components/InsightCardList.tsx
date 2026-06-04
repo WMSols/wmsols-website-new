@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import InsightCard from '@/components/common/InsightCard';
 import { BlogPost } from '@/data/blogs-newsroom';
-import { useBlogsByPage, getImageUrl, getExcerpt, type Blog } from '@/lib/strapi';
+import { getImageUrl, getExcerpt, type Blog } from '@/lib/strapi';
+import { useBlogsByPage } from '@/lib/strapi-hooks';
 
 const DEFAULT_AUTHOR_AVATAR = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150';
 const CATEGORIES = ['All', 'Insights', 'Design', 'News'];

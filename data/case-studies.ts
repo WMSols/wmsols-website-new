@@ -16,7 +16,7 @@ export interface CaseStudy {
   overview: string;
   challenge: string;
   solutionItems: string[];
-  results: ResultStat[];
+  results?: ResultStat[];
   fullTechStack: string[];
 }
 

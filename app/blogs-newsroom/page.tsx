@@ -5,7 +5,8 @@ import { GradientLight } from '@/components/common/GradientLight';
 import FeaturedPost from './components/FeaturedPost';
 import InsightCardList from './components/InsightCardList';
 import { blogPosts, type BlogPost } from '@/data/blogs-newsroom';
-import { useBlogs, getImageUrl, getExcerpt, type Blog } from '@/lib/strapi';
+import { getImageUrl, getExcerpt, type Blog } from '@/lib/strapi';
+import { useBlogsByPage } from '@/lib/strapi-hooks';
 
 const DEFAULT_AUTHOR_AVATAR =
   'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150';
@@ -47,7 +48,7 @@ function BlogSkeleton() {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 const Page = () => {
-  const { data, isLoading, error } = useBlogs();
+  const { data, isLoading, error } = useBlogsByPage();
 
   const posts = useMemo<BlogPost[]>(() => {
     if (data && data.length > 0) return data.map(mapBlogToPost);

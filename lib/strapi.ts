@@ -1,6 +1,3 @@
-import { useState, useEffect } from 'react';
-import type { BlocksContent } from '@strapi/blocks-react-renderer';
-
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export interface StrapiImageFormat {
@@ -54,15 +51,24 @@ export interface StrapiCategory {
   publishedAt: string;
 }
 
+export interface PaginationMeta {
+  page: number;
+  pageSize: number;
+  pageCount: number;
+  total: number;
+}
+
+// ─── Blog Types ───────────────────────────────────────────────────────────────
+
 export interface Blog {
   id: number;
   documentId: string;
   title: string;
-  description: BlocksContent;
   slug: string;
   author: string;
   readTime: string;
   date: string;
+  description: unknown; // rich text blocks
   isFeatured: boolean;
   createdAt: string;
   updatedAt: string;
@@ -71,229 +77,163 @@ export interface Blog {
   category: StrapiCategory;
 }
 
-export interface PaginationMeta {
-  page: number;
-  pageSize: number;
-  pageCount: number;
-  total: number;
-}
-
 export interface BlogsResponse {
   data: Blog[];
-  meta: {
-    pagination: PaginationMeta;
+  meta: { pagination: PaginationMeta };
+}
+
+// ─── Case Study Types ─────────────────────────────────────────────────────────
+
+export interface CaseStudy {
+  id: number;
+  documentId: string;
+  title: string;
+  slug: string;
+  date: string;
+  overview: string;
+  results: string | null;
+  client: string;
+  solutionItems?: string;
+  chellenge: string;
+  techStack: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  image: StrapiImage[];
+  category: StrapiCategory;
+}
+
+export interface CaseStudiesResponse {
+  data: CaseStudy[];
+  meta: { pagination: PaginationMeta };
+}
+
+// ─── Shared internals ─────────────────────────────────────────────────────────
+
+function buildHeaders(): HeadersInit {
+  const token = process.env.NEXT_PUBLIC_API_TOKEN ?? '';
+  return {
+    'Content-Type': 'application/json',
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
   };
 }
 
-// ─── Hook options ─────────────────────────────────────────────────────────────
-
-export interface UseBlogsOptions {
-  page?: number;
-  pageSize?: number;
+function strapiUrl(path: string): string {
+  return (process.env.NEXT_PUBLIC_STRAPI_URL ?? '').replace(/\/$/, '') + path;
 }
 
-// ─── Hook return type ─────────────────────────────────────────────────────────
+// ─── Blog fetchers ────────────────────────────────────────────────────────────
 
-export interface UseBlogsResult {
-  data: Blog[] | null;
-  pagination: PaginationMeta | null;
-  isLoading: boolean;
-  error: string | null;
-  refetch: () => void;
-}
-
-// ─── Fetcher ──────────────────────────────────────────────────────────────────
-
-async function fetchBlogs(page: number, pageSize: number): Promise<BlogsResponse> {
-  const base = (process.env.NEXT_PUBLIC_STRAPI_URL ?? '').replace(/\/$/, '');
-  const token = process.env.NEXT_PUBLIC_API_TOKEN ?? '';
-
-  const url = new URL(`${base}/api/blogs`);
+export async function fetchBlogs(
+  page: number,
+  pageSize: number,
+  category?: string
+): Promise<BlogsResponse> {
+  const url = new URL(strapiUrl('/api/blogs'));
   url.searchParams.set('populate', '*');
   url.searchParams.set('pagination[page]', String(page));
   url.searchParams.set('pagination[pageSize]', String(pageSize));
-
-  const response = await fetch(url.toString(), {
-    headers: {
-      'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
-    next: { revalidate: 60 },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch blogs: ${response.status} ${response.statusText}`);
+  if (category && category !== 'All') {
+    url.searchParams.set('filters[category][name][$eqi]', category);
   }
 
-  return response.json() as Promise<BlogsResponse>;
+  const res = await fetch(url.toString(), {
+    headers: buildHeaders(),
+    next: { revalidate: 60 },
+  });
+  if (!res.ok) throw new Error(`Failed to fetch blogs: ${res.status} ${res.statusText}`);
+  return res.json() as Promise<BlogsResponse>;
 }
 
-// ─── useBlogs hook ────────────────────────────────────────────────────────────
+export async function fetchBlogBySlug(slug: string): Promise<Blog | null> {
+  const url = new URL(strapiUrl('/api/blogs'));
+  url.searchParams.set('populate', '*');
+  url.searchParams.set('filters[slug][$eq]', slug);
 
-export function useBlogs(options: UseBlogsOptions = {}): UseBlogsResult {
-  const { page = 1, pageSize = 9 } = options; // 9 fits 3x3 grid cleanly
+  const res = await fetch(url.toString(), {
+    headers: buildHeaders(),
+    next: { revalidate: 60 },
+  });
+  if (!res.ok) return null;
 
-  const [data, setData] = useState<Blog[] | null>(null);
-  const [pagination, setPagination] = useState<PaginationMeta | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [tick, setTick] = useState<number>(0);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const load = async () => {
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        const result = await fetchBlogs(page, pageSize);
-        if (!cancelled) {
-          setData(result.data);
-          setPagination(result.meta.pagination);
-        }
-      } catch (err) {
-        if (!cancelled) {
-          setError(err instanceof Error ? err.message : 'Unknown error occurred');
-        }
-      } finally {
-        if (!cancelled) setIsLoading(false);
-      }
-    };
-
-    load();
-    return () => { cancelled = true; };
-  }, [page, pageSize, tick]);
-
-  const refetch = () => setTick(t => t + 1);
-  return { data, pagination, isLoading, error, refetch };
+  const json: BlogsResponse = await res.json();
+  return json.data?.[0] ?? null;
 }
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
+// ─── Case Study fetchers ──────────────────────────────────────────────────────
+
+export async function fetchCaseStudies(
+  page: number,
+  pageSize: number,
+  category?: string
+): Promise<CaseStudiesResponse> {
+  const url = new URL(strapiUrl('/api/case-studies'));
+  url.searchParams.set('populate', '*');
+  url.searchParams.set('pagination[page]', String(page));
+  url.searchParams.set('pagination[pageSize]', String(pageSize));
+  if (category && category !== 'All') {
+    url.searchParams.set('filters[category][name][$eqi]', category);
+  }
+
+  const res = await fetch(url.toString(), {
+    headers: buildHeaders(),
+    next: { revalidate: 60 },
+  });
+  if (!res.ok) throw new Error(`Failed to fetch case studies: ${res.status} ${res.statusText}`);
+  return res.json() as Promise<CaseStudiesResponse>;
+}
+
+export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null> {
+  const url = new URL(strapiUrl('/api/case-studies'));
+  url.searchParams.set('populate', '*');
+  url.searchParams.set('filters[slug][$eq]', slug);
+
+  const res = await fetch(url.toString(), {
+    headers: buildHeaders(),
+    next: { revalidate: 60 },
+  });
+  if (!res.ok) return null;
+
+  const json: CaseStudiesResponse = await res.json();
+  return json.data?.[0] ?? null;
+}
+
+// ─── Helpers (no React — safe anywhere) ──────────────────────────────────────
 
 export function getImageUrl(image: Blog['image']): string {
   const FALLBACK = 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200';
   if (!image?.url) return FALLBACK;
   if (image.url.startsWith('http')) return image.url;
   const base = (process.env.NEXT_PUBLIC_STRAPI_URL ?? '').replace(/\/$/, '');
-  if (!base) return image.url;
-  return `${base}${image.url}`;
+  return base ? `${base}${image.url}` : image.url;
 }
 
-export function getExcerpt(description: BlocksContent): string {
-  if (!Array.isArray(description) || description.length === 0) return '';
+export function getCaseStudyImageUrl(images: CaseStudy['image']): string {
+  const FALLBACK = 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200';
+  const image = images?.[0];
+  if (!image?.url) return FALLBACK;
+  if (image.url.startsWith('http')) return image.url;
+  const base = (process.env.NEXT_PUBLIC_STRAPI_URL ?? '').replace(/\/$/, '');
+  return base ? `${base}${image.url}` : image.url;
+}
 
+export function parseCaseStudyTechStack(techStack: string): string[] {
+  return techStack
+    .split(',')
+    .map(s => s.trim().replace(/^"|"$/g, ''))
+    .filter(Boolean);
+}
+
+export function getExcerpt(description: unknown): string {
+  if (!Array.isArray(description) || description.length === 0) return '';
   for (const block of description) {
     if (block.type === 'paragraph' && Array.isArray(block.children)) {
       const text = block.children
-        .map((c) => ('text' in c ? (c.text as string) : ''))
+        .map((c: unknown) => (typeof c === 'object' && c !== null && 'text' in c ? (c as { text: string }).text : ''))
         .join(' ')
         .trim();
       if (text) return text;
     }
   }
-
   return '';
-}
-
-// ─── Server-side fetcher ──────────────────────────────────────────────────────
-
-export async function fetchBlogBySlug(slug: string): Promise<Blog | null> {
-  const base = (process.env.NEXT_PUBLIC_STRAPI_URL ?? '').replace(/\/$/, '');
-  const token = process.env.NEXT_PUBLIC_API_TOKEN ?? '';
-
-  const url = new URL(`${base}/api/blogs`);
-  url.searchParams.set('populate', '*');
-  url.searchParams.set('filters[slug][$eq]', slug);
-
-  const response = await fetch(url.toString(), {
-    headers: {
-      'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
-    next: { revalidate: 60 },
-  });
-
-  if (!response.ok) return null;
-
-  const json: BlogsResponse = await response.json();
-  return json.data?.[0] ?? null;
-}
-// ─── Hook options ─────────────────────────────────────────────────────────────
-
-export interface UseBlogsByPageOptions {
-  pageSize?: number;
-  category?: string;
-}
-
-export interface UseBlogsByPageResult {
-  data: Blog[] | null;
-  pagination: PaginationMeta | null;
-  isLoading: boolean;
-  error: string | null;
-  currentPage: number;
-  goToPage: (page: number) => void;
-}
-
-export function useBlogsByPage(options: UseBlogsByPageOptions = {}): UseBlogsByPageResult {
-  const { pageSize = 9, category } = options;
-
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [data, setData] = useState<Blog[] | null>(null);
-  const [pagination, setPagination] = useState<PaginationMeta | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const load = async () => {
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        const base = (process.env.NEXT_PUBLIC_STRAPI_URL ?? '').replace(/\/$/, '');
-        const token = process.env.NEXT_PUBLIC_API_TOKEN ?? '';
-
-        const url = new URL(`${base}/api/blogs`);
-        url.searchParams.set('populate', '*');
-        url.searchParams.set('pagination[page]', String(currentPage));
-        url.searchParams.set('pagination[pageSize]', String(pageSize));
-
-        // Filter by category slug on the backend if provided
-        if (category && category !== 'All') {
-          url.searchParams.set('filters[category][name][$eqi]', category);
-        }
-
-        const response = await fetch(url.toString(), {
-          headers: {
-            'Content-Type': 'application/json',
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-          },
-        });
-
-        if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
-
-        const result: BlogsResponse = await response.json();
-
-        if (!cancelled) {
-          setData(result.data);
-          setPagination(result.meta.pagination);
-        }
-      } catch (err) {
-        if (!cancelled) {
-          setError(err instanceof Error ? err.message : 'Unknown error occurred');
-        }
-      } finally {
-        if (!cancelled) setIsLoading(false);
-      }
-    };
-
-    load();
-    return () => { cancelled = true; };
-  }, [currentPage, pageSize, category]);
-
-  const goToPage = (page: number) => setCurrentPage(page);
-
-  return { data, pagination, isLoading, error, currentPage, goToPage };
 }
