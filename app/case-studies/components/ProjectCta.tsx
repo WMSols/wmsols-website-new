@@ -4,7 +4,7 @@ import Link from 'next/link';
 const ProjectCTA: React.FC = () => {
   return (
     <section 
-      className="w-full h-125 flex items-center px-6 sm:px-12 md:px-20 lg:px-32 font-sans"
+      className="w-full h-125 flex items-center px-6 sm:px-12 md:px-20 lg:px-32 font-sans relative overflow-hidden"
       style={{
         // 135deg provides the exact diagonal slant shown in the design
         background: 'linear-gradient(135deg, #2776EA 54%, #050130 54%)'
@@ -27,7 +27,8 @@ const ProjectCTA: React.FC = () => {
           Let's Talk <span className="ml-2 font-bold">&rarr;</span>
         </Link>
       </div>
-    </section>
+<div className="absolute inset-0 pointer-events-none bg-linear-to-b from-transparent via-black/20 via-65% to-black" />
+ </section>
   );
 };
 
