@@ -7,7 +7,6 @@ import { getExcerpt } from '@/lib/strapi'; // Adjust the import path as needed
 import { fetchJobs, Job } from '@/lib/strapi-careers';
 
 const JobsListClient: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('');
   const [department, setDepartment] = useState('All');
   const [location, setLocation] = useState('All');
   const [jobType, setJobType] = useState('All');
@@ -27,7 +26,6 @@ const JobsListClient: React.FC = () => {
 
       try {
         const res = await fetchJobs(pageSize, {
-          searchTerm,
           domain: department,
           location: location,
           type: jobType,
@@ -49,12 +47,12 @@ const JobsListClient: React.FC = () => {
     }, 400);
 
     return () => clearTimeout(timeoutId);
-  }, [searchTerm, department, location, jobType, pageSize]);
+}, [department, location, jobType, pageSize]);
 
   // Reset page size to 10 whenever a filter changes
   useEffect(() => {
     setPageSize(10);
-  }, [searchTerm, department, location, jobType]);
+  }, [department, location, jobType]);
 
   const handleLoadMore = () => {
     setPageSize((prev) => prev + 10);
@@ -85,17 +83,6 @@ const JobsListClient: React.FC = () => {
       <h1 className="text-4xl font-bold text-center text-gray-900 mb-10">
         Current Openings
       </h1>
-
-      {/* Search Input */}
-      <div className="mb-6">
-        <input
-          type="text"
-          placeholder="Search Jobs..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full border border-gray-300 rounded-md py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
 
       {/* Filters */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-8 text-sm">
