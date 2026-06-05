@@ -54,7 +54,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
 
           <div className="prose prose-blue max-w-none text-gray-600 text-base leading-relaxed space-y-6">
-            <BlocksRenderer content={liveBlog.description} />
+            <BlocksRenderer content={liveBlog.description as any} />
           </div>
         </div>
       </article>
