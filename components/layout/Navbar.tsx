@@ -61,7 +61,8 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
             >
               <a 
                 href={navItem.href}
-                className={`flex items-center text-sm font-medium transition-colors ${
+                // Added font-normal to make the text weight normal
+                className={`flex items-center text-sm font-normal transition-colors ${
                   isActive ? 'text-blue-500' : 'text-gray-300 hover:text-blue-500'
                 }`}
               >
@@ -95,7 +96,7 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
                           <li key={child.item}>
                             <a
                               href={child.href} 
-                              className={`flex items-center cursor-pointer gap-3 text-sm font-medium w-full text-left transition-colors ${
+                              className={`flex items-center cursor-pointer gap-3 text-sm w-full text-left transition-colors ${
                                 activeCategory === child.item ? 'text-[#3b82f6]' : 'text-gray-700 hover:text-[#3b82f6]'
                               }`}
                               onMouseEnter={() => setActiveCategory(child.item)}
@@ -140,7 +141,7 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
       {/* CTA Button */}
       <a 
         href="/contact" 
-        className="px-6 py-2.5 text-sm font-medium text-white border border-gray-500 rounded-sm hover:bg-white/10 transition-colors"
+        className="px-6 py-2.5 text-sm font-normal text-white border border-gray-500 rounded-sm hover:bg-white/10 transition-colors"
       >
         Get Started
       </a>
@@ -198,7 +199,7 @@ const MobileNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
                 <div className="flex items-center justify-between">
                   <a 
                     href={navItem.href}
-                    className={`text-lg font-medium py-3 ${isActive ? 'text-[#3b82f6]' : 'text-white'}`}
+                    className={`text-lg font-normal py-3 ${isActive ? 'text-[#3b82f6]' : 'text-white'}`}
                   >
                     {navItem.item}
                   </a>
@@ -213,14 +214,14 @@ const MobileNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
                   <div className="pl-4 pb-3 space-y-4">
                     {navItem.children?.map(child => (
                       <div key={child.item}>
-                        <a href={child.href} className="text-md font-medium text-gray-300 block mb-2">{child.item}</a>
+                        <a href={child.href} className="text-md font-normal text-gray-300 block mb-2">{child.item}</a>
                         {child.children && (
                           <div className="pl-4 space-y-2 border-l border-gray-700">
                             {child.children.map(grandchild => (
                               <a 
                                 key={grandchild.item} 
                                 href={grandchild.href} 
-                                className="block text-sm text-gray-500 hover:text-white"
+                                className="block text-sm font-normal text-gray-500 hover:text-white"
                               >
                                 {grandchild.item}
                               </a>
@@ -239,7 +240,7 @@ const MobileNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
         <div className="mt-8">
           <a 
             href="/contact" 
-            className="block w-full py-3 text-center text-sm font-medium text-white bg-[#2563eb] rounded-md"
+            className="block w-full py-3 text-center text-sm font-normal text-white bg-[#2563eb] rounded-md"
           >
             Get Started
           </a>
@@ -253,13 +254,30 @@ const MobileNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
 // --- MAIN WRAPPER COMPONENT ---
 export const Navbar: React.FC = () => {
   const [currentPath, setCurrentPath] = useState('');
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     setCurrentPath(window.location.pathname);
+
+    // Track scroll state to add background
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <header className="absolute top-0 left-0 right-0 w-full z-50 bg-transparent">
+    <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
+      isScrolled 
+        ? 'bg-[#070714]/95 backdrop-blur-md shadow-lg border-b border-gray-800' 
+        : 'bg-transparent' // <-- Updated: Now transparent on both mobile and desktop initially
+    }`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-24 flex items-center">
         <DesktopNavbar currentPath={currentPath} />
         <MobileNavbar currentPath={currentPath} />
