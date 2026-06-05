@@ -22,9 +22,9 @@ export const CompanyStats: React.FC = () => {
           {trustStats.map((stat, index) => (
             <div 
               key={index} 
-              className="flex flex-col items-center justify-center w-full md:w-1/4 py-8 md:py-0 group cursor-pointer"
+              className="flex flex-col items-center justify-center  w-full md:w-1/4 py-8 md:py-0 group cursor-pointer"
             >
-              <h3 className="text-4xl md:text-[3.25rem] font-bold text-theme mb-3 tracking-tight group-hover:text-[60px] transition-all duration-300">
+              <h3 className="text-4xl md:text-[3.25rem] font-bold text-theme mb-3 tracking-tight group-hover:scale-110 transition-all duration-300">
                 {/* Note: Because we separated value and suffix in the data structure, 
                   you can easily wrap `stat.value` in an animation library like 
                   <CountUp end={Number(stat.value)} /> right here later if desired.
