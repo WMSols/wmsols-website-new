@@ -43,11 +43,14 @@ const ValueCard: React.FC<{ data: ValueItem; index: number }> = ({ data, index }
 
   return (
     <div 
-      className={`w-full md:w-[60%] bg-[#F8F9FA] rounded-xl p-8 md:p-10 shadow-xl transition-transform hover:-translate-y-1 ${
+      className={`w-full md:w-[60%]  rounded-xl p-8 md:p-10 transition-all duration-300 hover:shadow-xl hover:shadow-black/60   hover:-translate-y-1 ${
         isEven ? 'md:self-start' : 'md:self-end'
       }`}
+      style={{
+        background:"linear-gradient(to right, #408EFF 2%, #FFFFFF 2%, #FFFFFF 98%, #408EFF 96%)"
+      }}
     >
-      <span className="text-3xl font-bold text-gray-400 mb-2 block">
+      <span className="text-3xl font-bold text-blue-200 mb-2 block">
         {data.number}
       </span>
       <h3 className="text-3xl font-bold text-black mb-3">
