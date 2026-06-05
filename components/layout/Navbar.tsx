@@ -24,7 +24,7 @@ const Logo: React.FC<{ isLightMode?: boolean }> = ({ isLightMode }) => (
       W
     </div>
     <span className={`text-xl font-bold tracking-wide  text-[#3DA8FF]`}>
-      WM<span className={isLightMode ? 'text-gray-600' : 'text-gray-300'}>Sols</span>
+      WM<span className={isLightMode ? 'text-gray-700' : 'text-white'}>Sols</span>
     </span>
   </a>
 );

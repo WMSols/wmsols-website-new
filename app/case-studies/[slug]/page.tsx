@@ -5,6 +5,8 @@ import React, { Suspense } from 'react';
 import ProjectCTA from '../components/ProjectCta';
 import { Skeleton } from '@/components/ui/skeleton';
 
+import CaseStudySidebar from '../components/CaseStudySidebar';
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
@@ -44,24 +46,18 @@ function CaseStudyContentSkeleton() {
 
         {/* Content */}
         <div className="space-y-16 border-l-0 lg:border-l border-gray-100 lg:pl-16">
-          {/* Overview */}
           <div className="space-y-3">
             <Skeleton className="h-7 w-32" />
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-5/6" />
             <Skeleton className="h-4 w-4/6" />
           </div>
-
           <hr className="border-gray-100" />
-
-          {/* Challenge */}
           <div className="space-y-3">
             <Skeleton className="h-7 w-40" />
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-5/6" />
           </div>
-
-          {/* Solution */}
           <div className="bg-[#f5f7ff] rounded-2xl p-8 md:p-10 space-y-4">
             <Skeleton className="h-7 w-36" />
             {Array.from({ length: 4 }).map((_, i) => (
@@ -70,29 +66,6 @@ function CaseStudyContentSkeleton() {
                 <Skeleton className="h-4 flex-1" />
               </div>
             ))}
-          </div>
-
-          {/* Results */}
-          <div className="space-y-4">
-            <Skeleton className="h-7 w-64" />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="bg-[#f5f7ff] rounded-2xl p-6 flex flex-col items-center justify-center h-32 space-y-2">
-                  <Skeleton className="h-3 w-24" />
-                  <Skeleton className="h-10 w-20" />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Tech Stack */}
-          <div className="space-y-4">
-            <Skeleton className="h-7 w-28" />
-            <div className="flex flex-wrap gap-3">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <Skeleton key={i} className="h-5 w-20" />
-              ))}
-            </div>
           </div>
         </div>
       </div>
@@ -112,13 +85,11 @@ async function CaseStudyContent({ slug }: { slug: string }) {
   const techStack = parseCaseStudyTechStack(project.techStack);
   const imageUrl = getCaseStudyImageUrl(project.image);
 
-  // Parse solutionItems — API returns a quoted, newline-delimited string
-  const solutionItems =project.solutionItems && project.solutionItems
+  const solutionItems = project.solutionItems && project.solutionItems
     .split('\n')
     .map(s => s.trim().replace(/^"|",?$|"$/g, '').trim())
     .filter(Boolean);
 
-  // Parse results — string from API, render section only when present
   const results: string | null = project.results || null;
 
   return (
@@ -151,41 +122,32 @@ async function CaseStudyContent({ slug }: { slug: string }) {
       </section>
 
       {/* DETAILS */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 lg:gap-24">
+      <section className="max-w-6xl sm:ml-6 px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr]">
 
-          {/* Sticky Sidebar */}
-          <aside className="hidden lg:block relative">
-            <div className="sticky top-24 flex flex-col space-y-6 text-sm font-medium">
-              <a href="#overview"   className="text-blue-500 hover:text-blue-600 transition-colors">Overview</a>
-              <a href="#challenge"  className="text-gray-300 hover:text-gray-900 transition-colors">The Challenge</a>
-              <a href="#solution"   className="text-gray-300 hover:text-gray-900 transition-colors">The Solution</a>
-              {results && (
-                <a href="#results"  className="text-gray-300 hover:text-gray-900 transition-colors">The Results</a>
-              )}
-              <a href="#tech-stack" className="text-gray-300 hover:text-gray-900 transition-colors">Tech Stack</a>
-            </div>
-          </aside>
+          <CaseStudySidebar hasResults={!!results} />
 
           {/* Content */}
-          <div className="space-y-16 border-l-0 lg:border-l border-gray-100 lg:pl-16">
+          <div className="space-y-16 border-l-0 lg:border-l border-gray-100 lg:pl-10 px-4 sm:px-0">
 
-            <div id="overview">
+            {/* Added scroll-mt-32 to all section containers */}
+            <div id="overview" className="scroll-mt-32">
               <h2 className="text-2xl font-medium text-gray-900 mb-4">Overview:</h2>
               <p className="text-gray-500 text-sm leading-relaxed">{project.overview}</p>
             </div>
 
             <hr className="border-gray-100" />
 
-            <div id="challenge">
+            <div id="challenge" className="scroll-mt-32">
               <h2 className="text-2xl font-medium text-gray-900 mb-4">The Challenge:</h2>
               <p className="text-gray-500 text-sm leading-relaxed">{project.chellenge}</p>
             </div>
 
-            <div id="solution" className="bg-[#f5f7ff] rounded-2xl p-8 md:p-10">
+            {/* Merged scroll-mt-32 with existing background/padding classes */}
+            <div id="solution" className="bg-[#f5f7ff] rounded-2xl sm:p-8 md:p-10 scroll-mt-32">
               <h2 className="text-2xl font-medium text-gray-900 mb-6">The Solution:</h2>
               <ul className="space-y-4">
-                { solutionItems && solutionItems.map((item, idx) => (
+                {solutionItems && solutionItems.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
                     <span className="text-gray-600 text-sm">{item}</span>
@@ -195,13 +157,13 @@ async function CaseStudyContent({ slug }: { slug: string }) {
             </div>
 
             {results && (
-              <div id="results">
+              <div id="results" className="scroll-mt-32">
                 <h2 className="text-2xl font-medium text-gray-900 mb-6">Quantifiable Outcomes & Results</h2>
                 <p className="text-green-500 text-lg font-medium">{results}</p>
               </div>
             )}
 
-            <div id="tech-stack">
+            <div id="tech-stack" className="scroll-mt-32">
               <h2 className="text-2xl font-medium text-gray-900 mb-6">Tech Stack:</h2>
               <div className="flex flex-wrap items-center gap-3 text-sm text-blue-500">
                 {techStack.map((tech, idx) => (

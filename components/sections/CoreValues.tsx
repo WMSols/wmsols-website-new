@@ -19,11 +19,6 @@ const CoreValues: React.FC = () => {
 
         {/* Right Side: Cards Grid */}
         <div className="w-full lg:w-7/12 flex justify-center lg:justify-end">
-          {/* Grid Setup: 
-            - 1 column on mobile.
-            - 2 columns on sm screens (tablet) and up. 
-            - The staggered effect is created by pushing every even child down on sm screens.
-          */}
           <div className="grid grid-cols-1 sm:grid-cols-2 place-items-center gap-6 w-full max-w-2xl sm:px-16">
             {valuesData.map((card, index) => {
               const Icon = card.icon;
