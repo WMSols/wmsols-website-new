@@ -27,12 +27,12 @@ export const navigationData = [
         item: "Mobile App Development",
         href: "/services/mobile-development",
         children: [
-          { item: "iOS App Development", href: "/services/mobile-app-development" },
-          { item: "Android App Development", href: "/services/mobile-app-development" },
-          { item: "Flutter Development", href: "/services/mobile-app-development" },
-          { item: "Mobile UI/UX Design", href: "/services/mobile-app-development" },
-          { item: "App Store Optimization", href: "/services/mobile-app-development" },
-          { item: "React Native Development", href: "/services/mobile-app-development" }
+          { item: "iOS App Development", href: "/services/mobile-development" },
+          { item: "Android App Development", href: "/services/mobile-development" },
+          { item: "Flutter Development", href: "/services/mobile-development" },
+          { item: "Mobile UI/UX Design", href: "/services/mobile-development" },
+          { item: "App Store Optimization", href: "/services/mobile-development" },
+          { item: "React Native Development", href: "/services/mobile-development" }
         ]
       },
       {
@@ -123,7 +123,7 @@ export const footerData = [
     item: "Services",
     children: [
       { item: "Web Development", href: "/services/web-development" },
-      { item: "Mobile App Development", href: "/services/mobile-app-development" },
+      { item: "Mobile App Development", href: "/services/mobile-development" },
       { item: "AI Automation", href: "/services/ai-automation" },
       { item: "UI/UX Design", href: "/services/ui-ux-design" },
       { item: "Database Architecture", href: "/services/database-architecture" },
