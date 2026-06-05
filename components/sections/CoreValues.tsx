@@ -4,7 +4,7 @@ import { valuesData } from '@/data/homepage';
 // --- COMPONENT ---
 const CoreValues: React.FC = () => {
   return (
-    <section className="bg-[#F1F2FF] w-full min-h-200 py-20 lg:py-0 flex items-center overflow-hidden">
+    <section className="bg-[#F1F2FF] w-full  pt-20 pb-30  flex items-center overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 w-full flex flex-col lg:flex-row items-center gap-16 lg:gap-8">
         
         {/* Left Side: Text Content */}
@@ -33,13 +33,13 @@ const CoreValues: React.FC = () => {
               return (
                 <div 
                   key={card.id} 
-                  className={`bg-white w-60 rounded-3xl p-6 group hover:border hover:border-[#3b82f6]  sm:py-10  flex flex-col items-center text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] ${
+                  className={`bg-white w-60 rounded-3xl p-6 group   sm:py-10  flex flex-col items-center text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:shadow-black/25 ${
                     isEven ? 'sm:translate-y-16' : ''
                   }`}
                 >
                   {/* Icon Wrapper */}
-                  <div className="w-14 h-14 rounded-full bg-[#ecf1fd] flex items-center justify-center mb-6 ">
-                    <Icon className="w-6 h-6 text-[#3b82f6]" strokeWidth={2} />
+                  <div className="w-14 h-14 rounded-full bg-blue-500 transition-colors duration-300 flex items-center justify-center mb-6 ">
+                    <Icon className="w-6 h-6 text-[#ffffff] group-hover:rotate-z-16 transition-all duration-300" strokeWidth={2} />
                   </div>
                   
                   {/* Card Content */}
