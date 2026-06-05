@@ -3,6 +3,7 @@ import { Mouse } from 'lucide-react'
 import React from 'react'
 import ServicesGrid from './components/ServicesGrid'
 import CtaSection from './components/CtaSection'
+import { StaggerFadeUp } from '@/components/animations/StaggerFadeUp'
 
 const page = () => {
   return (
@@ -32,12 +33,12 @@ const page = () => {
                             left="35vw"
                             color="rgba(4, 136, 197, 29%)"
                         />
-                        <div className='flex flex-col items-center sm:gap-4 gap-2 justify-center h-full sm:px-0 px-2'>
+                        <StaggerFadeUp className='flex flex-col items-center sm:gap-4 gap-2 justify-center h-full sm:px-0 px-2'>
                             <h1 className=" max-w-4xl text-5xl text-center sm:text-6xl md:text-7xl font-bold text-white  ">Solutions Engineered for Your <span className="text-blue-500">Success</span></h1>
                             <p className="text-lg text-center max-w-2xl px-4 text-muted-foreground">
                               At WMsols, we transform complex business challenges into seamless digital experiences. Whether you need a high-performance web application, an intelligent automation system, or an intuitive mobile interface, our engineering-first approach ensures your product is built for scale. We combine modern technology stacks with purposeful design to deliver solutions that not only look exceptional but drive measurable growth for your business.
                             </p>
-                        </div>
+                        </StaggerFadeUp>
                         <Mouse size={34} className='absolute bottom-10 animate-bounce text-white'/>
                     </div>
                     <ServicesGrid/>

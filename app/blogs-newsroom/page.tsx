@@ -7,6 +7,7 @@ import InsightCardList from './components/InsightCardList';
 import { blogPosts, type BlogPost } from '@/data/blogs-newsroom';
 import { getImageUrl, getExcerpt, type Blog } from '@/lib/strapi';
 import { useBlogsByPage } from '@/lib/strapi-hooks';
+import { StaggerFadeUp } from '@/components/animations/StaggerFadeUp';
 
 const DEFAULT_AUTHOR_AVATAR =
   'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150';
@@ -84,7 +85,7 @@ const Page = () => {
         <GradientLight size={400} top="-10px" left="-100px" color="rgba(97, 4, 197, 29%)" />
         <GradientLight size={300} top="400px" right="-100px" color="rgba(65, 273, 111, 29%)" />
 
-        <div className="flex flex-col items-center sm:gap-4 gap-2 justify-center h-full sm:px-0 px-2">
+        <StaggerFadeUp className="flex flex-col items-center sm:gap-4 gap-2 justify-center h-full sm:px-0 px-2">
           <h1 className="max-w-5xl text-5xl text-center sm:text-6xl md:text-7xl font-bold text-white">
             Insights from the WMsols Team
           </h1>
@@ -92,7 +93,7 @@ const Page = () => {
             Practical thinking on technology, product design, AI, and digital strategy written
             by the engineers and strategists who build it every day.
           </p>
-        </div>
+        </StaggerFadeUp>
       </div>
 
       {/* ── Status banner ── */}

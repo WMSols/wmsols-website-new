@@ -1,8 +1,8 @@
 import { GradientLight } from '@/components/common/GradientLight'
 import React from 'react'
 import ProjectListClient from './components/ProjectListClient'
-import { caseStudies } from '@/data/case-studies'
 import CtaSection from './components/CtaSection'
+import { StaggerFadeUp } from '@/components/animations/StaggerFadeUp'
 
 const page = () => {
     return (
@@ -36,16 +36,16 @@ const page = () => {
                     right="0"
                     color="rgba(132, 4, 197, 29%)"
                 />
-                <div className='flex flex-col items-center sm:gap-4 gap-2 justify-center h-full sm:px-0 px-2'>
+                <StaggerFadeUp className='flex flex-col items-center sm:gap-4 gap-2 justify-center h-full sm:px-0 px-2'>
                     <h1 className=" max-w-4xl text-5xl text-center sm:text-6xl md:text-7xl font-bold text-white  ">Real Projects <br />
                         Real <span className="text-blue-500">Results</span></h1>
                     <p className="text-lg text-center max-w-2xl px-4 text-muted-foreground">
                         From early-stage startups to scaling enterprises, explore how WMsols turns complex challenges into elegant digital solutions
                     </p>
-                    <a  className='bg-transparent text-white  py-3 px-5 mt-6 border border-white rounded-md' href="#projects">Explore Our Work &rarr;</a>
-                </div>
+                    <a  className='bg-transparent text-white  py-3 px-5  border border-white rounded-md' href="#projects">Explore Our Work &rarr;</a>
+                </StaggerFadeUp>
             </div>
-            <ProjectListClient projects={caseStudies} />
+            <ProjectListClient  />
             <CtaSection/>
         </div>
     )
