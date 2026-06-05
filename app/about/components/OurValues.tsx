@@ -1,3 +1,4 @@
+import StaggerBlurView from '@/components/animations/StaggerBlurView';
 import React from 'react';
 
 // --- TYPES ---
@@ -78,7 +79,7 @@ const OurValues: React.FC = () => {
         {/* Cards Wrapper */}
         <div className="flex flex-col gap-6 md:gap-4 w-full relative">
           {valuesData.map((val, index) => (
-            <ValueCard key={val.id} data={val} index={index} />
+            <ValueCard key={val.id}  data={val} index={index} />
           ))}
         </div>
 
