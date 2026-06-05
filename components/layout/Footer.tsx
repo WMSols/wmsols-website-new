@@ -8,12 +8,12 @@ const Logo = () => (
     <div 
       className="w-16 h-16 rounded flex items-center justify-center font-bold text-white text-4xl"
       style={{
-        background: 'linear-gradient(to bottom, #3F28A3 0%, #600985 42%, #1C1344 100%)'
+        background: 'linear-gradient(to top, #2868A3 0%, #3DA8FF 56%, #1C1344 150%)'
       }}
     >
       W
     </div>
-    <span className="text-2xl font-bold text-[#723EFE] tracking-wide">
+    <span className="text-2xl font-bold text-[#3DA8FF] tracking-wide">
       WM<span className="text-gray-300">Sols</span>
     </span>
   </a>

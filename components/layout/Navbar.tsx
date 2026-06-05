@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { navigationData } from "@/data/navigation"
+import { usePathname } from 'next/navigation';
 
 // --- TYPES ---
 export interface NavItem {
@@ -12,24 +13,24 @@ export interface NavItem {
 }
 
 // --- SHARED COMPONENTS ---
-const Logo = () => (
+const Logo: React.FC<{ isLightMode?: boolean }> = ({ isLightMode }) => (
   <a href="/" className="flex items-center gap-2 z-50">
     <div 
       className="w-8 h-8 rounded flex items-center justify-center font-bold text-white text-lg"
       style={{
-        background: 'linear-gradient(to bottom, #3F28A3 0%, #600985 42%, #1C1344 100%)'
+        background: 'linear-gradient(to top, #2868A3 0%, #3DA8FF 56%, #1C1344 150%)'
       }}
     >
       W
     </div>
-    <span className="text-xl font-bold text-[#723EFE] tracking-wide">
-      WM<span className="text-gray-300">Sols</span>
+    <span className={`text-xl font-bold tracking-wide  text-[#3DA8FF]`}>
+      WM<span className={isLightMode ? 'text-gray-600' : 'text-gray-300'}>Sols</span>
     </span>
   </a>
 );
 
 // --- DESKTOP NAVBAR ---
-const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
+const DesktopNavbar: React.FC<{ currentPath: string; isLightMode: boolean }> = ({ currentPath, isLightMode }) => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
@@ -43,7 +44,7 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
 
   return (
     <div className="hidden lg:flex items-center justify-between w-full h-full">
-      <Logo />
+      <Logo isLightMode={isLightMode} />
 
       {/* Main Nav Links */}
       <nav className="flex items-center text-base space-x-8 h-full">
@@ -61,9 +62,12 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
             >
               <a 
                 href={navItem.href}
-                // Added font-normal to make the text weight normal
                 className={`flex items-center text-sm font-normal transition-colors ${
-                  isActive ? 'text-blue-500' : 'text-gray-300 hover:text-blue-500'
+                  isActive 
+                    ? 'text-blue-500' 
+                    : isLightMode 
+                      ? 'text-black hover:text-blue-500' 
+                      : 'text-gray-300 hover:text-blue-500'
                 }`}
               >
                 {navItem.item}
@@ -80,7 +84,6 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
                       : 'opacity-0 -translate-y-4 pointer-events-none invisible'
                     }`}
                 >
-                  {/* Inner wrapper aligns the dropdown columns with the main navbar layout */}
                   <div className="max-w-7xl mx-auto flex w-full min-h-75">
                     
                     {/* Column 1: Title */}
@@ -141,7 +144,11 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
       {/* CTA Button */}
       <a 
         href="/contact" 
-        className="px-6 py-2.5 text-sm font-normal text-white border border-gray-500 rounded-sm hover:bg-white/10 transition-colors"
+        className={`px-6 py-2.5 text-sm font-normal rounded-sm transition-colors ${
+          isLightMode 
+            ? 'text-black border border-black hover:bg-black/5' 
+            : 'text-white border border-gray-500 hover:bg-white/10'
+        }`}
       >
         Get Started
       </a>
@@ -151,7 +158,7 @@ const DesktopNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
 
 
 // --- MOBILE NAVBAR ---
-const MobileNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
+const MobileNavbar: React.FC<{ currentPath: string; isLightMode: boolean }> = ({ currentPath, isLightMode }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
@@ -172,17 +179,17 @@ const MobileNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
 
   return (
     <div className="flex lg:hidden items-center justify-between w-full h-full">
-      <Logo />
+      <Logo isLightMode={isLightMode && !isOpen} />
       
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="text-white p-2 z-50 focus:outline-none"
+        className={`${isLightMode && !isOpen ? 'text-black' : 'text-white'} p-2 z-50 focus:outline-none transition-colors`}
         aria-label="Toggle Menu"
       >
         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay (Kept dark for consistency) */}
       <div 
         className={`fixed inset-0 bg-[#070714] z-40 transition-transform duration-300 ease-in-out px-4 pt-24 pb-8 overflow-y-auto ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
@@ -253,13 +260,13 @@ const MobileNavbar: React.FC<{ currentPath: string }> = ({ currentPath }) => {
 
 // --- MAIN WRAPPER COMPONENT ---
 export const Navbar: React.FC = () => {
-  const [currentPath, setCurrentPath] = useState('');
+  // Use Next.js hook instead of window.location to track route changes dynamically
+  const pathname = usePathname(); 
+  const currentPath = pathname || ''; // Fallback just in case
+
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    setCurrentPath(window.location.pathname);
-
-    // Track scroll state to add background
     const handleScroll = () => {
       if (window.scrollY > 20) {
         setIsScrolled(true);
@@ -270,18 +277,25 @@ export const Navbar: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, []); // We only need to set up the scroll listener once
+
+  // This will now instantly re-calculate on every client-side route change
+  const isLightMode = 
+    (currentPath.startsWith('/careers/') && currentPath.length > '/careers/'.length) || 
+    (currentPath.startsWith('/blogs-newsroom/') && currentPath.length > '/blogs-newsroom/'.length);
 
   return (
     <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
       isScrolled 
-        ? 'bg-[#070714]/95 backdrop-blur-md shadow-lg border-b border-gray-800' 
-        : 'bg-transparent' // <-- Updated: Now transparent on both mobile and desktop initially
+        ? isLightMode 
+          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-200' 
+          : 'bg-[#070714]/95 backdrop-blur-md shadow-lg border-b border-gray-800' 
+        : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-24 flex items-center">
-        <DesktopNavbar currentPath={currentPath} />
-        <MobileNavbar currentPath={currentPath} />
+        <DesktopNavbar currentPath={currentPath} isLightMode={isLightMode} />
+        <MobileNavbar currentPath={currentPath} isLightMode={isLightMode} />
       </div>
     </header>
   );
-};
+};;
