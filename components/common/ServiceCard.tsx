@@ -24,7 +24,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     <a 
       href={href}
       className={`
-        group relative flex flex-col w-full max-w-105 h-100 
+        group relative flex flex-col w-full max-w-105 h-90 
         rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-2
         ${isDark 
           ? 'bg-[#00193D] border border-[#0a009963] shadow-2xl shadow-blue-800/20' 
@@ -34,8 +34,8 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     >
       <div 
         className={`
-          flex items-center justify-center gap-4 pt-4 pb-3 px-6
-          ${isDark ? 'bg-transparent' : 'bg-[#3680f8] '}
+          flex items-center  gap-4 pt-4 pb-3 px-6
+          bg-transparent '}
         `}
       >
         {/* Icon Wrapper */}
@@ -51,7 +51,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           <Icon size={30}/>
         </div>
         
-        <h3 className=" text-xl  font-bold text-white tracking-wide">
+        <h3 className={` text-xl ${isDark ? 'text-white' : 'text-gray-800'} font-bold tracking-wide`}>
           {title}
         </h3>
       </div>
@@ -59,10 +59,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       {/* BODY SECTION */}
       <div className="flex flex-col grow px-2 ">
         {/* Description */}
-        <div className="grow flex items-center justify-center">
+        <div className="grow flex items-center ">
           <p 
             className={`
-              text-center  leading-[1.8] font-medium
+             px-3  leading-[1.8] font-medium
               ${isDark ? 'text-gray-300' : 'text-gray-600'}
             `}
           >
