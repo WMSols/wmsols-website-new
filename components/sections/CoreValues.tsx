@@ -1,5 +1,8 @@
 import React from 'react';
 import { valuesData } from '@/data/homepage';
+import SingleBlurView from '../animations/SingleBlurView';
+import { StaggerFadeUpInView } from '../animations/StaggerFadeUpInView';
+import StaggerBlurView from '../animations/StaggerBlurView';
 
 // --- COMPONENT ---
 const CoreValues: React.FC = () => {
@@ -26,12 +29,13 @@ const CoreValues: React.FC = () => {
               const isEven = index % 2 !== 0; 
               
               return (
-                <div 
+                <StaggerBlurView
                   key={card.id} 
                   className={`bg-white w-60 rounded-3xl p-6 group   sm:py-10  flex flex-col items-center text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:shadow-black/25 ${
                     isEven ? 'sm:translate-y-16' : ''
                   }`}
-                >
+                  >
+            
                   {/* Icon Wrapper */}
                   <div className="w-14 h-14 rounded-full bg-blue-500 transition-colors duration-300 flex items-center justify-center mb-6 ">
                     <Icon className="w-6 h-6 text-[#ffffff] group-hover:rotate-z-16 transition-all duration-300" strokeWidth={2} />
@@ -44,7 +48,7 @@ const CoreValues: React.FC = () => {
                   <p className="text-sm text-gray-500 leading-relaxed">
                     {card.description}
                   </p>
-                </div>
+                </StaggerBlurView>
               );
             })}
           </div>

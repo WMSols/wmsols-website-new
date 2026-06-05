@@ -1,3 +1,4 @@
+import SingleBlurView from '@/components/animations/SingleBlurView';
 import StaggerBlurView from '@/components/animations/StaggerBlurView';
 import React from 'react';
 
@@ -51,6 +52,7 @@ const ValueCard: React.FC<{ data: ValueItem; index: number }> = ({ data, index }
         background:"linear-gradient(to right, #408EFF 2%, #FFFFFF 2%, #FFFFFF 98%, #408EFF 96%)"
       }}
     >
+      <SingleBlurView>
       <span className="text-3xl font-bold text-blue-200 mb-2 block">
         {data.number}
       </span>
@@ -60,6 +62,7 @@ const ValueCard: React.FC<{ data: ValueItem; index: number }> = ({ data, index }
       <p className="text-gray-500 text-sm leading-relaxed">
         {data.description}
       </p>
+      </SingleBlurView>
     </div>
   );
 };

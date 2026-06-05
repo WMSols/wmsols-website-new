@@ -63,8 +63,8 @@ const ProjectListClient: React.FC = () => {
 
       {/* Error Banner — non-blocking, shown alongside stale/dummy data */}
       {error && (
-        <div className="mb-8 px-4 py-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
-          Failed to load projects: {error}
+        <div className="mb-8 px-4 py-3 rounded-lg bg-red-50 border border-red-200 text-red-500 text-sm">
+          Sorry the server did not respond: {error}
         </div>
       )}
 
