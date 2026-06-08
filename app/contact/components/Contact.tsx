@@ -43,7 +43,7 @@ const Contact: React.FC = () => {
             </div>
 
             {/* Map sits directly under the info block */}
-            <div className="w-full rounded-xl overflow-hidden shadow-sm">
+            <div className="w-full overflow-hidden z-0 ">
               <Map />
             </div>
           </div>

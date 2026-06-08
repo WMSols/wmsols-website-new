@@ -31,17 +31,18 @@ export default function Map() {
   if (!icon) return null
 
   return (
+    //33.709733681426286, 73.04351966543929
     <MapContainer
-      center={[37.7749, -122.4194]}
+      center={[33.709733681426286, 73.04351966543929]}
       zoom={14}
-      style={{ height: '300px', width: '300px', borderRadius: '12px' }}
+      style={{ height: '300px', width: '100%', borderRadius: '12px' }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={[37.7749, -122.4194]} icon={icon}>
-        <Popup>123 Tech Avenue, San Francisco</Popup>
+      <Marker position={[33.709733681426286, 73.04351966543929]} icon={icon}>
+        <Popup>WMSols , Islamabad</Popup>
       </Marker>
     </MapContainer>
   )
