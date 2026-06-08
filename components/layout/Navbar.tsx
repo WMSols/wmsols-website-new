@@ -182,7 +182,7 @@ const MobileNavbar: React.FC<{ currentPath: string; isLightMode: boolean }> = ({
 
   return (
     <header className={`fixed top-0 left-0 right-0 w-full z-[999] lg:hidden transition-all duration-300 ${
-      isScrolled && !isOpen
+      isScrolled || isOpen  // ← only change: added || isOpen
         ? isLightMode
           ? 'bg-white border-b border-gray-200'
           : 'bg-[#070714] border-b border-gray-800'
@@ -265,7 +265,6 @@ const MobileNavbar: React.FC<{ currentPath: string; isLightMode: boolean }> = ({
     </header>
   );
 };
-
 
 // --- MAIN EXPORT --- (just renders both; CSS handles which one shows)
 export const Navbar: React.FC = () => {
