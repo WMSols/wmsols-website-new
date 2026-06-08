@@ -68,7 +68,7 @@ const LatestInsights: React.FC = () => {
           </div>
           <a
             href="/blogs-newsroom"
-            className="inline-flex items-center justify-center px-6 py-2.5 rounded-full border border-gray-300 text-[#3b82f6] font-medium text-sm hover:border-[#3b82f6] hover:bg-blue-50 transition-colors whitespace-nowrap"
+            className="inline-flex items-center justify-center px-6 py-2.5 rounded-full border border-gray-300 bg-[#3b82f6] font-medium text-sm  text-white hover:bg-blue-600 transition-colors whitespace-nowrap"
           >
             View All Posts
           </a>
