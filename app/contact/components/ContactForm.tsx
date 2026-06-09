@@ -64,10 +64,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
         {/* Row 1 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-900 mb-1">
+            <label htmlFor="name" className="block text-sm font-medium text-gray-900 mb-1">
               Name <span className="text-red-500">*</span>
             </label>
             <input
+              id="name"
               type="text"
               name="name"
               required
@@ -78,10 +79,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-900 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-1">
               Email <span className="text-red-500">*</span>
             </label>
             <input
+              id="email"
               type="email"
               name="email"
               required
@@ -96,10 +98,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
         {/* Row 2 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-900 mb-1">
+            <label htmlFor="company" className="block text-sm font-medium text-gray-900 mb-1">
               Company/Organisation
             </label>
             <input
+              id="company"
               type="text"
               name="company"
               placeholder="Dell Inc"
@@ -109,10 +112,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-900 mb-1">
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-900 mb-1">
               Phone
             </label>
             <input
+              id="phone"
               type="tel"
               name="phone"
               placeholder="+92 323 3243456"
@@ -126,10 +130,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
         {/* Row 3 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium mb-1">
+            <label htmlFor="service" className="block text-sm font-medium mb-1">
               Service You are Interested in
             </label>
             <select
+              id="service"
               name="service"
               value={formData.service}
               onChange={handleChange}
@@ -145,10 +150,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">
+            <label htmlFor="budget" className="block text-sm font-medium mb-1">
               Project Budget
             </label>
             <select
+              id="budget"
               name="budget"
               value={formData.budget}
               onChange={handleChange}
@@ -166,10 +172,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
 
         {/* Row 4 */}
         <div>
-          <label className="block text-sm font-medium mb-1">
+          <label htmlFor="description" className="block text-sm font-medium mb-1">
             Tell us about your project <span className="text-red-500">*</span>
           </label>
           <textarea
+            id="description"
             name="description"
             required
             rows={5}
@@ -183,10 +190,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
         {/* Row 5 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
           <div>
-            <label className="block text-sm font-medium text-gray-900 mb-1">
+            <label htmlFor="source" className="block text-sm font-medium text-gray-900 mb-1">
               How did you hear about us? (Optional)
             </label>
             <select
+              id="source"
               name="source"
               value={formData.source}
               onChange={handleChange}
@@ -206,6 +214,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
             <button
               type="submit"
               disabled={isSubmitting}
+              aria-label={isSubmitting ? 'Sending contact request' : 'Send contact request'}
               className="w-full md:w-36 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {isSubmitting ? (

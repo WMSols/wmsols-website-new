@@ -67,7 +67,7 @@ const Contact: React.FC = () => {
             </button>
             <div className="flex items-center justify-center space-x-2 mb-4 mt-2">
               <CheckCircle2 className="w-6 h-6 text-black" />
-              <h3 className="text-2xl font-bold text-gray-900">Message Received</h3>
+              <h1 className="text-2xl font-sans font-bold text-gray-900">Message Received</h1>
             </div>
             <p className="text-gray-500 text-sm mb-8 px-4">
               Thank you for reaching out. A member of the WMsols team will be in touch within 24 hours. In the meantime, explore our latest work below.

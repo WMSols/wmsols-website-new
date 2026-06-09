@@ -47,7 +47,7 @@ const DesktopNavbar: React.FC<{ currentPath: string; isLightMode: boolean }> = (
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 w-full z-[999] hidden lg:block transition-all duration-300 ${
+    <header className={`fixed top-0 left-0 right-0 w-full z-999 hidden lg:block transition-all duration-300 ${
       isScrolled
         ? isLightMode
           ? 'bg-white border-b border-gray-200'
@@ -181,7 +181,7 @@ const MobileNavbar: React.FC<{ currentPath: string; isLightMode: boolean }> = ({
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 w-full z-[999] lg:hidden transition-all duration-300 ${
+    <header className={`fixed top-0 left-0 right-0 w-full z-999 lg:hidden transition-all duration-300 ${
       isScrolled || isOpen  // ← only change: added || isOpen
         ? isLightMode
           ? 'bg-white border-b border-gray-200'
