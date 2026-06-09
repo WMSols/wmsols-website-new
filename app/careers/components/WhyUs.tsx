@@ -41,9 +41,9 @@ const WhyUs: React.FC = () => {
             >
               {/* Bold Sub-heading */}
               <div className="md:w-[40%] mb-2 md:mb-0">
-                <h3 className="text-[17px] font-bold text-blue-500 sm:text-black group-hover:text-blue-500 transition-colors duration-300">
+                <h1 className="text-[17px] font-bold font-sans text-blue-500 sm:text-black group-hover:text-blue-500 transition-colors duration-300">
                   {benefit.title}
-                </h3>
+                </h1>
               </div>
               
               {/* Description Text */}

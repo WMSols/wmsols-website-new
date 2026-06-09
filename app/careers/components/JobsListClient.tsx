@@ -89,8 +89,9 @@ const JobsListClient: React.FC = () => {
         <span className="text-gray-600">Filters:</span>
 
         <div className="flex items-center gap-2">
-          <span className="font-medium text-gray-900">Department</span>
-          <select 
+          <label htmlFor="department" className="font-medium text-gray-900">Department</label>
+          <select
+            id="department"
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
             className="border border-gray-300 rounded-md py-1.5 px-3 bg-white focus:outline-none text-gray-500 w-36"
@@ -103,8 +104,9 @@ const JobsListClient: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="font-medium text-gray-900">Location</span>
-          <select 
+          <label htmlFor="location" className="font-medium text-gray-900">Location</label>
+          <select
+            id="location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             className="border border-gray-300 rounded-md py-1.5 px-3 bg-white focus:outline-none text-gray-500 w-36"
@@ -116,8 +118,9 @@ const JobsListClient: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="font-medium text-gray-900">Type</span>
-          <select 
+          <label htmlFor="jobType" className="font-medium text-gray-900">Type</label>
+          <select
+            id="jobType"
             value={jobType}
             onChange={(e) => setJobType(e.target.value)}
             className="border border-gray-300 rounded-md py-1.5 px-3 bg-white focus:outline-none text-gray-500 w-36"
@@ -180,7 +183,7 @@ const JobsListClient: React.FC = () => {
           })
         ) : (
           <div className="text-center py-10">
-            <h3 className="text-lg font-medium text-gray-900">No jobs found</h3>
+            <h1 className="text-lg font-sans font-medium text-gray-900">No jobs found</h1>
             <p className="text-gray-500 mt-2">Try adjusting your filters or search term.</p>
           </div>
         )}
@@ -195,6 +198,7 @@ const JobsListClient: React.FC = () => {
       {!isLoading && jobs.length < totalJobs && (
         <div className="mt-10 text-center">
           <button 
+          aria-label='Button for loading more jobs'
             onClick={handleLoadMore}
             disabled={isFetchingMore}
             className="text-gray-600 text-sm font-medium cursor-pointer hover:underline underline-offset-4 disabled:opacity-50 disabled:cursor-not-allowed"
