@@ -5,6 +5,21 @@ import OurValues from './components/OurValues'
 import TrackRecord from './components/TrackRecord'
 import CtaSection from './components/CtaSection'
 import { StaggerFadeUp } from '@/components/animations/StaggerFadeUp'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+title: "About WMsols | Our Story, Team & Mission",
+
+description:
+  "WMsols is a digital solutions agency committed to building technology that matters. Learn about our story, our values, and the team behind our work.",
+
+keywords: [
+  "about WMsols",
+  "software development agency team",
+  "tech company mission",
+  "digital agency story",
+],
+}
 
 const page = () => {
     return (

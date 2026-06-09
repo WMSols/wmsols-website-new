@@ -2,6 +2,21 @@ import WhyUs from './components/WhyUs'
 import JobsListClient from './components/JobsListClient'
 import OpenApplicationCTA from './components/OpenApplicationCta'
 import { StaggerFadeUp } from '@/components/animations/StaggerFadeUp'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+ title: "Careers at WMsols | Join Our Team of Digital Builders",
+
+description:
+  "We're hiring! Join the WMsols team and help build transformative digital products. Explore open roles in engineering, design, AI, and strategy.",
+
+keywords: [
+  "software developer jobs",
+  "tech startup careers",
+  "digital agency hiring",
+  "remote software jobs",
+], 
+}
 
 const page = () => {
     return (

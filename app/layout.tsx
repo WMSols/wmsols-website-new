@@ -26,8 +26,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WMSols | Digital Solutions that Matter",
-  description: "WMsols builds world-class web apps, mobile apps, AI automation, and digital strategies for ambitious businesses. 100+ projects. 98% client satisfaction. Let's build together.",
+  title: "WMsols | Custom Software Development & Digital Solutions Agency",
+
+description:
+  "WMsols builds world-class web apps, mobile apps, AI automation, and digital strategies for ambitious businesses. 100+ projects. 98% client satisfaction. Let's build together.",
+
+keywords: [
+  "custom software development agency",
+  "web and mobile app development",
+  "AI automation services",
+  "digital transformation company"
+],
+
 };
 
 export default function RootLayout({

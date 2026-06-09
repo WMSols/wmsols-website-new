@@ -2,10 +2,32 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { CheckCircle2 } from 'lucide-react';
-import { servicesDetailedData } from '@/data/services';
 import SubServiceCard from '../components/SubServiceCard';
 import ServiceFaq from '../components/ServiceFaq';
+import { Metadata } from 'next';
+import { getServiceBySlug } from '../lib/getServiceBySlug';
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  const service = getServiceBySlug(slug);
+
+  if (!service) {
+    return {
+      title: "Service Not Found | WMsols",
+    };
+  }
+
+  return {
+    title: service.seo.titleTag,
+    description: service.seo.metaDescription,
+    keywords: service.seo.focusKeywords,
+  };
+}
 // For Next.js 15, params in server components are asynchronous
 export default async function ServiceDetailsPage({
   params,
@@ -16,8 +38,8 @@ export default async function ServiceDetailsPage({
   const { slug } = resolvedParams;
 
   // Find the service based on the slug (id)
-  const service = servicesDetailedData.find((s) => s.id === slug);
-
+  const service = getServiceBySlug(slug);
+  
   if (!service) {
     notFound();
   }

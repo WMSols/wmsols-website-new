@@ -2,7 +2,21 @@ import { GradientLight } from '@/components/common/GradientLight'
 import React from 'react'
 import Contact from './components/Contact'
 import { StaggerFadeUp } from '@/components/animations/StaggerFadeUp'
+import { Metadata } from 'next'
 
+export const metadata: Metadata = {
+title: "Contact WMsols | Let's Start Your Digital Project",
+
+description:
+  "Get in touch with the WMsols team. Tell us about your project and we'll get back to you within 24 hours. We're ready to build something great together.",
+
+keywords: [
+  "contact software development agency",
+  "hire app developers",
+  "get a tech quote",
+  "digital agency contact",
+],   
+}
 const page = () => {
     return (
         <div>

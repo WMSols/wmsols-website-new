@@ -3,7 +3,22 @@ import React from 'react'
 import ProjectListClient from './components/ProjectListClient'
 import CtaSection from './components/CtaSection'
 import { StaggerFadeUp } from '@/components/animations/StaggerFadeUp'
+import { Metadata } from 'next'
 
+
+export const metadata: Metadata = {
+title: "Case Studies | WMsols — Real Projects, Real Results",
+
+description:
+  "Explore WMsols' client case studies — from AI companion apps to enterprise recruitment platforms. See how we solve complex problems with elegant digital solutions.",
+
+keywords: [
+  "software development case studies",
+  "app development portfolio",
+  "digital transformation examples",
+  "custom software projects",
+], 
+}
 const page = () => {
     return (
         <div>

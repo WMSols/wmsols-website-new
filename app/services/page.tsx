@@ -4,6 +4,20 @@ import React from 'react'
 import ServicesGrid from './components/ServicesGrid'
 import CtaSection from './components/CtaSection'
 import { StaggerFadeUp } from '@/components/animations/StaggerFadeUp'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "WMsols Services | Custom Software Development & Digital Solutions",
+  description:  "Discover WMsols' comprehensive range of services, including custom software development, web and mobile app development, AI solutions, and digital transformation strategies. Learn how we can help your business thrive in the digital age.",
+  keywords: [
+    "WMsols services",  
+    "custom software development",
+    "web app development",
+    "mobile app development",
+    "AI solutions",
+    "digital transformation"
+  ]
+}
 
 const page = () => {
   return (
