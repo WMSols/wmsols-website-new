@@ -145,5 +145,44 @@ export const blogPosts: BlogPost[] = [
     isFeatured: false,
     readTime: "5 min read",
     author: { name: "Alex Rivera", avatarUrl: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=150" }
-  }
+  },
+  { 
+      id: "11",
+      category: 'Engineering',
+      date: 'Oct 15, 2023',
+      title: 'The Future of AI in Web Development',
+      content: 'Exploring how artificial intelligence is shaping the way we build and interact with modern web applications and transforming developer workflows.',
+      excerpt: 'Exploring how artificial intelligence is shaping the way we build and interact with modern web applications and transforming developer workflows.',
+      imageUrl: 'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8dGVjaHxlbnwwfDF8MHx8fDA%3D', 
+      slug: 'future-of-ai-in-web-development',
+      isFeatured: false,
+      readTime: '6 min read',
+      author: { name: 'John Doe', avatarUrl: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80' }
+    },
+    {
+      id: "12",
+      category: 'Design',
+      date: 'Oct 2, 2023',
+      title: 'Designing for Accessibility First',
+      excerpt: 'Why prioritizing accessibility from the start creates better digital experiences for everyone, not just those with disabilities.',
+      content: 'Why prioritizing accessibility from the start creates better digital experiences for everyone, not just those with disabilities.',
+      imageUrl: 'https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dGVjaHxlbnwwfDF8MHx8fDA%3D',
+      slug: 'designing-for-accessibility',
+      isFeatured: false,
+      readTime: '5 min read',
+      author: { name: 'John Doe', avatarUrl: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80' }
+    },
+    {
+      id: "13",
+      category: 'Strategy',
+      date: 'Sep 20, 2023',
+      title: 'Scaling Your Tech Stack',
+      excerpt: 'A strategic guide to choosing the right technologies as your startup grows from initial launch to serving millions of users.',
+      content: 'A strategic guide to choosing the right technologies as your startup grows from initial launch to serving millions of users.',
+      imageUrl: 'https://images.unsplash.com/photo-1597239450996-ea7c2c564412?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fHRlY2h8ZW58MHwxfDB8fHww',
+      slug: 'scaling-your-tech-stack',
+      isFeatured: false,
+      readTime: '7 min read',
+      author: { name: 'John Doe', avatarUrl: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80' }
+    }
 ];
