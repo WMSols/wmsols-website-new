@@ -49,7 +49,7 @@ const page = () => {
                     color="rgba(4, 136, 197, 29%)"
                 />
                 <StaggerFadeUp className='flex flex-col items-center sm:gap-4 gap-2 justify-center h-full sm:px-0 px-2'>
-                    <h1 className=" text-5xl text-center sm:text-6xl md:text-7xl font-bold text-white  ">We Build With Purpose</h1>
+                    <h1 className=" text-4xl text-center sm:text-6xl md:text-7xl font-bold text-white  ">We Build With Purpose</h1>
                     <p className="text-lg text-center max-w-2xl px-4 text-muted-foreground">
                         WMsols is a digital solutions agency on a mission to make world-class
                         technology accessible to every ambitious business — wherever they are in the
