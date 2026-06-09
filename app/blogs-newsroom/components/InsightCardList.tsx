@@ -58,7 +58,7 @@ useEffect(() => {
 
   // Use live data if available, otherwise fall back to prop posts
   const livePosts: BlogPost[] = data ? data.map(mapBlogToPost) : [];
-  const displayPosts = livePosts.length > 0 ? livePosts : posts;
+const displayPosts = data === null ? posts : livePosts;
   const totalPages = pagination?.pageCount ?? Math.ceil(posts.length / 3);
 
   return (
