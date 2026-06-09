@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ProjectCard from './ProjectCard';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import {
+  fetchCaseStudyCategories,
   getCaseStudyImageUrl,
   parseCaseStudyTechStack,
   type CaseStudy,
@@ -13,10 +14,19 @@ import { caseStudies as dummyProjects } from '@/data/case-studies';
 import { useCaseStudies } from '@/lib/strapi-hooks';
 
 const POSTS_PER_PAGE = 10;
-const CATEGORIES = ["All", "AI", "Web Dev", "Mobile", "Strategy", "Data", "Analytics"];
+const FALLBACK_CASE_STUDY_CATEGORIES = ["All", "AI", "Web Dev", "Mobile", "Strategy", "Data", "Analytics"];
 
 const ProjectListClient: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [categories, setCategories] = useState<string[]>(FALLBACK_CASE_STUDY_CATEGORIES);
+
+useEffect(() => {
+  fetchCaseStudyCategories()
+    .then((names) => {
+      if (names.length > 0) setCategories(['All', ...names]);
+    })
+    .catch(() => {}); // silently keep fallback
+}, []);
 
   const { data, pagination, isLoading, error, currentPage, goToPage } = useCaseStudies({
     pageSize: POSTS_PER_PAGE,
@@ -46,7 +56,7 @@ const ProjectListClient: React.FC = () => {
 
       {/* Pill Filters */}
       <div className="flex flex-wrap items-center gap-3 mb-12">
-        {CATEGORIES.map((category) => (
+        {categories.map((category) => (
           <button
             type="button"
             key={category}

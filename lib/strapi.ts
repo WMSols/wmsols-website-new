@@ -237,3 +237,31 @@ export function getExcerpt(description: unknown): string {
   }
   return '';
 }
+
+// ─── Category fetchers ────────────────────────────────────────────────────────
+
+export async function fetchBlogCategories(): Promise<string[]> {
+  const url = new URL(strapiUrl('/api/blog-categories'));
+
+  const res = await fetch(url.toString(), {
+    headers: buildHeaders(),
+    next: { revalidate: 60 },
+  });
+  if (!res.ok) return [];
+
+  const json = await res.json();
+  return (json.data as StrapiCategory[]).map((c) => c.name);
+}
+
+export async function fetchCaseStudyCategories(): Promise<string[]> {
+  const url = new URL(strapiUrl('/api/case-study-categories'));
+
+  const res = await fetch(url.toString(), {
+    headers: buildHeaders(),
+    next: { revalidate: 60 },
+  });
+  if (!res.ok) return [];
+
+  const json = await res.json();
+  return (json.data as StrapiCategory[]).map((c) => c.name);
+}
