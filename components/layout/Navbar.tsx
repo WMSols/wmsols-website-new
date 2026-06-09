@@ -194,14 +194,16 @@ const MobileNavbar: React.FC<{ currentPath: string; isLightMode: boolean }> = ({
         <button
           onClick={() => setIsOpen(!isOpen)}
           className={`${isLightMode && !isOpen ? 'text-black' : 'text-white'} p-2 z-50 focus:outline-none transition-colors`}
-          aria-label="Toggle Menu"
+          aria-label={isOpen ? 'Close mobile menu' : 'Open mobile menu'}
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
         >
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
       {/* Full-screen mobile menu */}
-      <div className={`fixed inset-0 bg-[#070714] z-40 transition-transform duration-300 ease-in-out px-4 pt-24 pb-8 overflow-y-auto ${
+      <div id="mobile-menu" className={`fixed inset-0 bg-[#070714] z-40 transition-transform duration-300 ease-in-out px-4 pt-24 pb-8 overflow-y-auto ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
         <nav className="flex flex-col space-y-2">
@@ -220,14 +222,23 @@ const MobileNavbar: React.FC<{ currentPath: string; isLightMode: boolean }> = ({
                     {navItem.item}
                   </a>
                   {hasChildren && (
-                    <button onClick={(e) => toggleExpand(navItem.item, e)} className="p-3 text-gray-400">
+                    <button
+                      onClick={(e) => toggleExpand(navItem.item, e)}
+                      className="p-3 text-gray-400"
+                      aria-label={isExpanded ? `Collapse ${navItem.item} submenu` : `Expand ${navItem.item} submenu`}
+                      aria-expanded={isExpanded}
+                      aria-controls={`${navItem.item.replace(/\s+/g, '-').toLowerCase()}-submenu`}
+                    >
                       <ChevronDown className={`w-5 h-5 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                     </button>
                   )}
                 </div>
 
                 {hasChildren && isExpanded && (
-                  <div className="pl-4 pb-3 space-y-4">
+                  <div
+                    id={`${navItem.item.replace(/\s+/g, '-').toLowerCase()}-submenu`}
+                    className="pl-4 pb-3 space-y-4"
+                  >
                     {navItem.children?.map(child => (
                       <div key={child.item}>
                         <a href={child.href} className="text-md font-normal text-gray-300 block mb-2">{child.item}</a>

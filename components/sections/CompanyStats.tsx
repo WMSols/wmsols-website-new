@@ -24,14 +24,14 @@ export const CompanyStats: React.FC = () => {
               key={index} 
               className="flex flex-col items-center justify-center  w-full md:w-1/4 py-8 md:py-0 group cursor-pointer"
             >
-              <h3 className="text-4xl md:text-[3.25rem] font-bold text-theme mb-3 tracking-tight group-hover:scale-110 transition-all duration-300">
+              <h1 className="text-4xl md:text-[3.25rem] font-bold text-theme font-sans mb-3 tracking-tight group-hover:scale-110 transition-all duration-300">
                 {/* Note: Because we separated value and suffix in the data structure, 
                   you can easily wrap `stat.value` in an animation library like 
                   <CountUp end={Number(stat.value)} /> right here later if desired.
                 */}
                 <span>{stat.value}</span>
                 <span>{stat.suffix}</span>
-              </h3>
+              </h1>
               
               <p className="text-sm sm:text-base text-gray-400 font-medium">
                 {stat.label}
