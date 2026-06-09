@@ -56,9 +56,9 @@ const ValueCard: React.FC<{ data: ValueItem; index: number }> = ({ data, index }
       <span className="text-3xl font-bold text-blue-200 mb-2 block">
         {data.number}
       </span>
-      <h3 className="text-3xl font-bold text-black mb-3">
+      <h1 className="text-3xl font-sans font-bold text-black mb-3">
         {data.title}
-      </h3>
+      </h1>
       <p className="text-gray-500 text-sm leading-relaxed">
         {data.description}
       </p>
