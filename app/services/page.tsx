@@ -23,7 +23,7 @@ const page = () => {
     <div>
 
          {/* Hero Section */}
-                    <div className='h-screen  pt-14 flex items-center justify-center overflow-hidden relative'
+                    <div className='min-h-screen  pt-14 flex items-center justify-center overflow-hidden relative'
                         style={{
                             background: 'linear-gradient(180deg, #030015 0%, #0C0438 100%)'
                         }}>
@@ -51,8 +51,8 @@ const page = () => {
                             <p className="text-lg text-center max-w-2xl px-4 text-muted-foreground">
                               At WMsols, we transform complex business challenges into seamless digital experiences. Whether you need a high-performance web application, an intelligent automation system, or an intuitive mobile interface, our engineering-first approach ensures your product is built for scale. We combine modern technology stacks with purposeful design to deliver solutions that not only look exceptional but drive measurable growth for your business.
                             </p>
+                        <Mouse size={34} className=' sm:block hidden  animate-bounce text-white'/>
                         </StaggerFadeUp>
-                        <Mouse size={34} className='absolute sm:block hidden bottom-10 animate-bounce text-white'/>
                     </div>
                     <ServicesGrid/>
                     <CtaSection/>
