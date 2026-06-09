@@ -95,7 +95,7 @@ const DesktopNavbar: React.FC<{ currentPath: string; isLightMode: boolean }> = (
                     <div className="max-w-7xl mx-auto flex w-full min-h-75">
                       <div className="w-1/4 p-8 bg-gray-50 border-r border-gray-200">
                         <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider block mb-2">Explore</span>
-                        <h3 className="text-3xl font-bold text-black">{navItem.item}</h3>
+                        <h1 className="text-3xl font-sans font-bold text-black">{navItem.item}</h1>
                       </div>
                       <div className="w-1/3 p-6 border-r border-gray-200">
                         <ul className="space-y-4">

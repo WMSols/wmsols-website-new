@@ -51,9 +51,9 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           <Icon size={30}/>
         </div>
         
-        <h3 className={` text-xl ${isDark ? 'text-white' : 'text-gray-800'} font-bold tracking-wide`}>
+        <h1 className={` text-xl ${isDark ? 'text-white' : 'text-gray-800'} font-bold font-sans tracking-wide`}>
           {title}
-        </h3>
+        </h1>
       </div>
 
       {/* BODY SECTION */}
