@@ -83,7 +83,7 @@ async function CaseStudyContent({ slug }: { slug: string }) {
   }
 
   const techStack = parseCaseStudyTechStack(project.techStack);
-  const imageUrl = getCaseStudyImageUrl(project.image);
+  // const imageUrl = getCaseStudyImageUrl(project.image);
 
   const solutionItems = project.solutionItems && project.solutionItems
     .split('\n')

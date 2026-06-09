@@ -123,7 +123,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
         <div className="space-y-12">
           {overviewText && (
             <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
-              <h3 className="text-lg font-medium text-gray-900">About the Role :</h3>
+              <h2 className="text-lg font-medium text-gray-900">About the Role :</h2>
               <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-wrap">
                 {overviewText}
               </p>
@@ -132,7 +132,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
 
           {responsibilitiesList.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
-              <h3 className="text-lg font-medium text-gray-900">What You'll Do :</h3>
+              <h2 className="text-lg font-medium text-gray-900">What You'll Do :</h2>
               <ul className="space-y-3">
                 {responsibilitiesList.map((item, idx) => (
                   <li key={idx} className="text-sm text-gray-600 flex items-start">
@@ -146,7 +146,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
 
           {requirementsList.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
-              <h3 className="text-lg font-medium text-gray-900">What We're Looking For :</h3>
+              <h2 className="text-lg font-medium text-gray-900">What We're Looking For :</h2>
               <ul className="space-y-3">
                 {requirementsList.map((item, idx) => (
                   <li key={idx} className="text-sm text-gray-600 flex items-start">
@@ -160,7 +160,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
 
           {extrasList.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
-              <h3 className="text-lg font-medium text-gray-900">Nice to Have :</h3>
+              <h2 className="text-lg font-medium text-gray-900">Nice to Have :</h2>
               <ul className="space-y-3">
                 {extrasList.map((item, idx) => (
                   <li key={idx} className="text-sm text-gray-600 flex items-start">
@@ -174,7 +174,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
 
           {benefitsList.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4">
-              <h3 className="text-lg font-medium text-gray-900">What We Offer :</h3>
+              <h2 className="text-lg font-medium text-gray-900">What We Offer :</h2>
               <ul className="space-y-3">
                 {benefitsList.map((item, idx) => (
                   <li key={idx} className="text-sm text-gray-600 flex items-start">
@@ -190,6 +190,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
         {/* Apply Button */}
         <div className="mt-16">
           <button
+          aria-label={`Apply for ${job.title} position`}
             onClick={() => setIsModalOpen(true)}
             className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-8 rounded-md transition-colors"
           >
@@ -321,6 +322,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
                   )}
 
                   <button
+                  aria-label='Job Application Submission button'
                     type="submit"
                     disabled={isSubmitting}
                     className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded-md transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2"

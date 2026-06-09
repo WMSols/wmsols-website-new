@@ -62,9 +62,9 @@ export const Footer: React.FC = () => {
 
           {/* Column 2: Useful Links */}
           <div className="lg:col-span-2">
-            <h3 className="text-lg font-medium text-white mb-6">
+            <h1 className="text-lg font-sans font-medium text-white mb-6">
               {footerData[0].item}
-            </h3>
+            </h1>
             <ul className="space-y-4">
               {footerData[0].children?.map((link, index) => (
                 <li key={index}>
@@ -78,9 +78,9 @@ export const Footer: React.FC = () => {
 
           {/* Column 3: Services */}
           <div className="lg:col-span-3">
-            <h3 className="text-lg font-medium text-white mb-6">
+            <h1 className="text-lg font-medium font-sans text-white mb-6">
               {footerData[1].item}
-            </h3>
+            </h1>
             <ul className="space-y-4">
               {footerData[1].children?.map((link, index) => (
                 <li key={index}>
@@ -94,9 +94,9 @@ export const Footer: React.FC = () => {
 
           {/* Column 4: Contact */}
           <div className="lg:col-span-3">
-            <h3 className="text-lg font-medium text-white mb-6">
+            <h1 className="text-lg font-medium font-sans text-white mb-6">
               {footerData[2].item}
-            </h3>
+            </h1>
             <ul className="space-y-4">
               {footerData[2].children?.map((link, index) => (
                 <li key={index}>

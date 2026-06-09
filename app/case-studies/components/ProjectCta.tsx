@@ -21,6 +21,7 @@ const ProjectCTA: React.FC = () => {
         </p>
         
         <Link 
+        aria-label="Contact us to discuss your project"
           href="/contact"
           className="inline-flex items-center justify-center bg-[#050130] hover:bg-[#08024d] text-white font-medium py-3 px-8 rounded-full transition-all duration-300 text-sm focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-[#2776EA]"
         >
