@@ -48,8 +48,11 @@ const ProjectListClient: React.FC = () => {
       <div className="flex flex-wrap items-center gap-3 mb-12">
         {CATEGORIES.map((category) => (
           <button
+            type="button"
             key={category}
             onClick={() => handleCategoryChange(category)}
+            aria-label={`Filter projects by ${category}`}
+            aria-pressed={activeCategory === category}
             className={`py-2 px-6 text-sm rounded-full border transition-all ${
               activeCategory === category
                 ? 'bg-blue-500 border-blue-500 text-white shadow-sm'
@@ -129,16 +132,20 @@ const ProjectListClient: React.FC = () => {
           <span>Page {currentPage} of {totalPages}</span>
           <div className="flex items-center gap-2">
             <button
+              type="button"
               onClick={() => goToPage(Math.max(currentPage - 1, 1))}
               disabled={currentPage === 1 || isLoading}
+              aria-label="Go to previous page"
               className="p-1 rounded-full bg-gray-200 text-white disabled:opacity-50 hover:bg-gray-300 transition-colors"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <span className="font-medium text-gray-900">{currentPage}</span>
             <button
+              type="button"
               onClick={() => goToPage(Math.min(currentPage + 1, totalPages))}
               disabled={currentPage === totalPages || isLoading}
+              aria-label="Go to next page"
               className="p-1 rounded-full bg-[#060053] text-white disabled:opacity-50 hover:bg-blue-900 transition-colors"
             >
               <ChevronRight className="w-5 h-5" />
