@@ -44,11 +44,13 @@
   
   // Mock data array - you can move this to a separate data file later
   export const brands: BrandLogo[] = [
-    { id: '1', name: 'Ferozsons Laboratories', imageUrl: '/images/trustedBrands/logo.avif' },
-    { id: '2', name: 'Ferozsons Laboratories', imageUrl: '/images/trustedBrands/logo.avif' },
-    { id: '3', name: 'Ferozsons Laboratories', imageUrl: '/images/trustedBrands/logo.avif' },
+    { id: '1', name: 'Amorra AI', imageUrl: '/images/trustedBrands/amorra_logo.png' },
+    { id: '2', name: 'Airport Shuttle', imageUrl: '/images/trustedBrands/as4l_logo.webp' },
+    { id: '3', name: 'ATS', imageUrl: '/images/trustedBrands/ats_logo.png' },
     { id: '4', name: 'Ferozsons Laboratories', imageUrl: '/images/trustedBrands/logo.avif' },
-    { id: '5', name: 'Ferozsons Laboratories', imageUrl: '/images/trustedBrands/logo.avif' },
+    { id: '5', name: 'Elegant', imageUrl: '/images/trustedBrands/elegant_logo.webp' },
+    { id: '6', name: 'TodAI', imageUrl: '/images/trustedBrands/todAI_logo.webp' },
+    { id: '7', name: 'Tulip Tea', imageUrl: '/images/trustedBrands/tulip_tea_logo.webp' },
     // Add more logos here as the list grows
   ];
 
