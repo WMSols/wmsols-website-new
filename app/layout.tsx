@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, Gelasio } from "next/font/google";
 import "./globals.css";
-import {Navbar} from "@/components/layout/Navbar";
-import {Footer} from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -15,6 +16,7 @@ const gelasio = Gelasio({
   display: "swap",
   weight: ["400", "500", "600", "700"],
 });
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,18 +28,40 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://wmsols.com"),
   title: "WMsols | Custom Software Development & Digital Solutions Agency",
-
-description:
-  "WMsols builds world-class web apps, mobile apps, AI automation, and digital strategies for ambitious businesses. 100+ projects. 98% client satisfaction. Let's build together.",
-
-keywords: [
-  "custom software development agency",
-  "web and mobile app development",
-  "AI automation services",
-  "digital transformation company"
-],
-
+  description:
+    "WMsols builds world-class web apps, mobile apps, AI automation, and digital strategies for ambitious businesses. 100+ projects. 98% client satisfaction. Let's build together.",
+  keywords: [
+    "custom software development agency",
+    "web and mobile app development",
+    "AI automation services",
+    "digital transformation company"
+  ],
+  openGraph: {
+    title: "WMsols | Custom Software Development & Digital Solutions Agency",
+    description:
+      "WMsols builds world-class web apps, mobile apps, AI automation, and digital strategies for ambitious businesses.",
+    url: "https://wmsols.com",
+    siteName: "WMsols",
+    images: [
+      {
+        url: "/og-image.webp",
+        width: 1200,
+        height: 630,
+        alt: "WMsols - Digital Experiences that Matter",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WMsols | Custom Software Development & Digital Solutions Agency",
+    description:
+      "WMsols builds world-class web apps, mobile apps, AI automation, and digital strategies for ambitious businesses.",
+    images: ["/og-image.webp"],
+  },
 };
 
 export default function RootLayout({
