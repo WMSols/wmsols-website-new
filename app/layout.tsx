@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Inter, Gelasio } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({
   subsets: ["latin"],
@@ -81,6 +82,8 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        {/* Injects GA4 perfectly without blocking the main thread */}
+        <GoogleAnalytics gaId="G-RL23CCQGEE" />
       </body>
     </html>
   );

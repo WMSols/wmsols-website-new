@@ -5,6 +5,8 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navigationData } from "@/data/navigation";
+// 1. Import the tracking functions
+import { trackCTAClick, trackNavClick } from '@/lib/analytics';
 
 export interface NavItem {
   item: string;
@@ -12,9 +14,14 @@ export interface NavItem {
   children?: NavItem[];
 }
 
-// --- LOGO (Optimized to use Next Link) ---
+// --- LOGO ---
 const Logo: React.FC<{ isLightMode?: boolean }> = ({ isLightMode }) => (
-  <Link href="/" className="flex items-center gap-2 z-50">
+  <Link 
+    href="/" 
+    className="flex items-center gap-2 z-50"
+    // Track logo clicks returning to home
+    onClick={() => trackNavClick("Logo", "/")} 
+  >
     <div
       className="w-8 h-8 rounded flex items-center justify-center font-bold text-white text-lg"
       style={{ background: 'linear-gradient(to top, #2868A3 0%, #3DA8FF 56%, #1C1344 150%)' }}
@@ -33,17 +40,17 @@ export const Navbar: React.FC = () => {
 
   // Unified State
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false); // Mobile menu state
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null); // Desktop hover state
-  const [activeCategory, setActiveCategory] = useState<string | null>(null); // Desktop mega-menu state
-  const [expandedItems, setExpandedItems] = useState<string[]>([]); // Mobile accordion state
+  const [isOpen, setIsOpen] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
   // Determine theme based on route
   const isLightMode =
     (currentPath.startsWith('/careers/') && currentPath.length > '/careers/'.length) ||
     (currentPath.startsWith('/blogs-newsroom/') && currentPath.length > '/blogs-newsroom/'.length);
 
-  // 1. Optimized Scroll Listener (Passive flag tells browser this won't block scrolling)
+  // Optimized Scroll Listener
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -72,7 +79,6 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    // 2. Unified Header Element (Cuts DOM depth in half)
     <header 
       className={`fixed top-0 left-0 right-0 w-full z-999 transition-all duration-300 ${
         isScrolled || isOpen
@@ -84,11 +90,10 @@ export const Navbar: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-24 flex items-center justify-between">
         
-        {/* Render Logo Once */}
         <Logo isLightMode={isLightMode && !isOpen} />
 
         {/* ========================================= */}
-        {/* DESKTOP NAVIGATION (Hidden on Mobile)     */}
+        {/* DESKTOP NAVIGATION                        */}
         {/* ========================================= */}
         <nav className="hidden lg:flex items-center text-base space-x-8 h-full">
           {navigationData.map((navItem) => {
@@ -103,9 +108,10 @@ export const Navbar: React.FC = () => {
                 onMouseEnter={() => handleDesktopMouseEnter(navItem)}
                 onMouseLeave={() => setHoveredItem(null)}
               >
-                {/* 3. Replaced <a> with Next.js <Link> for SPA routing */}
                 <Link
                   href={navItem.href}
+                  // 2. Track top-level desktop nav clicks
+                  onClick={() => trackNavClick(navItem.item, navItem.href)}
                   className={`flex items-center text-sm font-normal transition-colors ${
                     isActive
                       ? 'text-blue-500'
@@ -138,7 +144,11 @@ export const Navbar: React.FC = () => {
                                   activeCategory === child.item ? 'text-[#3b82f6]' : 'text-gray-700 hover:text-[#3b82f6]'
                                 }`}
                                 onMouseEnter={() => setActiveCategory(child.item)}
-                                onClick={() => setHoveredItem(null)} // Close menu on click
+                                onClick={() => {
+                                  setHoveredItem(null);
+                                  // 3. Track sub-menu clicks
+                                  trackNavClick(child.item, child.href);
+                                }}
                               >
                                 <span className="text-gray-400">•</span>
                                 {child.item}
@@ -154,7 +164,11 @@ export const Navbar: React.FC = () => {
                               <Link
                                 href={grandchild.href}
                                 className="flex items-center gap-3 text-sm text-gray-600 hover:text-[#3b82f6] transition-colors"
-                                onClick={() => setHoveredItem(null)}
+                                onClick={() => {
+                                  setHoveredItem(null);
+                                  // 4. Track nested sub-menu clicks
+                                  trackNavClick(grandchild.item, grandchild.href);
+                                }}
                               >
                                 <span className="text-gray-300">-</span>
                                 {grandchild.item}
@@ -176,6 +190,8 @@ export const Navbar: React.FC = () => {
         {/* Desktop CTA */}
         <Link
           href="/contact"
+          // 5. Track the high-value CTA click
+          onClick={() => trackCTAClick("Get Started", "Desktop Navbar")}
           className={`hidden lg:block px-6 py-2.5 text-sm font-normal rounded-sm transition-colors ${
             isLightMode
               ? 'text-black border border-black hover:bg-black/5'
@@ -186,7 +202,7 @@ export const Navbar: React.FC = () => {
         </Link>
 
         {/* ========================================= */}
-        {/* MOBILE HAMBURGER BUTTON (Hidden on Desktop) */}
+        {/* MOBILE HAMBURGER BUTTON                   */}
         {/* ========================================= */}
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -202,7 +218,7 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* ========================================= */}
-      {/* MOBILE MENU OVERLAY (Hidden on Desktop)   */}
+      {/* MOBILE MENU OVERLAY                       */}
       {/* ========================================= */}
       <div 
         id="mobile-menu" 
@@ -221,7 +237,11 @@ export const Navbar: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <Link
                     href={navItem.href}
-                    onClick={() => setIsOpen(false)} // Close menu on navigation
+                    onClick={() => {
+                      setIsOpen(false);
+                      // 6. Track mobile top-level nav clicks
+                      trackNavClick(navItem.item, navItem.href);
+                    }}
                     className={`text-lg font-normal py-3 ${isActive ? 'text-[#3b82f6]' : 'text-white'}`}
                   >
                     {navItem.item}
@@ -242,7 +262,15 @@ export const Navbar: React.FC = () => {
                   <div className="pl-4 pb-3 space-y-4">
                     {navItem.children?.map(child => (
                       <div key={child.item}>
-                        <Link href={child.href} onClick={() => setIsOpen(false)} className="text-md font-normal text-gray-300 block mb-2">
+                        <Link 
+                          href={child.href} 
+                          onClick={() => {
+                            setIsOpen(false);
+                            // 7. Track mobile sub-menu clicks
+                            trackNavClick(child.item, child.href);
+                          }} 
+                          className="text-md font-normal text-gray-300 block mb-2"
+                        >
                           {child.item}
                         </Link>
                         {child.children && (
@@ -251,7 +279,11 @@ export const Navbar: React.FC = () => {
                               <Link
                                 key={grandchild.item}
                                 href={grandchild.href}
-                                onClick={() => setIsOpen(false)}
+                                onClick={() => {
+                                  setIsOpen(false);
+                                  // 8. Track mobile nested sub-menu clicks
+                                  trackNavClick(grandchild.item, grandchild.href);
+                                }}
                                 className="block text-sm font-normal text-gray-500 hover:text-white"
                               >
                                 {grandchild.item}
@@ -271,7 +303,11 @@ export const Navbar: React.FC = () => {
         <div className="mt-8">
           <Link
             href="/contact"
-            onClick={() => setIsOpen(false)}
+            onClick={() => {
+              setIsOpen(false);
+              // 9. Track the mobile CTA click separately
+              trackCTAClick("Get Started", "Mobile Navbar");
+            }}
             className="block w-full py-3 text-center text-sm font-normal text-white bg-[#2563eb] rounded-md"
           >
             Get Started
