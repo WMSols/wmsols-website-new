@@ -47,3 +47,38 @@ export const trackNavClick = (linkText: string, destination: string) => {
     destination: destination 
   });
 };
+
+/**
+ * Tracks a successful contact form submission.
+ */
+export const trackFormSubmission = (
+  formName: string,
+  success: boolean,
+  extraParams?: Record<string, unknown>
+) => {
+  trackEvent("form_submit", { 
+    form_name: formName, 
+    success: success, 
+    ...extraParams 
+  });
+};
+
+/**
+ * Tracks when a user opens the job application modal.
+ */
+export const trackJobApplicationStart = (jobTitle: string) => {
+  trackEvent("job_application_started", { 
+    job_title: jobTitle 
+  });
+};
+
+/**
+ * Tracks the final submission of a job application.
+ */
+export const trackJobApplicationSubmit = (jobTitle: string, success: boolean, errorMsg?: string) => {
+  trackEvent("job_application_submit", { 
+    job_title: jobTitle, 
+    success: success,
+    error_message: errorMsg || "none"
+  });
+};

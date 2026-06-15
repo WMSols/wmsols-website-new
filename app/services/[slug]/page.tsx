@@ -1,9 +1,10 @@
+// per service dynamic page 
 import React from 'react';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import { CheckCircle2 } from 'lucide-react';
 import SubServiceCard from '../components/SubServiceCard';
 import ServiceFaq from '../components/ServiceFaq';
+import ServiceHeroCTA from '../components/ServiceHeroCta'; // 1. Import the new CTA
 import { Metadata } from 'next';
 import { getServiceBySlug } from '../lib/getServiceBySlug';
 
@@ -28,7 +29,7 @@ export async function generateMetadata({
     keywords: service.seo.focusKeywords,
   };
 }
-// For Next.js 15, params in server components are asynchronous
+
 export default async function ServiceDetailsPage({
   params,
 }: {
@@ -37,14 +38,12 @@ export default async function ServiceDetailsPage({
   const resolvedParams = await params;
   const { slug } = resolvedParams;
 
-  // Find the service based on the slug (id)
   const service = getServiceBySlug(slug);
   
   if (!service) {
     notFound();
   }
 
-  // The custom dark gradient from your screenshots
   const darkGradient = "bg-[linear-gradient(to_bottom,#060053,#050109)]";
 
   return (
@@ -58,12 +57,13 @@ export default async function ServiceDetailsPage({
           <p className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed max-w-3xl mx-auto">
             {service.hero.subHeadline}
           </p>
-          <Link
-            href="/contact"
-            className="inline-block bg-[#2776EA] text-white px-8 py-3.5 rounded-full font-medium hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(39,118,234,0.4)] transition-all duration-300 transform hover:-translate-y-0.5"
-          >
-            {service.hero.cta}
-          </Link>
+          
+          {/* 2. Inject the Client Component CTA */}
+          <ServiceHeroCTA 
+            ctaText={service.hero.cta} 
+            serviceId={service.id} 
+          />
+          
         </div>
       </section>
 

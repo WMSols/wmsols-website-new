@@ -1,6 +1,8 @@
 'use client';
+
 import React, { useState } from 'react';
 import { submitContactForm } from '@/lib/strapi-contact';
+import { trackFormSubmission } from '@/lib/analytics'; // 1. Import tracking
 
 interface ContactFormProps {
   onSuccess: () => void;
@@ -25,7 +27,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    // Clear error as soon as the user starts editing again
     if (errorMsg) setErrorMsg(null);
   };
 
@@ -45,8 +46,21 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
         phone: formData.phone,
         requiredService: formData.service,
       });
+      
+      // 2. Track the successful submission with valuable contextual data
+      trackFormSubmission("Main Contact Form", true, {
+        service_requested: formData.service,
+        budget_range: formData.budget,
+        lead_source: formData.source
+      });
+
       onSuccess();
     } catch (err) {
+      // 3. Optional: You can also track form failures if you want to debug drop-offs
+      trackFormSubmission("Main Contact Form", false, {
+        error_type: err instanceof Error ? err.message : 'Unknown'
+      });
+
       setErrorMsg(
         err instanceof Error
           ? err.message

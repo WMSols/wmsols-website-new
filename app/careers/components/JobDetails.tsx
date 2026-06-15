@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { Briefcase, MapPin, Clock, UploadCloud, CheckCircle2, X } from 'lucide-react';
 import { Job, parseRichTextBlocks } from '@/lib/strapi-careers';
 import { submitJobApplication } from '@/lib/strapi-jobApply';
+// 1. Import the tracking functions
+import { trackJobApplicationStart, trackJobApplicationSubmit } from '@/lib/analytics';
 
 interface JobDetailsProps {
   job: Job;
@@ -39,39 +41,46 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
     if (errorMsg) setErrorMsg(null);
   };
 
- const handleApplySubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleApplySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  // Read file directly from the input ref at submit time — most reliable
-  const file = fileInputRef.current?.files?.[0] ?? resumeFile ?? null;
+    // Read file directly from the input ref at submit time — most reliable
+    const file = fileInputRef.current?.files?.[0] ?? resumeFile ?? null;
 
-  if (!file) {
-    setErrorMsg('Please upload your resume before submitting.');
-    return;
-  }
+    if (!file) {
+      setErrorMsg('Please upload your resume before submitting.');
+      return;
+    }
 
-  setIsSubmitting(true);
-  setErrorMsg(null);
+    setIsSubmitting(true);
+    setErrorMsg(null);
 
-  try {
-    await submitJobApplication({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      coverLetter: formData.coverLetter,
-      title: job.title,
-      resume: file,
-    });
-    setIsSubmitted(true);
-  } catch (err) {
-    setErrorMsg(
-      err instanceof Error ? err.message : 'Something went wrong. Please try again.'
-    );
-  } finally {
-    setIsSubmitting(false);
-    
-  }
-};
+    try {
+      await submitJobApplication({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        coverLetter: formData.coverLetter,
+        title: job.title,
+        resume: file,
+      });
+      
+      setIsSubmitted(true);
+      
+      // 2. Track Successful Submission
+      trackJobApplicationSubmit(job.title, true);
+      
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
+      setErrorMsg(errorMessage);
+      
+      // 3. Track Failed Submission (helps identify if people are failing due to file size limits, etc.)
+      trackJobApplicationSubmit(job.title, false, errorMessage);
+      
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -191,7 +200,11 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
         <div className="mt-16">
           <button
           aria-label={`Apply for ${job.title} position`}
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => {
+              setIsModalOpen(true);
+              // 4. Track Intent to Apply
+              trackJobApplicationStart(job.title);
+            }}
             className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-8 rounded-md transition-colors"
           >
             Apply Now
@@ -207,7 +220,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
             onClick={closeModal}
           />
 
-          <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto m-4 p-8">
+          <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[70vh] overflow-y-auto m-4 p-8">
             <button
               onClick={closeModal}
               className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-colors"
