@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import AnalyticsWrapper from '@/components/common/AnalyticsWrapper';
+import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -85,6 +86,7 @@ export default function RootLayout({
         <Footer />
         {/* Injects GA4 perfectly without blocking the main thread */}
         <AnalyticsWrapper gaId="G-RL23CCQGEE" />
+        <Analytics />
       </body>
     </html>
   );
