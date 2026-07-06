@@ -51,6 +51,7 @@
     { id: '5', name: 'Elegant', imageUrl: '/images/trustedBrands/elegant_logo.webp' },
     { id: '6', name: 'TodAI', imageUrl: '/images/trustedBrands/todAI_logo.webp' },
     { id: '7', name: 'Tulip Tea', imageUrl: '/images/trustedBrands/tulip_tea_logo.webp' },
+    { id: '8', name: 'Shahtaj Oil', imageUrl: '/images/trustedBrands/shahtaj.png' },
     // Add more logos here as the list grows
   ];
 
