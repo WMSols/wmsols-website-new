@@ -1,5 +1,6 @@
- import { trustStats } from '@/data/homepage';
+import { trustStats } from '@/data/homepage';
 import React from 'react';
+import { AnimatedCounter } from '@/components/animations/AnimatedCounter';
 
 // --- TYPES ---
 export interface StatItem {
@@ -7,8 +8,6 @@ export interface StatItem {
   suffix: string;
   label: string;
 }
-
-
 
 // --- COMPONENT ---
 export const CompanyStats: React.FC = () => {
@@ -25,11 +24,7 @@ export const CompanyStats: React.FC = () => {
               className="flex flex-col items-center justify-center  w-full md:w-1/4 py-8 md:py-0 group cursor-pointer"
             >
               <h1 className="text-4xl md:text-[3.25rem] font-bold text-theme font-sans mb-3 tracking-tight group-hover:scale-110 transition-all duration-300">
-                {/* Note: Because we separated value and suffix in the data structure, 
-                  you can easily wrap `stat.value` in an animation library like 
-                  <CountUp end={Number(stat.value)} /> right here later if desired.
-                */}
-                <span>{stat.value}</span>
+                <AnimatedCounter value={Number(stat.value)} />
                 <span>{stat.suffix}</span>
               </h1>
               

@@ -40,19 +40,20 @@
     id: string;
     name: string;
     imageUrl: string;
+    url: string;
   }
   
   // Mock data array - you can move this to a separate data file later
   export const brands: BrandLogo[] = [
-    { id: '1', name: 'Amorra AI', imageUrl: '/images/trustedBrands/amorra_logo.png' },
-    { id: '2', name: 'Airport Shuttle', imageUrl: '/images/trustedBrands/as4l_logo.webp' },
-    { id: '3', name: 'ATS', imageUrl: '/images/trustedBrands/ats_logo.png' },
-    { id: '4', name: 'Ferozsons Laboratories', imageUrl: '/images/trustedBrands/logo.avif' },
-    { id: '5', name: 'Elegant', imageUrl: '/images/trustedBrands/elegant_logo.webp' },
-    { id: '6', name: 'TodAI', imageUrl: '/images/trustedBrands/todAI_logo.webp' },
-    { id: '7', name: 'Tulip Tea', imageUrl: '/images/trustedBrands/tulip_tea_logo.webp' },
-    { id: '8', name: 'Shahtaj Oil', imageUrl: '/images/trustedBrands/shahtaj.png' },
-    // Add more logos here as the list grows
+    { id: '1', name: 'Amorra AI', imageUrl: '/images/trustedBrands/amorra_logo.png', url: 'https://apps.apple.com/ca/app/amorra-ai/id6760344803' },
+    { id: '2', name: 'Airport Shuttle', imageUrl: '/images/trustedBrands/as4l_logo.webp', url: 'https://airportshuttles4less.com/' },
+    { id: '3', name: 'ATS', imageUrl: '/images/trustedBrands/ats_logo.png', url: 'https://www.ats.com' },
+    { id: '4', name: 'Ferozsons Laboratories', imageUrl: '/images/trustedBrands/logo.avif', url: 'https://www.ferozsons-labs.com' },
+    { id: '5', name: 'Elegant', imageUrl: '/images/trustedBrands/elegant_logo.webp', url: 'https://elegant.com' },
+    { id: '6', name: 'TodAI', imageUrl: '/images/trustedBrands/todAI_logo.webp', url: '/' },
+    { id: '7', name: 'Tulip Tea', imageUrl: '/images/trustedBrands/tulip_tea_logo.webp', url: 'https://awgroup.com.pk' },
+    { id: '8', name: 'Shahtaj Oil', imageUrl: '/images/trustedBrands/shahtaj.png', url: 'https://shahtajoil.com.pk/' },
+    { id: '9', name: 'XpertHR', imageUrl: '/images/trustedBrands/white-logo-bf-black.png', url: 'https://bfbio-nextjs.mansoor-ali.workers.dev/' },
   ];
 
 import { InsightCardProps } from '@/components/common/InsightCard';

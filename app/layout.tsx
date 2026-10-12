@@ -32,7 +32,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://wmsols.com"),
+  metadataBase: new URL("https://www.wmsols.com"),
   title: "WMsols | Custom Software Development & Digital Solutions Agency",
   description:
     "WMsols builds world-class web apps, mobile apps, AI automation, and digital strategies for ambitious businesses. 100+ projects. 98% client satisfaction. Let's build together.",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "WMsols | Custom Software Development & Digital Solutions Agency",
     description:
       "WMsols builds world-class web apps, mobile apps, AI automation, and digital strategies for ambitious businesses.",
-    url: "https://wmsols.com",
+    url: "https://www.wmsols.com",
     siteName: "WMsols",
     images: [
       {

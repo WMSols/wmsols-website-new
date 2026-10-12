@@ -48,7 +48,9 @@ export const Navbar: React.FC = () => {
   // Determine theme based on route
   const isLightMode =
     (currentPath.startsWith('/careers/') && currentPath.length > '/careers/'.length) ||
-    (currentPath.startsWith('/blogs-newsroom/') && currentPath.length > '/blogs-newsroom/'.length);
+    (currentPath.startsWith('/blogs-newsroom/') && currentPath.length > '/blogs-newsroom/'.length) ||
+    (currentPath.startsWith('/odoo/') && currentPath.length > '/odoo/'.length);
+   
 
   // Optimized Scroll Listener
   useEffect(() => {
@@ -97,9 +99,13 @@ export const Navbar: React.FC = () => {
         {/* ========================================= */}
         <nav className="hidden lg:flex items-center text-base space-x-8 h-full">
           {navigationData.map((navItem) => {
-            const isActive = currentPath === navItem.href || currentPath.startsWith(navItem.href + '/');
+            const isActive =
+              currentPath === navItem.href ||
+              currentPath.startsWith(navItem.href + '/') ||
+              (navItem.item === 'Services' && currentPath.startsWith('/odoo'));
             const hasChildren = navItem.children && navItem.children.length > 0;
             const isHovered = hoveredItem === navItem.item;
+            const isOdooCategory = activeCategory === 'Odoo';
 
             return (
               <div
@@ -136,25 +142,33 @@ export const Navbar: React.FC = () => {
                       </div>
                       <div className="w-1/3 p-6 border-r border-gray-200">
                         <ul className="space-y-4">
-                          {navItem.children?.map((child) => (
-                            <li key={child.item}>
-                              <Link
-                                href={child.href}
-                                className={`flex items-center cursor-pointer gap-3 text-sm w-full text-left transition-colors ${
-                                  activeCategory === child.item ? 'text-[#3b82f6]' : 'text-gray-700 hover:text-[#3b82f6]'
-                                }`}
-                                onMouseEnter={() => setActiveCategory(child.item)}
-                                onClick={() => {
-                                  setHoveredItem(null);
-                                  // 3. Track sub-menu clicks
-                                  trackNavClick(child.item, child.href);
-                                }}
-                              >
-                                <span className="text-gray-400">•</span>
-                                {child.item}
-                              </Link>
-                            </li>
-                          ))}
+                          {navItem.children?.map((child) => {
+                            const isChildActive = activeCategory === child.item;
+                            const childAccent =
+                              child.item === 'Odoo' && isChildActive
+                                ? 'text-[#714B67]'
+                                : isChildActive
+                                  ? 'text-[#3b82f6]'
+                                  : 'text-gray-700 hover:text-[#3b82f6]';
+
+                            return (
+                              <li key={child.item}>
+                                <Link
+                                  href={child.href}
+                                  className={`flex items-center cursor-pointer gap-3 text-sm w-full text-left transition-colors ${childAccent}`}
+                                  onMouseEnter={() => setActiveCategory(child.item)}
+                                  onClick={() => {
+                                    setHoveredItem(null);
+                                    // 3. Track sub-menu clicks
+                                    trackNavClick(child.item, child.href);
+                                  }}
+                                >
+                                  <span className="text-gray-400">•</span>
+                                  {child.item}
+                                </Link>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                       <div className="w-5/12 p-6 bg-white">
@@ -163,7 +177,9 @@ export const Navbar: React.FC = () => {
                             <li key={grandchild.item}>
                               <Link
                                 href={grandchild.href}
-                                className="flex items-center gap-3 text-sm text-gray-600 hover:text-[#3b82f6] transition-colors"
+                                className={`flex items-center gap-3 text-sm text-gray-600 transition-colors ${
+                                  isOdooCategory ? 'hover:text-[#714B67]' : 'hover:text-[#3b82f6]'
+                                }`}
                                 onClick={() => {
                                   setHoveredItem(null);
                                   // 4. Track nested sub-menu clicks
@@ -228,7 +244,9 @@ export const Navbar: React.FC = () => {
       >
         <nav className="flex flex-col space-y-2 mt-4">
           {navigationData.map((navItem) => {
-            const isActive = currentPath === navItem.href;
+            const isActive =
+              currentPath === navItem.href ||
+              (navItem.item === 'Services' && currentPath.startsWith('/odoo'));
             const hasChildren = navItem.children && navItem.children.length > 0;
             const isExpanded = expandedItems.includes(navItem.item);
 

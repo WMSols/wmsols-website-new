@@ -1,5 +1,6 @@
 import React from 'react';
 import { trustStats } from '@/data/homepage';
+import { AnimatedCounter } from '@/components/animations/AnimatedCounter';
 
 const TrackRecord: React.FC = () => {
   return (
@@ -20,7 +21,7 @@ const TrackRecord: React.FC = () => {
             >
               {/* Value & Suffix */}
               <div className="text-6xl font-bold text-[#3b82f6] mb-4 tracking-tight group-hover:scale-105 transition-transform duration-300">
-                {stat.value}
+                <AnimatedCounter value={Number(stat.value)} />
                 <span>{stat.suffix}</span>
               </div>
               

@@ -1,6 +1,28 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Link, Home} from 'lucide-react';
-import { footerData } from '@/data/navigation'; // Adjust path if necessary
+import { Mail, Phone, MapPin } from 'lucide-react';
+import { footerData, footerSocialLinks } from '@/data/navigation';
+
+const socialIcons = {
+  instagram: ({ className }: { className?: string }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  ),
+  facebook: ({ className }: { className?: string }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  ),
+  linkedin: ({ className }: { className?: string }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect width="4" height="12" x="2" y="9" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  ),
+} as const;
 
 // --- SHARED LOGO COMPONENT ---
 const Logo = () => (
@@ -20,10 +42,9 @@ const Logo = () => (
 );
 
 export const Footer: React.FC = () => {
-  // Utility to map string content to the correct Lucide icon
   const getContactIcon = (itemText: string) => {
     if (itemText.includes('@')) return <Mail className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />;
-    if (itemText.includes('+1')) return <Phone className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />;
+    if (itemText.trim().startsWith('+')) return <Phone className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />;
     return <MapPin className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />;
   };
 
@@ -31,7 +52,6 @@ export const Footer: React.FC = () => {
     <footer 
       className="w-full text-white pt-20 pb-8 px-4 sm:px-6 lg:px-8 "
       style={{
-        // Gradient extracted exactly from your screenshot stops
         background: 'linear-gradient(180deg, #000000 20%, #110227 54%, #0C045F 100%)'
       }}
     >
@@ -40,7 +60,7 @@ export const Footer: React.FC = () => {
         {/* --- MAIN FOOTER CONTENT --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
           
-          {/* Column 1: Brand & Socials (Takes up more space) */}
+          {/* Column 1: Brand & Socials */}
           <div className="lg:col-span-4 pr-4">
             <Logo />
             <p className="mt-6 text-gray-400 text-sm leading-relaxed max-w-sm">
@@ -50,12 +70,19 @@ export const Footer: React.FC = () => {
             <div className="mt-8">
               <span className="text-xs font-semibold text-gray-500 mb-3 block">Our Socials:</span>
               <div className="flex items-center gap-4">
-                <a href="#" aria-label="LinkedIn" className="text-gray-400 hover:text-white transition-colors">
-                  <Link className="w-6 h-6" />
-                </a>
-                <a href="#" aria-label="GitHub" className="text-gray-400 hover:text-white transition-colors">
-                  <Home className="w-6 h-6" />
-                </a>
+                {footerSocialLinks.map((social) => {
+                  const Icon = socialIcons[social.icon];
+                  return (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      aria-label={social.name}
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      <Icon className="w-6 h-6" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -106,8 +133,7 @@ export const Footer: React.FC = () => {
                   >
                     {getContactIcon(link.item)}
                     <span className="leading-relaxed whitespace-pre-line">
-                      {/* Using regex to replace the comma with a newline for the address to match the design */}
-                      {link.item.replace(', ', ',\n')}
+                      {link.item}
                     </span>
                   </a>
                 </li>

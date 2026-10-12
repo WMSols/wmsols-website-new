@@ -528,5 +528,5 @@ export const servicesDetailedData: ServiceData[] = [
       "dbt", "BigQuery", "Snowflake", "Redshift", "Python (Pandas, Scikit-learn)",
       "D3.js", "Chart.js", "Recharts"
     ]
-  }
+  },
 ];

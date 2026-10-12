@@ -3,6 +3,7 @@ import { CompanyStats } from "@/components/sections/CompanyStats";
 import CoreValues from "@/components/sections/CoreValues";
 import { Hero } from "@/components/sections/Hero";
 import LatestInsights from "@/components/sections/LatestInsights";
+import OdooPartnershipCard from "@/components/sections/OdooPartnerCard";
 import { ServicesCardsGrid } from "@/components/sections/ServiceCardsGrid";
 import TrustedBrands from "@/components/sections/TustedBrands";
 
@@ -11,6 +12,7 @@ export default function Home() {
     <main>
       <Hero/>
       <CompanyStats/>
+      <OdooPartnershipCard/>
       <ServicesCardsGrid/>
       <TrustedBrands/>
       <CoreValues/>

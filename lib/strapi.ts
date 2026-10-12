@@ -184,18 +184,25 @@ export async function fetchCaseStudies(
 }
 
 export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null> {
-  const url = new URL(strapiUrl('/api/case-studies'));
-  url.searchParams.set('populate', '*');
-  url.searchParams.set('filters[slug][$eq]', slug);
+  const base = process.env.NEXT_PUBLIC_STRAPI_URL;
+  if (!base) return null;
 
-  const res = await fetch(url.toString(), {
-    headers: buildHeaders(),
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) return null;
+  try {
+    const url = new URL(strapiUrl('/api/case-studies'));
+    url.searchParams.set('populate', '*');
+    url.searchParams.set('filters[slug][$eq]', slug);
 
-  const json: CaseStudiesResponse = await res.json();
-  return json.data?.[0] ?? null;
+    const res = await fetch(url.toString(), {
+      headers: buildHeaders(),
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return null;
+
+    const json: CaseStudiesResponse = await res.json();
+    return json.data?.[0] ?? null;
+  } catch {
+    return null;
+  }
 }
 
 // ─── Helpers (no React — safe anywhere) ──────────────────────────────────────

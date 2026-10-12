@@ -144,6 +144,19 @@
     
   }
 }
+
+@keyframes brand-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-brand-marquee {
+  animation: brand-marquee 40s linear infinite;
+}
 .leaflet-container {
   z-index: 0;
 }

@@ -90,6 +90,18 @@ export const navigationData = [
           { item: "Real-Time Dashboards", href: "/services/data-analytics" },
           { item: "Custom Reporting", href: "/services/data-analytics" }
         ]
+      },
+      {
+        item: "Odoo",
+        href: "/odoo",
+        children: [
+          { item: "Odoo Development", href: "/odoo/development" },
+          { item: "Odoo Customization", href: "/odoo/customization" },
+          { item: "Odoo Integration", href: "/odoo/integration" },
+          { item: "Odoo Support & Maintenance", href: "/odoo/support-maintenance" },
+          { item: "Odoo Migration", href: "/odoo/migration" },
+          { item: "Odoo Training", href: "/odoo/training" }
+        ]
       }
     ]
   },
@@ -133,18 +145,36 @@ export const footerData = [
   {
     item: "Contact",
     children: [
-      { 
-        item: "info@wmsols.com", 
-        href: "mailto:info@wmsols.com" 
+      {
+        item: "info@wmsols.com",
+        href: "mailto:info@wmsols.com"
       },
-      { 
-        item: "+1 (505) 386-1888", 
-        href: "tel:+15053861888" 
+      {
+        item: "+1 (505) 386-1888",
+        href: "tel:+15053861888"
       },
-      { 
-        item: "123 Tech Avenue, San Francisco, CA 94102", 
-        href: "https://maps.google.com/?q=123+Tech+Avenue,+San+Francisco,+CA+94102" // Optional: Google Maps link
+      {
+        item: "+92 309 0049555",
+        href: "tel:+923090049555"
+      },
+      {
+        item: "US Office\nSan Francisco, California",
+        href: "https://maps.google.com/?q=San+Francisco,+California"
+      },
+      {
+        item: "Karachi\n27-C, Khayaban-e-Sehar, DHA, 75500",
+        href: "https://maps.google.com/?q=27-C,+Khayaban-e-Sehar,+DHA,+Karachi+75500"
+      },
+      {
+        item: "Islamabad\nAW Tower, I-10 Markaz, 44000",
+        href: "https://maps.google.com/?q=AW+Tower,+I-10+Markaz,+Islamabad+44000"
       }
     ]
   }
+];
+
+export const footerSocialLinks = [
+  { name: "Instagram", href: "#", icon: "instagram" as const },
+  { name: "Facebook", href: "#", icon: "facebook" as const },
+  { name: "LinkedIn", href: "#", icon: "linkedin" as const },
 ];

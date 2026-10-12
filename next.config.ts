@@ -23,6 +23,32 @@ const nextConfig = {
     ],
     unoptimized: true, // Disable Next.js's built-in image optimizationn
   },
+  async redirects() {
+    return [
+      // Old site blog path
+      {
+        source: '/blog',
+        destination: '/blogs-newsroom',
+        permanent: true,
+      },
+      {
+        source: '/blog/:path*',
+        destination: '/blogs-newsroom',
+        permanent: true,
+      },
+      // Old-site case study URLs — keep permanently; use different slugs in Strapi
+      {
+        source: '/case-studies/elegant-advisor',
+        destination: '/case-studies',
+        permanent: true,
+      },
+      {
+        source: '/case-studies/amora',
+        destination: '/case-studies',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
