@@ -174,7 +174,7 @@ export const footerData = [
 ];
 
 export const footerSocialLinks = [
-  { name: "Instagram", href: "#", icon: "instagram" as const },
+  { name: "Instagram", href: "https://www.instagram.com/wm_sols/", icon: "instagram" as const },
   { name: "Facebook", href: "#", icon: "facebook" as const },
-  { name: "LinkedIn", href: "#", icon: "linkedin" as const },
+  { name: "LinkedIn", href: "https://pk.linkedin.com/company/wmsols", icon: "linkedin" as const },
 ];
