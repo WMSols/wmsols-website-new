@@ -56,7 +56,7 @@ export default async function ServiceDetailsPage({
       <section className={`${darkGradient} min-h-screen pt-14 px-6 flex items-center`}>
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center py-16 lg:py-0">
           <div className="lg:col-span-7 text-center lg:text-left text-white">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+            <h1 className="text-4xl md:text-5xl  font-bold mb-6 tracking-tight">
               {service.hero.h1}
             </h1>
             <p className="text-lg text-muted-foreground mb-10 leading-relaxed max-w-3xl mx-auto lg:mx-0">
