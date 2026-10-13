@@ -49,12 +49,12 @@ export default async function ServiceDetailsPage({
   return (
     <main className="w-full min-h-screen">
       {/* 1. Hero Section */}
-      <section className={`${darkGradient} pt-32 pb-24 px-6`}>
+      <section className={`${darkGradient} min-h-screen pt-14 px-6 flex items-center justify-center`}>
         <div className="max-w-4xl mx-auto text-center text-white">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
             {service.hero.h1}
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-lg  text-muted-foreground mb-10 leading-relaxed max-w-3xl mx-auto">
             {service.hero.subHeadline}
           </p>
           

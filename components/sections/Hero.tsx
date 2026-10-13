@@ -43,7 +43,7 @@ export const Hero: React.FC = () => {
         </h1>
 
         {/* Sub-headline */}
-        <p className="text-gray-400 text-center md:text-xl max-w-3xl mb-10 leading-relaxed">
+        <p className="text-muted-foreground text-center text-lg  max-w-3xl mb-10 leading-relaxed">
           {heroData.subHeadline}
         </p>
 

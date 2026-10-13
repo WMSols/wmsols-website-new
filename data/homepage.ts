@@ -1,6 +1,6 @@
  export const heroData = {
   headline: "We Build Digital Experiences That Matter",
-  subHeadline: "From bold ideas to production-ready software — WMsols partners with businesses to deliver web apps, mobile solutions, AI automation, and digital strategies that drive real growth.",
+  subHeadline: "From bold ideas to production-ready software, WMsols partners with businesses to deliver web apps, mobile solutions, AI automation, and digital strategies that drive real growth.",
   actions: {
     primary: {
       label: "Start Your Project",
