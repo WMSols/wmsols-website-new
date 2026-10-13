@@ -1,9 +1,11 @@
 import { notFound } from 'next/navigation';
-import { getCaseStudyBySlug, parseCaseStudyTechStack, type CaseStudy } from '@/lib/strapi';
+import { getCaseStudyBySlug, getCaseStudyImageUrl, parseCaseStudyTechStack, type CaseStudy } from '@/lib/strapi';
 import { CheckCircle2 } from 'lucide-react';
 import React from 'react';
 import ProjectCTA from '../components/ProjectCta';
 import CaseStudySidebar from '../components/CaseStudySidebar';
+import { ImagePlaceholder } from '@/components/common/ImagePlaceholder';
+import { placeholderImages } from '@/data/placeholder-images';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -18,6 +20,9 @@ function CaseStudyContent({ project }: { project: CaseStudy }) {
     .filter(Boolean);
 
   const results: string | null = project.results || null;
+  const coverSrc = project.image?.[0]?.url
+    ? getCaseStudyImageUrl(project.image)
+    : placeholderImages.caseStudyCover;
 
   return (
     <>
@@ -27,11 +32,18 @@ function CaseStudyContent({ project }: { project: CaseStudy }) {
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-medium text-white mb-8 leading-tight">
             {project.title}
           </h1>
-          <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl mx-auto mb-16">
+          <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl mx-auto mb-10">
             {project.overview}
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left border-t border-white/10 pt-8 mt-12">
+          <ImagePlaceholder
+            src={coverSrc}
+            alt={`${project.title} cover`}
+            className="w-full h-64 md:h-80 rounded-2xl mb-12"
+            priority
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left border-t border-white/10 pt-8 mt-4">
             <div>
               <p className="text-gray-400 text-sm mb-1">Client</p>
               <p className="text-white font-medium">{project.client}</p>

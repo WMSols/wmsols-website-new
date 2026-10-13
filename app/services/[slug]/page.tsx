@@ -7,6 +7,10 @@ import ServiceFaq from '../components/ServiceFaq';
 import ServiceHeroCTA from '../components/ServiceHeroCta'; // 1. Import the new CTA
 import { Metadata } from 'next';
 import { getServiceBySlug } from '../lib/getServiceBySlug';
+import { ImagePlaceholder } from '@/components/common/ImagePlaceholder';
+import { getServicePlaceholder, placeholderImages } from '@/data/placeholder-images';
+
+const serviceThumbIds = Object.keys(placeholderImages.services);
 
 export async function generateMetadata({
   params,
@@ -48,22 +52,31 @@ export default async function ServiceDetailsPage({
 
   return (
     <main className="w-full min-h-screen">
-      {/* 1. Hero Section */}
-      <section className={`${darkGradient} min-h-screen pt-14 px-6 flex items-center justify-center`}>
-        <div className="max-w-4xl mx-auto text-center text-white">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-            {service.hero.h1}
-          </h1>
-          <p className="text-lg  text-muted-foreground mb-10 leading-relaxed max-w-3xl mx-auto">
-            {service.hero.subHeadline}
-          </p>
-          
-          {/* 2. Inject the Client Component CTA */}
-          <ServiceHeroCTA 
-            ctaText={service.hero.cta} 
-            serviceId={service.id} 
-          />
-          
+      {/* 1. Hero Section — split on lg+ */}
+      <section className={`${darkGradient} min-h-screen pt-14 px-6 flex items-center`}>
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center py-16 lg:py-0">
+          <div className="lg:col-span-7 text-center lg:text-left text-white">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+              {service.hero.h1}
+            </h1>
+            <p className="text-lg text-muted-foreground mb-10 leading-relaxed max-w-3xl mx-auto lg:mx-0">
+              {service.hero.subHeadline}
+            </p>
+            <div className="flex justify-center lg:justify-start">
+              <ServiceHeroCTA
+                ctaText={service.hero.cta}
+                serviceId={service.id}
+              />
+            </div>
+          </div>
+          <div className="lg:col-span-5 w-full max-w-md mx-auto lg:max-w-none lg:mx-0 2xl:max-w-none">
+            <ImagePlaceholder
+              src={getServicePlaceholder(service.id)}
+              alt={`${service.title} visual`}
+              className="w-full aspect-[16/10] md:aspect-[4/3] 2xl:aspect-square rounded-2xl max-h-[220px] md:max-h-[280px] lg:max-h-[320px] 2xl:max-h-none min-h-[160px] 2xl:min-h-[280px]"
+              priority
+            />
+          </div>
         </div>
       </section>
 
@@ -73,12 +86,15 @@ export default async function ServiceDetailsPage({
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-14">
             What We Offer
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
             {service.whatWeOffer.map((offer, index) => (
               <SubServiceCard
                 key={index}
                 title={offer.title}
                 description={offer.description}
+                imageSrc={getServicePlaceholder(
+                  serviceThumbIds[index % serviceThumbIds.length] ?? service.id
+                )}
               />
             ))}
           </div>

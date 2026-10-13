@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function OdooPartnershipCard() {
   return (
-    <section className="w-full py-16 px-4">
+    <section className="w-full pb-16 px-4">
       <div className="max-w-5xl mx-auto relative rounded-3xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden flex flex-col md:flex-row items-center justify-between p-8 md:p-12 gap-10 group">
          
          <div className="absolute inset-0 z-0 flex items-center justify-center opacity-30 md:hidden pointer-events-none">

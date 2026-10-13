@@ -51,7 +51,7 @@
     { id: '4', name: 'Ferozsons Laboratories', imageUrl: '/images/trustedBrands/logo.avif', url: 'https://www.ferozsons-labs.com' },
     { id: '5', name: 'Elegant', imageUrl: '/images/trustedBrands/elegant_logo.webp', url: 'https://elegant.com' },
     { id: '6', name: 'TodAI', imageUrl: '/images/trustedBrands/todAI_logo.webp', url: '/' },
-    { id: '7', name: 'Tulip Tea', imageUrl: '/images/trustedBrands/tulip_tea_logo.webp', url: 'https://awgroup.com.pk' },
+    { id: '7', name: 'Tulip Tea', imageUrl: '/images/trustedBrands/tulip-logo.webp', url: 'https://awgroup.com.pk' },
     { id: '8', name: 'Shahtaj Oil', imageUrl: '/images/trustedBrands/shahtaj.png', url: 'https://shahtajoil.com.pk/' },
     { id: '9', name: 'XpertHR', imageUrl: '/images/trustedBrands/white-logo-bf-black.png', url: 'https://bfbio-nextjs.mansoor-ali.workers.dev/' },
   ];

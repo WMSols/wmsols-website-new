@@ -2,6 +2,7 @@ import React from 'react';
 import { ServiceCard } from "@/components/common/ServiceCard"
 import { servicesData } from '@/data/services';
 import { StaggerGrid } from '../animations/StaggerGrid';
+import { getServicePlaceholder } from '@/data/placeholder-images';
 
 export const ServicesCardsGrid: React.FC = () => {
   return (
@@ -20,8 +21,10 @@ export const ServicesCardsGrid: React.FC = () => {
 
         {/* --- GRID SECTION --- */}
    
-         <StaggerGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-4 sm:px-6 lg:px-8 justify-items-center">
-          {servicesData.map((service, index) => (
+         <StaggerGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-4 sm:px-6 lg:px-8 justify-items-stretch items-stretch">
+          {servicesData.map((service, index) => {
+            const serviceId = service.href.replace('/services/', '');
+            return (
             <ServiceCard 
               key={index}
               title={service.title}
@@ -29,8 +32,10 @@ export const ServicesCardsGrid: React.FC = () => {
               href={service.href}
               Icon={service.icon}
               variant="dark"
+              imageSrc={getServicePlaceholder(serviceId)}
             />
-          ))}
+            );
+          })}
           </StaggerGrid>
   
 
