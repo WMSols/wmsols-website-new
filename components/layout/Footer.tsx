@@ -1,28 +1,7 @@
 import React from 'react';
-import { Mail, Phone, MapPin } from 'lucide-react';
-import { footerData, footerSocialLinks } from '@/data/navigation';
-
-const socialIcons = {
-  instagram: ({ className }: { className?: string }) => (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-    </svg>
-  ),
-  facebook: ({ className }: { className?: string }) => (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-    </svg>
-  ),
-  linkedin: ({ className }: { className?: string }) => (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-      <rect width="4" height="12" x="2" y="9" />
-      <circle cx="4" cy="4" r="2" />
-    </svg>
-  ),
-} as const;
+import { Mail, Phone } from 'lucide-react';
+import { footerData } from '@/data/navigation';
+import { SocialLinks } from '@/components/common/SocialIcons';
 
 // --- SHARED LOGO COMPONENT ---
 const Logo = () => (
@@ -44,8 +23,7 @@ const Logo = () => (
 export const Footer: React.FC = () => {
   const getContactIcon = (itemText: string) => {
     if (itemText.includes('@')) return <Mail className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />;
-    if (itemText.trim().startsWith('+')) return <Phone className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />;
-    return <MapPin className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />;
+    return <Phone className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />;
   };
 
   return (
@@ -68,22 +46,10 @@ export const Footer: React.FC = () => {
             </p>
             
             <div className="mt-8">
-              <span className="text-xs font-semibold text-gray-500 mb-3 block">Our Socials:</span>
-              <div className="flex items-center gap-4">
-                {footerSocialLinks.map((social) => {
-                  const Icon = socialIcons[social.icon];
-                  return (
-                    <a
-                      key={social.name}
-                      href={social.href}
-                      aria-label={social.name}
-                      className="text-gray-400 hover:text-white transition-colors"
-                    >
-                      <Icon className="w-6 h-6" />
-                    </a>
-                  );
-                })}
-              </div>
+              <SocialLinks
+                showLabel
+                linkClassName="text-gray-400 hover:text-white transition-colors"
+              />
             </div>
           </div>
 
@@ -144,22 +110,10 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* --- BOTTOM BAR --- */}
-        <div className="border-t border-gray-800/60 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-gray-800/60 pt-8 w-full flex justify-center items-center gap-4">
           <p className="text-xs text-gray-500">
             © 2026 WMSols. All rights reserved.
           </p>
-          
-          <div className="flex items-center gap-6">
-            <a href="/contact" className="text-xs text-gray-500 hover:text-white transition-colors">
-              Contact
-            </a>
-            <a href="/privacy-policy" className="text-xs text-gray-500 hover:text-white transition-colors">
-              Privacy Policy
-            </a>
-            <a href="/terms-of-service" className="text-xs text-gray-500 hover:text-white transition-colors">
-              Terms of Service
-            </a>
-          </div>
         </div>
 
       </div>

@@ -37,7 +37,7 @@ export default function Map() {
       aria-label="WMSols Islamabad office location map"
       center={[33.709733681426286, 73.04351966543929]}
       zoom={14}
-      style={{ height: '300px', width: '100%', borderRadius: '12px' }}
+      style={{ height: '100%', width: '100%', borderRadius: '12px' }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'

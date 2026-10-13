@@ -72,8 +72,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 max-w-2xl w-full">
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 max-w-2xl w-full h-full lg:flex lg:flex-col">
+      <form onSubmit={handleSubmit} className="space-y-6 lg:flex-1 lg:flex lg:flex-col">
 
         {/* Row 1 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -184,8 +184,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
           </div>
         </div>
 
-        {/* Row 4 */}
-        <div>
+        {/* Row 4 — grows on desktop so form matches map column height */}
+        <div className="lg:flex-1 lg:flex lg:flex-col lg:min-h-0">
           <label htmlFor="description" className="block text-sm font-medium mb-1">
             Tell us about your project <span className="text-red-500">*</span>
           </label>
@@ -197,12 +197,12 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
             placeholder="Please write a detailed description about your project"
             value={formData.description}
             onChange={handleChange}
-            className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"
+            className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none lg:flex-1 lg:min-h-[8rem]"
           />
         </div>
 
         {/* Row 5 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end lg:mt-auto">
           <div>
             <label htmlFor="source" className="block text-sm font-medium text-gray-900 mb-1">
               How did you hear about us? (Optional)

@@ -157,20 +157,23 @@ export const footerData = [
         item: "+92 309 0049555",
         href: "tel:+923090049555"
       },
-      {
-        item: "US Office\nSan Francisco, California",
-        href: "https://maps.google.com/?q=San+Francisco,+California"
-      },
-      {
-        item: "Karachi\n27-C, Khayaban-e-Sehar, DHA, 75500",
-        href: "https://maps.google.com/?q=27-C,+Khayaban-e-Sehar,+DHA,+Karachi+75500"
-      },
-      {
-        item: "Islamabad\nAW Tower, I-10 Markaz, 44000",
-        href: "https://maps.google.com/?q=AW+Tower,+I-10+Markaz,+Islamabad+44000"
-      }
     ]
   }
+];
+
+export const contactOffices = [
+  {
+    label: "US Office",
+    address: "San Francisco, California",
+  },
+  {
+    label: "Karachi",
+    address: "27-C, Khayaban-e-Sehar, DHA, 75500",
+  },
+  {
+    label: "Islamabad",
+    address: "AW Tower, I-10 Markaz, 44000",
+  },
 ];
 
 export const footerSocialLinks = [
