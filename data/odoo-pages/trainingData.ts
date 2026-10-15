@@ -2,7 +2,7 @@ export const trainingHeroData = {
   title: "Comprehensive",
   titleHighlight: "Odoo Training",
   description: "A system is only as good as the people using it. We provide targeted training sessions for your administrative team and end-users to ensure rapid adoption and operational efficiency.",
-  imageSrc: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=1200",
+  imageSrc: "/images/odoo-pages/training.png",
   imageAlt: "People collaborating in a training session",
 };
 

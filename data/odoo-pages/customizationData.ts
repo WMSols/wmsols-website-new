@@ -2,7 +2,7 @@ export const customizationHeroData = {
   title: "Tailored Odoo",
   titleHighlight: "Customization",
   description: "We adapt Odoo to fit your exact business logic. From tweaking backend parameters and XML views to overhauling the frontend user experience, we ensure the ERP works for you, not the other way around.",
-  imageSrc: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200", 
+  imageSrc: "/images/odoo-pages/customization.png",
   imageAlt: "Data analysis on a computer screen",
 };
 

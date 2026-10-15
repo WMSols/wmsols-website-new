@@ -41,7 +41,7 @@ const TrustedBrands: React.FC = () => {
                 alt={`${brand.name} logo`}
                 width={200}
                 height={200}
-                className="max-h-full max-w-full h-auto w-auto object-contain rounded-md grayscale opacity-70 transition-all duration-300 ease-in-out hover:grayscale-0 hover:opacity-100"
+                className="max-h-full max-w-full h-auto w-auto object-contain rounded-md sm:grayscale sm:opacity-70 transition-all duration-300 ease-in-out hover:grayscale-0 hover:opacity-100"
               />
             </a>
           ))}

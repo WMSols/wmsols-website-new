@@ -2,7 +2,7 @@ export const integrationHeroData = {
   title: "Seamless Odoo",
   titleHighlight: "Integrations",
   description: "Eliminate data silos. We build secure, real-time connections between your Odoo environment and third-party APIs, payment gateways, e-commerce platforms, and legacy CRM systems.",
-  imageSrc: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200",
+  imageSrc: "/images/odoo-pages/integration.png",
   imageAlt: "Digital network connection lines",
 };
 

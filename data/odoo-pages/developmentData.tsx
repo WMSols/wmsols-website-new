@@ -3,7 +3,7 @@ export const developmentHeroData = {
   titleHighlight: "Development",
   description:
     "Leverage the full power of the Odoo framework. We build scalable, high-performance custom modules and applications using Python, XML, and the OWL JavaScript framework to match your precise operational requirements.",
-  imageSrc: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1200", // High-quality stock placeholder
+  imageSrc: "/images/odoo-pages/development.png",
   imageAlt: "Software developer writing code on multiple screens",
 };
 

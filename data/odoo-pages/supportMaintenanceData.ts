@@ -2,7 +2,7 @@ export const supportHeroData = {
   title: "Reliable Odoo",
   titleHighlight: "Support & Maintenance",
   description: "Keep your operations running smoothly. Our full-stack team provides proactive monitoring, critical bug fixes, server administration, and continuous performance optimization.",
-  imageSrc: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=1200",
+  imageSrc: "/images/odoo-pages/support-and-maintain.png",
   imageAlt: "IT support team in a server room",
 };
 

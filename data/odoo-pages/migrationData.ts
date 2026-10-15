@@ -2,7 +2,7 @@ export const migrationHeroData = {
   title: "Zero-Data-Loss",
   titleHighlight: "Migration",
   description: "Transitioning to a new ERP shouldn't be a nightmare. We execute secure, fully mapped database migrations from older Odoo versions or legacy local systems directly to modern production environments.",
-  imageSrc: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1200",
+  imageSrc: "/images/odoo-pages/migration.png",
   imageAlt: "Data servers transmitting information",
 };
 

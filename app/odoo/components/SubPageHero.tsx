@@ -1,4 +1,4 @@
-import Image from "next/image";
+import TiltImage from "./TiltImage";
 
 interface SubPageHeroProps {
   title: string;
@@ -24,18 +24,13 @@ export default function SubPageHero({ title, titleHighlight, description, imageS
             </p>
           </div>
 
-          {/* Image Container */}
-          <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl shadow-blue-900/10">
-            <Image
-              src={imageSrc}
-              alt={imageAlt}
-              fill
-              className="object-cover"
-              priority
-            />
-            {/* Subtle overlay to ensure the image fits the brand vibe */}
-            <div className="absolute inset-0 bg-blue-600/10 mix-blend-multiply"></div>
-          </div>
+          {/* Image with hover tilt */}
+          <TiltImage
+            src={imageSrc}
+            alt={imageAlt}
+            className="relative h-[300px] sm:h-[400px] lg:h-[500px] w-full"
+            priority
+          />
           
         </div>
       </div>
