@@ -40,14 +40,9 @@ const FeaturedPost: React.FC<FeaturedPostProps> = ({ post }) => {
             {post.excerpt}
           </p>
 
-          <div className="flex items-center gap-3">
-            <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-100">
-              <Image src={post.author.avatarUrl} alt={post.author.name} fill className="object-cover" />
-            </div>
-            <div>
-              <p className="text-sm font-medium text-gray-900">{post.author.name}</p>
-              <p className="text-xs text-gray-400">{post.readTime}</p>
-            </div>
+          <div>
+            <p className="text-sm font-medium text-gray-900">{post.author.name}</p>
+            <p className="text-xs text-gray-400">{post.readTime}</p>
           </div>
         </div>
       </Link>

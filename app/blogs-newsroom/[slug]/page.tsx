@@ -5,9 +5,6 @@ import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 import { blogPosts } from '@/data/blogs-newsroom';
 import { fetchBlogBySlug, getImageUrl } from '../lib/fetchBlogsBySlug'; // ← server-only file
 
-const DEFAULT_AUTHOR_AVATAR =
-  'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150';
-
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
@@ -42,14 +39,9 @@ export default async function BlogPostPage({ params }: PageProps) {
               {liveBlog.title}
             </h1>
 
-            <div className="flex items-center gap-3 border-b border-gray-100 pb-6">
-              <div className="relative w-11 h-11 rounded-full overflow-hidden bg-gray-50">
-                <Image src={DEFAULT_AUTHOR_AVATAR} alt={liveBlog.author} fill className="object-cover" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-gray-900">{liveBlog.author}</p>
-                <p className="text-xs text-gray-400">{liveBlog.date} · {liveBlog.readTime}</p>
-              </div>
+            <div className="border-b border-gray-100 pb-6">
+              <p className="text-sm font-semibold text-gray-900">{liveBlog.author}</p>
+              <p className="text-xs text-gray-400">{liveBlog.date} · {liveBlog.readTime}</p>
             </div>
           </div>
 
@@ -87,14 +79,9 @@ export default async function BlogPostPage({ params }: PageProps) {
             {post.title}
           </h1>
 
-          <div className="flex items-center gap-3 border-b border-gray-100 pb-6">
-            <div className="relative w-11 h-11 rounded-full overflow-hidden bg-gray-50">
-              <Image src={post.author.avatarUrl} alt={post.author.name} fill className="object-cover" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-gray-900">{post.author.name}</p>
-              <p className="text-xs text-gray-400">{post.date} · {post.readTime}</p>
-            </div>
+          <div className="border-b border-gray-100 pb-6">
+            <p className="text-sm font-semibold text-gray-900">{post.author.name}</p>
+            <p className="text-xs text-gray-400">{post.date} · {post.readTime}</p>
           </div>
         </div>
 

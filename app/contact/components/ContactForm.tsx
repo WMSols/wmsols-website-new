@@ -54,6 +54,17 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
         lead_source: formData.source
       });
 
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        service: '',
+        budget: '',
+        description: '',
+        source: '',
+      });
+
       onSuccess();
     } catch (err) {
       // 3. Optional: You can also track form failures if you want to debug drop-offs
