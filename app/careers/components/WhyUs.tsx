@@ -28,9 +28,9 @@ const WhyUs: React.FC = () => {
     <div className="w-full py-12 flex flex-col justify-center items-center bg-white px-6 font-sans">
       <div className="max-w-4xl w-full">
         {/* Main Heading */}
-        <h1 className="text-3xl md:text-4xl font-semibold text-center text-gray-900 mb-16 md:mb-20">
+        <h2 className="text-3xl md:text-4xl font-semibold text-center text-gray-900 mb-16 md:mb-20">
           Why Build Your Career at WMsols?
-        </h1>
+        </h2>
 
         {/* Benefits List */}
         <div className="space-y-10 md:space-y-6">
@@ -41,9 +41,9 @@ const WhyUs: React.FC = () => {
             >
               {/* Bold Sub-heading */}
               <div className="md:w-[40%] mb-2 md:mb-0">
-                <h1 className="text-[17px] font-bold font-sans text-blue-500 sm:text-black group-hover:text-blue-500 transition-colors duration-300">
+                <h3 className="text-[17px] font-bold font-sans text-blue-500 sm:text-black group-hover:text-blue-500 transition-colors duration-300">
                   {benefit.title}
-                </h1>
+                </h3>
               </div>
               
               {/* Description Text */}

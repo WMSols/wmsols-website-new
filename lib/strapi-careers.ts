@@ -35,11 +35,12 @@ export async function fetchJobs(
     domain?: string;
     location?: string;
     type?: string;
-  }
+  },
+  page: number = 1,
 ): Promise<JobsResponse> {
   const url = new URL(strapiUrl('/api/job-posts'));
   // Removed url.searchParams.set('populate', '*');
-  url.searchParams.set('pagination[page]', '1');
+  url.searchParams.set('pagination[page]', String(page));
   url.searchParams.set('pagination[pageSize]', String(pageSize));
 
   if (filters) {

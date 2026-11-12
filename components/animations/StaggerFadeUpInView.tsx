@@ -1,7 +1,7 @@
 "use client";
 
 import { Children } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { fadeUp } from "./variants";
 
 const staggerContainer = {
@@ -17,6 +17,12 @@ type Props = {
 };
 
 export function StaggerFadeUpInView({ className, children }: Props) {
+  const reduceMotion = useReducedMotion();
+
+  if (reduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       className={className}

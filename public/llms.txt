@@ -1,0 +1,38 @@
+# WMsols
+
+WMsols builds custom software, web apps, mobile apps, AI automation, and digital strategy for ambitious businesses.
+
+Site: https://www.wmsols.com
+Email: info@wmsols.com
+Phone: +1 (505) 386-1888
+Phone: +92 309 0049555
+
+## Pages
+
+- https://www.wmsols.com/ — WMsols builds world-class web apps, mobile apps, AI automation, and digital strategies for ambitious businesses.
+- https://www.wmsols.com/about — WMsols is a digital solutions agency committed to building technology that matters.
+- https://www.wmsols.com/services — Custom software development, web and mobile app development, AI solutions, and digital transformation.
+- https://www.wmsols.com/services/web-development — Custom web development, from Next.js web apps to migrations, PWAs, ERPs, and API integrations.
+- https://www.wmsols.com/services/mobile-development — iOS, Android, and Flutter app development.
+- https://www.wmsols.com/services/ai-automation — Workflow automation, chatbots, and custom AI integrations.
+- https://www.wmsols.com/services/ui-ux-design — Website and mobile product design.
+- https://www.wmsols.com/services/database-architecture — SQL, NoSQL, and cloud database architecture.
+- https://www.wmsols.com/services/digital-strategy — Technology roadmapping and digital transformation.
+- https://www.wmsols.com/services/data-analytics — Business intelligence, dashboards, and predictive analytics.
+- https://www.wmsols.com/case-studies — Client projects and the results they produced.
+- https://www.wmsols.com/blogs-newsroom — Writing on web development, mobile apps, AI automation, design, and digital strategy.
+- https://www.wmsols.com/odoo — Odoo implementation, custom modules, integration, and training.
+- https://www.wmsols.com/odoo/development — Custom Odoo modules and applications.
+- https://www.wmsols.com/odoo/customization — Odoo workflows, UI, and reports tailored to a business.
+- https://www.wmsols.com/odoo/integration — Odoo connections to third-party software, payments, and APIs.
+- https://www.wmsols.com/odoo/support-maintenance — Odoo bug fixes, patching, and server administration.
+- https://www.wmsols.com/odoo/migration — Moves onto current Odoo versions without losing data.
+- https://www.wmsols.com/odoo/training — Odoo training for users and administrators.
+- https://www.wmsols.com/careers — Open roles in engineering, design, AI, and strategy.
+- https://www.wmsols.com/contact — Project inquiries. The team replies within 24 hours.
+
+## Offices
+
+- US Office: San Francisco, California
+- Karachi: 27-C, Khayaban-e-Sehar, DHA, 75500
+- Islamabad: AW Tower, I-10 Markaz, 44000

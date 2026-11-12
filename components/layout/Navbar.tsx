@@ -138,7 +138,7 @@ export const Navbar: React.FC = () => {
                     <div className="max-w-7xl mx-auto flex w-full min-h-75">
                       <div className="w-1/4 p-8 bg-gray-50 border-r border-gray-200">
                         <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider block mb-2">Explore</span>
-                        <h1 className="text-3xl font-sans font-bold text-black">{navItem.item}</h1>
+                        <h2 className="text-3xl font-sans font-bold text-black">{navItem.item}</h2>
                       </div>
                       <div className="w-1/3 p-6 border-r border-gray-200">
                         <ul className="space-y-4">

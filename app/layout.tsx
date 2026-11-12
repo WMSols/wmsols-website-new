@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Gelasio } from "next/font/google";
+import { Inter, Gelasio } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { GoogleAnalytics } from '@next/third-parties/google'
 import AnalyticsWrapper from '@/components/common/AnalyticsWrapper';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationGraph } from "@/lib/structured-data";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,19 +22,12 @@ const gelasio = Gelasio({
   weight: ["400", "500", "600", "700"],
 });
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.wmsols.com"),
-  title: "WMsols | Custom Software Development & Digital Solutions Agency",
+  title: {
+    default: "WMsols | Custom Software Development & Digital Solutions Agency",
+    template: "%s | WMsols",
+  },
   description:
     "WMsols builds world-class web apps, mobile apps, AI automation, and digital strategies for ambitious businesses. 100+ projects. 98% client satisfaction. Let's build together.",
   keywords: [
@@ -42,20 +36,15 @@ export const metadata: Metadata = {
     "AI automation services",
     "digital transformation company"
   ],
+  alternates: {
+    canonical: "https://www.wmsols.com/",
+  },
   openGraph: {
     title: "WMsols | Custom Software Development & Digital Solutions Agency",
     description:
       "WMsols builds world-class web apps, mobile apps, AI automation, and digital strategies for ambitious businesses.",
     url: "https://www.wmsols.com",
     siteName: "WMsols",
-    images: [
-      {
-        url: "/og-image.webp",
-        width: 1200,
-        height: 630,
-        alt: "WMsols - Digital Experiences that Matter",
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
@@ -64,7 +53,6 @@ export const metadata: Metadata = {
     title: "WMsols | Custom Software Development & Digital Solutions Agency",
     description:
       "WMsols builds world-class web apps, mobile apps, AI automation, and digital strategies for ambitious businesses.",
-    images: ["/og-image.webp"],
   },
 };
 
@@ -77,9 +65,10 @@ export default function RootLayout({
     <html
       data-scroll-behavior="smooth"
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${gelasio.variable} h-full antialiased`}
+      className={`${inter.variable} ${gelasio.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <JsonLd data={organizationGraph()} />
         <Navbar />
         <main>
           {children}

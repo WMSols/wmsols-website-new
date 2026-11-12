@@ -1,4 +1,18 @@
 /** @type {import('next').NextConfig} */
+
+function strapiImagePort() {
+  const raw = process.env.NEXT_PUBLIC_STRAPI_URL;
+  if (raw) {
+    try {
+      return new URL(raw).port;
+    } catch {
+      // Fall through to the explicit port.
+    }
+  }
+  const port = process.env.NEXT_PUBLIC_STRAPI_PORT || '';
+  return port === '443' || port === '80' ? '' : port;
+}
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -15,13 +29,12 @@ const nextConfig = {
             {
               protocol: process.env.NEXT_PUBLIC_STRAPI_PROTOCOL || 'http',
               hostname: process.env.NEXT_PUBLIC_STRAPI_HOSTNAME || 'localhost',
-              port: process.env.NEXT_PUBLIC_STRAPI_PORT || '1337',
+              port: strapiImagePort(),
               pathname: '/uploads/**', // Specifically targets Strapi's media folder
             },
           ]
         : []),
     ],
-    unoptimized: true, // Disable Next.js's built-in image optimizationn
   },
   async redirects() {
     return [

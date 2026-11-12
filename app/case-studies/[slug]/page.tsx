@@ -1,5 +1,9 @@
 import { notFound } from 'next/navigation';
-import { getCaseStudyBySlug, parseCaseStudyTechStack, type CaseStudy } from '@/lib/strapi';
+import type { Metadata } from 'next';
+import { getCaseStudyBySlug, getCaseStudyImageUrl, parseCaseStudyTechStack, type CaseStudy } from '@/lib/strapi';
+import { clipText, pageMetadata } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { breadcrumbList } from '@/lib/structured-data';
 import { CheckCircle2 } from 'lucide-react';
 import React from 'react';
 import ProjectCTA from '../components/ProjectCta';
@@ -7,6 +11,23 @@ import CaseStudySidebar from '../components/CaseStudySidebar';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  try {
+    const { slug } = await params;
+    const project = await getCaseStudyBySlug(slug);
+    if (!project) return { title: 'Case Study | WMsols' };
+
+    return pageMetadata({
+      title: project.title,
+      description: clipText(project.overview || project.title),
+      path: `/case-studies/${project.slug}`,
+      image: getCaseStudyImageUrl(project.image),
+    });
+  } catch {
+    return { title: 'Case Study | WMsols' };
+  }
 }
 
 function CaseStudyContent({ project }: { project: CaseStudy }) {
@@ -117,6 +138,13 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-white font-sans">
+      <JsonLd
+        data={breadcrumbList([
+          { name: 'Home', path: '/' },
+          { name: 'Case Studies', path: '/case-studies' },
+          { name: project.title, path: `/case-studies/${project.slug}` },
+        ])}
+      />
       <CaseStudyContent project={project} />
       <ProjectCTA />
     </div>

@@ -20,6 +20,7 @@ const FeaturedPost: React.FC<FeaturedPostProps> = ({ post }) => {
             alt={post.title}
             fill
             priority
+            sizes="(max-width: 1024px) 100vw, 960px"
             className="object-cover group-hover:scale-101 transition-transform duration-500"
           />
         </div>

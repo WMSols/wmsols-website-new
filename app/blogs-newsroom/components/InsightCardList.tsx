@@ -29,11 +29,12 @@ function mapBlogToPost(blog: Blog): BlogPost {
 }
 
 interface InsightCardListProps {
-  /** Fallback posts shown while backend loads or on error */
+  /** Posts already rendered by the server. Used until a filter or page change. */
   posts: BlogPost[];
+  initialPageCount?: number;
 }
 
-const InsightCardList: React.FC<InsightCardListProps> = ({ posts }) => {
+const InsightCardList: React.FC<InsightCardListProps> = ({ posts, initialPageCount }) => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [categories, setCategories] = useState<string[]>(FALLBACK_BLOG_CATEGORIES);
 
@@ -49,6 +50,7 @@ useEffect(() => {
   const { data, pagination, isLoading, error, currentPage, goToPage } = useBlogsByPage({
     pageSize: 3,
     category: activeCategory,
+    skipInitial: posts.length > 0,
   });
 
   const handleCategoryChange = (category: string) => {
@@ -56,10 +58,10 @@ useEffect(() => {
     goToPage(1); // reset to page 1 on filter change
   };
 
-  // Use live data if available, otherwise fall back to prop posts
+  const isInitialView = activeCategory === 'All' && currentPage === 1;
   const livePosts: BlogPost[] = data ? data.map(mapBlogToPost) : [];
-const displayPosts = data === null ? posts : livePosts;
-  const totalPages = pagination?.pageCount ?? Math.ceil(posts.length / 3);
+  const displayPosts = isInitialView ? posts : livePosts;
+  const totalPages = pagination?.pageCount ?? initialPageCount ?? Math.ceil(posts.length / 3);
 
   return (
     <div className="px-4 md:px-8 sm:px-6 py-10">
@@ -81,7 +83,7 @@ const displayPosts = data === null ? posts : livePosts;
       </div>
 
       {/* Loading state */}
-      {isLoading && (
+      {isLoading && !isInitialView && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-pulse">
           {Array.from({ length: 9 }).map((_, i) => (
             <div key={i} className="rounded-xl bg-gray-100 h-72 w-full" />
@@ -97,7 +99,7 @@ const displayPosts = data === null ? posts : livePosts;
       )}
 
       {/* Grid */}
-      {!isLoading && displayPosts.length > 0 && (
+      {(isInitialView || !isLoading) && displayPosts.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayPosts.map((post) => (
             <InsightCard
@@ -115,7 +117,7 @@ const displayPosts = data === null ? posts : livePosts;
       )}
 
       {/* Empty state */}
-      {!isLoading && displayPosts.length === 0 && (
+      {!isLoading && !isInitialView && displayPosts.length === 0 && (
         <div className="text-center py-20 text-gray-400 text-sm">
           No articles found matching this category.
         </div>

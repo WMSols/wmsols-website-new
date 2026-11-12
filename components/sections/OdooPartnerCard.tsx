@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Settings, Database, Layout, Code } from "lucide-react";
+import { Settings, Database, Layout } from "lucide-react";
 import Image from "next/image";
 
 export default function OdooPartnershipCard() {
@@ -7,9 +7,6 @@ export default function OdooPartnershipCard() {
     <section className="w-full py-16 px-4">
       <div className="max-w-5xl mx-auto relative rounded-3xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden flex flex-col md:flex-row items-center justify-between p-8 md:p-12 gap-10 group">
          
-         <div className="absolute inset-0 z-0 flex items-center justify-center opacity-30 md:hidden pointer-events-none">
-          <Image src="/images/odoo_logo.png" alt="Odoo Community Logo" width={350} height={250} className="object-contain " /> 
-          </div> 
         {/* Background Floating Blurred Icons */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           {/* Top Left Icon */}
@@ -42,9 +39,13 @@ export default function OdooPartnershipCard() {
           </Link>
         </div>
 
-        {/* Right Content - Logo Placeholder Area */}
-       
-         <Image src="/images/odoo_logo.png" alt="Odoo Community Logo" width={350} height={250} className="object-contain hidden md:block" /> 
+        <Image
+          src="/images/odoo_logo.png"
+          alt="Odoo Community Logo"
+          width={350}
+          height={250}
+          className="relative z-10 object-contain pointer-events-none absolute inset-0 m-auto h-auto w-auto max-w-[220px] opacity-30 md:pointer-events-auto md:static md:inset-auto md:m-0 md:max-w-[350px] md:opacity-100"
+        />
 
       </div>
     </section>

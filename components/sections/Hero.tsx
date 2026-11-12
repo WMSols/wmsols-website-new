@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { GradientLight } from '../common/GradientLight';
 import { heroData } from '@/data/homepage';
 import { CircleArrowOutUpRight } from 'lucide-react';
@@ -49,21 +50,21 @@ export const Hero: React.FC = () => {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
-          <a 
+          <Link 
             href={heroData.actions.primary.href}
             className="group relative inline-flex items-center justify-center gap-2 px-8 py-3.5  font-sans font-medium text-white bg-[#2563eb] hover:bg-[#1d4ed8] rounded-[12px] transition-all duration-300 w-full sm:w-auto"
           >
             {heroData.actions.primary.label}
             <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
-          </a>
+          </Link>
           
-          <a 
+          <Link 
             href={heroData.actions.secondary.href}
             className="group inline-flex items-center justify-center gap-2 px-8 py-3.5  font-sans font-medium text-gray-300 bg-transparent border border-gray-600 hover:border-gray-400 hover:text-white rounded-[12px] transition-all duration-300 w-full sm:w-auto"
           >
             {heroData.actions.secondary.label}
           <CircleArrowOutUpRight size={16} />
-          </a>
+          </Link>
         </div>
         </div>
     </section>

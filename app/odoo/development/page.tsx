@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { absolutePageMetadata } from "@/lib/seo";
 import SubPageHero from "../components/SubPageHero";
 import SubPageFeatures from "../components/SubPageFeatures";
 import SubPageCTA from "../components/SubPageCTA";
@@ -8,14 +8,15 @@ import {
   subPageCTAData 
 } from "@/data/odoo-pages/developmentData";
 
-export const metadata: Metadata = {
-  title: "Custom Odoo Development Services | WMSols",
-  description: "Build custom Odoo modules and applications using Python, XML, and OWL. WMSols provides expert full-stack Odoo development tailored to your business needs.",
-};
+export const metadata = absolutePageMetadata({
+  title: "Custom Odoo Development Services | WMsols",
+  description: "Build custom Odoo modules and applications using Python, XML, and OWL. WMsols provides expert full-stack Odoo development tailored to your business needs.",
+  path: "/odoo/development",
+});
 
 export default function OdooDevelopmentPage() {
   return (
-    <main className="min-h-screen bg-white selection:bg-blue-200">
+    <div className="min-h-screen bg-white selection:bg-blue-200">
       <SubPageHero 
         title={developmentHeroData.title}
         titleHighlight={developmentHeroData.titleHighlight}
@@ -36,6 +37,6 @@ export default function OdooDevelopmentPage() {
         buttonLabel={subPageCTAData.buttonLabel}
         href={subPageCTAData.href}
       />
-    </main>
+    </div>
   );
 }

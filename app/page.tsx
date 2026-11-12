@@ -9,7 +9,7 @@ import TrustedBrands from "@/components/sections/TustedBrands";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Hero/>
       <CompanyStats/>
       <OdooPartnershipCard/>
@@ -18,6 +18,6 @@ export default function Home() {
       <CoreValues/>
       <LatestInsights/>
       <BottomCta/>
-    </main>
+    </>
   );
 }

@@ -7,6 +7,7 @@ import {
   getCaseStudyImageUrl,
   parseCaseStudyTechStack,
   type CaseStudy,
+  type PaginationMeta,
 } from '@/lib/strapi';
 
 // Static dummy data shown immediately while the first fetch is in-flight
@@ -16,7 +17,17 @@ import { useCaseStudies } from '@/lib/strapi-hooks';
 const POSTS_PER_PAGE = 10;
 const FALLBACK_CASE_STUDY_CATEGORIES = ["All", "AI", "Web Dev", "Mobile", "Strategy", "Data", "Analytics"];
 
-const ProjectListClient: React.FC = () => {
+interface ProjectListClientProps {
+  initialProjects: CaseStudy[] | null;
+  initialPagination: PaginationMeta | null;
+  fetchFailed: boolean;
+}
+
+const ProjectListClient: React.FC<ProjectListClientProps> = ({
+  initialProjects,
+  initialPagination,
+  fetchFailed,
+}) => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [categories, setCategories] = useState<string[]>(FALLBACK_CASE_STUDY_CATEGORIES);
 
@@ -31,28 +42,26 @@ useEffect(() => {
   const { data, pagination, isLoading, error, currentPage, goToPage } = useCaseStudies({
     pageSize: POSTS_PER_PAGE,
     category: activeCategory,
+    skipInitial: !fetchFailed && initialProjects !== null,
   });
 
-  // Reset to page 1 whenever the category filter changes
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category);
     goToPage(1);
   };
 
-  // While loading, prefer stale API data if available; otherwise fall back to dummy data
-  const displayProjects: CaseStudy[] | typeof dummyProjects =
-    data ??
-    (isLoading
-      ? dummyProjects // show dummy data only on the very first load
-      : []);
+  const isInitialView = activeCategory === 'All' && currentPage === 1;
+  const displayProjects: CaseStudy[] | typeof dummyProjects = isInitialView
+    ? (data ?? initialProjects ?? (fetchFailed ? dummyProjects : []))
+    : (data ?? []);
 
-  const totalPages = pagination?.pageCount ?? 1;
+  const totalPages = pagination?.pageCount ?? initialPagination?.pageCount ?? 1;
 
   return (
     <div id="projects" className="max-w-7xl mx-auto px-4 sm:px-12 py-16 font-sans">
-      <h1 className="text-4xl md:text-5xl font-medium text-center text-gray-900 mb-12">
+      <h2 className="text-4xl md:text-5xl font-medium text-center text-gray-900 mb-12">
         Explore Our Work
-      </h1>
+      </h2>
 
       {/* Pill Filters */}
       <div className="flex flex-wrap items-center gap-3 mb-12">
@@ -82,7 +91,7 @@ useEffect(() => {
       )}
 
       {/* Grid Display */}
-      <div className={`transition-opacity duration-300 ${isLoading ? 'opacity-50' : 'opacity-100'}`}>
+      <div className={`transition-opacity duration-300 ${isLoading && !isInitialView ? 'opacity-50' : 'opacity-100'}`}>
         {displayProjects.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {displayProjects.map((project) => {
@@ -128,7 +137,7 @@ useEffect(() => {
       </div>
 
       {/* Skeleton shimmer shown only on first load (no data yet) */}
-      {isLoading && !data && (
+      {isLoading && !data && !isInitialView && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
           {Array.from({ length: POSTS_PER_PAGE }).map((_, i) => (
             <div key={i} className="rounded-xl bg-gray-100 animate-pulse h-64" />

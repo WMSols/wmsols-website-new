@@ -2,27 +2,39 @@ import WhyUs from './components/WhyUs'
 import JobsListClient from './components/JobsListClient'
 import OpenApplicationCTA from './components/OpenApplicationCta'
 import { StaggerFadeUp } from '@/components/animations/StaggerFadeUp'
-import { Metadata } from 'next'
+import { absolutePageMetadata } from '@/lib/seo'
+import { fetchJobs, type Job } from '@/lib/strapi-careers'
 
-export const metadata: Metadata = {
+export const metadata = absolutePageMetadata({
  title: "Careers at WMsols | Join Our Team of Digital Builders",
-
-description:
+ description:
   "We're hiring! Join the WMsols team and help build transformative digital products. Explore open roles in engineering, design, AI, and strategy.",
-
-keywords: [
+ path: "/careers",
+ keywords: [
   "software developer jobs",
   "tech startup careers",
   "digital agency hiring",
   "remote software jobs",
-], 
-}
+],
+})
 
-const page = () => {
+const page = async () => {
+    let initialJobs: Job[] = []
+    let initialTotal = 0
+    let fetchFailed = false
+
+    try {
+        const result = await fetchJobs(10)
+        initialJobs = result.data ?? []
+        initialTotal = result.meta.pagination.total
+    } catch {
+        fetchFailed = true
+    }
+
     return (
         <div className="flex flex-col">
             {/* Hero Section */}
-            <div className='h-screen pt-14 flex items-center justify-center overflow-hidden relative'
+            <div className='min-h-[85vh] pt-14 flex items-center justify-center overflow-hidden relative'
                 style={{
                     background: 'linear-gradient(180deg, #030015 0%, #0C0438 100%)'
                 }}>
@@ -51,7 +63,11 @@ const page = () => {
                 </StaggerFadeUp>
             </div>
             <WhyUs/>
-            <JobsListClient/>
+            <JobsListClient
+                initialJobs={initialJobs}
+                initialTotal={initialTotal}
+                fetchFailed={fetchFailed}
+            />
             <OpenApplicationCTA/>
         </div>
     )

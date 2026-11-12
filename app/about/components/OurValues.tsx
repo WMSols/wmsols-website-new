@@ -56,9 +56,9 @@ const ValueCard: React.FC<{ data: ValueItem; index: number }> = ({ data, index }
       <span className="text-3xl font-bold text-blue-200 mb-2 block">
         {data.number}
       </span>
-      <h1 className="text-3xl font-sans font-bold text-black mb-3">
+      <h3 className="text-3xl font-sans font-bold text-black mb-3">
         {data.title}
-      </h1>
+      </h3>
       <p className="text-gray-500 text-sm leading-relaxed">
         {data.description}
       </p>
@@ -75,9 +75,9 @@ const OurValues: React.FC = () => {
       <div className="max-w-6xl w-full flex flex-col">
         
         {/* Section Heading */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium text-white text-center mb-16 md:mb-24 tracking-wide">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium text-white text-center mb-16 md:mb-24 tracking-wide">
           What We Stand For
-        </h1>
+        </h2>
 
         {/* Cards Wrapper */}
         <div className="flex flex-col gap-6 md:gap-4 w-full relative">

@@ -1,11 +1,12 @@
 import React from 'react';
+import Link from 'next/link';
 import { Mail, Phone } from 'lucide-react';
 import { footerData } from '@/data/navigation';
 import { SocialLinks } from '@/components/common/SocialIcons';
 
 // --- SHARED LOGO COMPONENT ---
 const Logo = () => (
-  <a href="/" className="flex items-center gap-2 z-50">
+  <Link href="/" className="flex items-center gap-2 z-50">
     <div 
       className="w-16 h-16 rounded flex items-center justify-center font-bold text-white text-4xl"
       style={{
@@ -17,7 +18,7 @@ const Logo = () => (
     <span className="text-2xl font-bold text-[#3DA8FF] tracking-wide">
       WM<span className="text-gray-300">Sols</span>
     </span>
-  </a>
+  </Link>
 );
 
 export const Footer: React.FC = () => {
@@ -55,15 +56,15 @@ export const Footer: React.FC = () => {
 
           {/* Column 2: Useful Links */}
           <div className="lg:col-span-2">
-            <h1 className="text-lg font-sans font-medium text-white mb-6">
+            <h2 className="text-lg font-sans font-medium text-white mb-6">
               {footerData[0].item}
-            </h1>
+            </h2>
             <ul className="space-y-4">
               {footerData[0].children?.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
+                  <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
                     {link.item}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -71,15 +72,15 @@ export const Footer: React.FC = () => {
 
           {/* Column 3: Services */}
           <div className="lg:col-span-3">
-            <h1 className="text-lg font-medium font-sans text-white mb-6">
+            <h2 className="text-lg font-medium font-sans text-white mb-6">
               {footerData[1].item}
-            </h1>
+            </h2>
             <ul className="space-y-4">
               {footerData[1].children?.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
+                  <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
                     {link.item}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -87,9 +88,9 @@ export const Footer: React.FC = () => {
 
           {/* Column 4: Contact */}
           <div className="lg:col-span-3">
-            <h1 className="text-lg font-medium font-sans text-white mb-6">
+            <h2 className="text-lg font-medium font-sans text-white mb-6">
               {footerData[2].item}
-            </h1>
+            </h2>
             <ul className="space-y-4">
               {footerData[2].children?.map((link, index) => (
                 <li key={index}>

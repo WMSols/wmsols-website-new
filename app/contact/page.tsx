@@ -2,27 +2,26 @@ import { GradientLight } from '@/components/common/GradientLight'
 import React from 'react'
 import Contact from './components/Contact'
 import { StaggerFadeUp } from '@/components/animations/StaggerFadeUp'
-import { Metadata } from 'next'
+import { absolutePageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata = absolutePageMetadata({
 title: "Contact WMsols | Let's Start Your Digital Project",
-
 description:
   "Get in touch with the WMsols team. Tell us about your project and we'll get back to you within 24 hours. We're ready to build something great together.",
-
+path: "/contact",
 keywords: [
   "contact software development agency",
   "hire app developers",
   "get a tech quote",
   "digital agency contact",
-],   
-}
+],
+})
 const page = () => {
     return (
         <div>
 
             {/* Hero Section */}
-            <div className='h-screen  pt-14 flex items-center justify-center overflow-hidden relative'
+            <div className='min-h-[85vh]  pt-14 flex items-center justify-center overflow-hidden relative'
                 style={{
                     background: 'linear-gradient(180deg, #030015 0%, #0C0438 100%)'
                 }}>

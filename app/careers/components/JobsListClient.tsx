@@ -6,48 +6,64 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { getExcerpt } from '@/lib/strapi'; // Adjust the import path as needed
 import { fetchJobs, Job } from '@/lib/strapi-careers';
 
-const JobsListClient: React.FC = () => {
+const JobsListClient: React.FC<{
+  initialJobs: Job[];
+  initialTotal: number;
+  fetchFailed: boolean;
+}> = ({ initialJobs, initialTotal, fetchFailed }) => {
   const [department, setDepartment] = useState('All');
   const [location, setLocation] = useState('All');
   const [jobType, setJobType] = useState('All');
 
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [jobs, setJobs] = useState<Job[]>(initialJobs);
+  const [isLoading, setIsLoading] = useState(false);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
   const [pageSize, setPageSize] = useState(10);
-  const [totalJobs, setTotalJobs] = useState(0);
+  const [totalJobs, setTotalJobs] = useState(initialTotal);
 
-  // Fetch jobs dynamically when filters or pageSize change
+  const isInitialQuery =
+    department === 'All' && location === 'All' && jobType === 'All' && pageSize === 10;
+
+  // Fetch jobs when filters or page size change. The default view is already rendered.
   useEffect(() => {
-    const loadJobs = async () => {
-      // Show full loading state if it's a completely new filter/search
-      if (pageSize === 10) setIsLoading(true); 
+    if (!fetchFailed && isInitialQuery) {
+      setJobs(initialJobs);
+      setTotalJobs(initialTotal);
+      setIsLoading(false);
+      setIsFetchingMore(false);
+      return;
+    }
+
+    let cancelled = false;
+    const timeoutId = setTimeout(() => {
+      if (pageSize === 10) setIsLoading(true);
       else setIsFetchingMore(true);
 
-      try {
-        const res = await fetchJobs(pageSize, {
-          domain: department,
-          location: location,
-          type: jobType,
+      fetchJobs(pageSize, {
+        domain: department,
+        location: location,
+        type: jobType,
+      })
+        .then((res) => {
+          if (cancelled) return;
+          setJobs(res.data);
+          setTotalJobs(res.meta.pagination.total);
+        })
+        .catch((error) => {
+          console.error('Failed to load jobs:', error);
+        })
+        .finally(() => {
+          if (cancelled) return;
+          setIsLoading(false);
+          setIsFetchingMore(false);
         });
-        
-        setJobs(res.data);
-        setTotalJobs(res.meta.pagination.total);
-      } catch (error) {
-        console.error('Failed to load jobs:', error);
-      } finally {
-        setIsLoading(false);
-        setIsFetchingMore(false);
-      }
-    };
-
-    // Simple debounce to prevent spamming requests on keystrokes
-    const timeoutId = setTimeout(() => {
-      loadJobs();
     }, 400);
 
-    return () => clearTimeout(timeoutId);
-}, [department, location, jobType, pageSize]);
+    return () => {
+      cancelled = true;
+      clearTimeout(timeoutId);
+    };
+  }, [department, location, jobType, pageSize, fetchFailed, isInitialQuery, initialJobs, initialTotal]);
 
   // Reset page size to 10 whenever a filter changes
   useEffect(() => {
@@ -80,9 +96,9 @@ const JobsListClient: React.FC = () => {
 
   return (
     <div id="jobslist" className="max-w-5xl mx-auto px-4 py-16 font-sans">
-      <h1 className="text-4xl font-bold text-center text-gray-900 mb-10">
+      <h2 className="text-4xl font-bold text-center text-gray-900 mb-10">
         Current Openings
-      </h1>
+      </h2>
 
       {/* Filters */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-8 text-sm">
@@ -183,7 +199,7 @@ const JobsListClient: React.FC = () => {
           })
         ) : (
           <div className="text-center py-10">
-            <h1 className="text-lg font-sans font-medium text-gray-900">No jobs found</h1>
+            <h3 className="text-lg font-sans font-medium text-gray-900">No jobs found</h3>
             <p className="text-gray-500 mt-2">Try adjusting your filters or search term.</p>
           </div>
         )}

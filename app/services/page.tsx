@@ -3,27 +3,28 @@ import { Mouse } from 'lucide-react'
 import ServicesGrid from './components/ServicesGrid'
 import CtaSection from './components/CtaSection'
 import { StaggerFadeUp } from '@/components/animations/StaggerFadeUp'
-import { Metadata } from 'next'
+import { absolutePageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata = absolutePageMetadata({
   title: "WMsols Services | Custom Software Development & Digital Solutions",
-  description:  "Discover WMsols' comprehensive range of services, including custom software development, web and mobile app development, AI solutions, and digital transformation strategies. Learn how we can help your business thrive in the digital age.",
+  description: "Discover WMsols' comprehensive range of services, including custom software development, web and mobile app development, AI solutions, and digital transformation strategies. Learn how we can help your business thrive in the digital age.",
+  path: "/services",
   keywords: [
-    "WMsols services",  
+    "WMsols services",
     "custom software development",
     "web app development",
     "mobile app development",
     "AI solutions",
     "digital transformation"
-  ]
-}
+  ],
+})
 
 const page = () => {
   return (
     <div>
 
          {/* Hero Section */}
-                    <div className='min-h-screen  pt-14 flex items-center justify-center overflow-hidden relative'
+                    <div className='min-h-[85vh]  pt-14 flex items-center justify-center overflow-hidden relative'
                         style={{
                             background: 'linear-gradient(180deg, #030015 0%, #0C0438 100%)'
                         }}>

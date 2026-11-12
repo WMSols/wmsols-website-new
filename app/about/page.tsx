@@ -5,27 +5,26 @@ import OurValues from './components/OurValues'
 import TrackRecord from './components/TrackRecord'
 import CtaSection from './components/CtaSection'
 import { StaggerFadeUp } from '@/components/animations/StaggerFadeUp'
-import { Metadata } from 'next'
+import { absolutePageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata = absolutePageMetadata({
 title: "About WMsols | Our Story, Team & Mission",
-
 description:
   "WMsols is a digital solutions agency committed to building technology that matters. Learn about our story, our values, and the team behind our work.",
-
+path: "/about",
 keywords: [
   "about WMsols",
   "software development agency team",
   "tech company mission",
   "digital agency story",
 ],
-}
+})
 
 const page = () => {
     return (
         <div>
             {/* Hero Section */}
-            <div className='h-screen  pt-14  flex items-center justify-center overflow-hidden relative'
+            <div className='min-h-[85vh]  pt-14  flex items-center justify-center overflow-hidden relative'
                 style={{
                     background: 'linear-gradient(180deg, #030015 0%, #0C0438 100%)'
                 }}>

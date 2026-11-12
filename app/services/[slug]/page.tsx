@@ -7,6 +7,9 @@ import ServiceFaq from '../components/ServiceFaq';
 import ServiceHeroCTA from '../components/ServiceHeroCta'; // 1. Import the new CTA
 import { Metadata } from 'next';
 import { getServiceBySlug } from '../lib/getServiceBySlug';
+import { absolutePageMetadata } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { breadcrumbList, faqPage } from '@/lib/structured-data';
 
 export async function generateMetadata({
   params,
@@ -23,11 +26,12 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  return absolutePageMetadata({
     title: service.seo.titleTag,
     description: service.seo.metaDescription,
+    path: `/services/${service.id}`,
     keywords: service.seo.focusKeywords,
-  };
+  });
 }
 
 export default async function ServiceDetailsPage({
@@ -47,7 +51,15 @@ export default async function ServiceDetailsPage({
   const darkGradient = "bg-[linear-gradient(to_bottom,#060053,#050109)]";
 
   return (
-    <main className="w-full min-h-screen">
+    <div className="w-full min-h-screen">
+      <JsonLd
+        data={breadcrumbList([
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: service.name, path: `/services/${service.id}` },
+        ])}
+      />
+      {service.faq && service.faq.length > 0 && <JsonLd data={faqPage(service.faq)} />}
       {/* 1. Hero Section */}
       <section className={`${darkGradient} min-h-screen pt-14 px-6 flex items-center justify-center`}>
         <div className="max-w-4xl mx-auto text-center text-white">
@@ -153,6 +165,6 @@ export default async function ServiceDetailsPage({
           </div>
         </section>
       )}
-    </main>
+    </div>
   );
 }

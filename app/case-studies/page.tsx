@@ -1,29 +1,41 @@
 import { GradientLight } from '@/components/common/GradientLight'
 import React from 'react'
+import { fetchCaseStudies, type CaseStudy, type PaginationMeta } from '@/lib/strapi'
 import ProjectListClient from './components/ProjectListClient'
 import CtaSection from './components/CtaSection'
 import { StaggerFadeUp } from '@/components/animations/StaggerFadeUp'
-import { Metadata } from 'next'
+import { absolutePageMetadata } from '@/lib/seo'
 
 
-export const metadata: Metadata = {
+export const metadata = absolutePageMetadata({
 title: "Case Studies | WMsols — Real Projects, Real Results",
-
 description:
   "Explore WMsols' client case studies — from AI companion apps to enterprise recruitment platforms. See how we solve complex problems with elegant digital solutions.",
-
+path: "/case-studies",
 keywords: [
   "software development case studies",
   "app development portfolio",
   "digital transformation examples",
   "custom software projects",
-], 
-}
-const page = () => {
+],
+})
+const page = async () => {
+    let initialProjects: CaseStudy[] | null = null
+    let initialPagination: PaginationMeta | null = null
+    let fetchFailed = false
+
+    try {
+        const result = await fetchCaseStudies(1, 10)
+        initialProjects = result.data ?? []
+        initialPagination = result.meta.pagination
+    } catch {
+        fetchFailed = true
+    }
+
     return (
         <>
             {/* Hero Section */}
-            <div className='min-h-screen pt-14  flex items-center justify-center overflow-hidden relative'
+            <div className='min-h-[85vh] pt-14  flex items-center justify-center overflow-hidden relative'
                 style={{
                     background: 'linear-gradient(180deg, #030015 0%, #0C0438 100%)'
                 }}>
@@ -60,7 +72,11 @@ const page = () => {
                     <a  className='bg-transparent text-white  py-3 px-5 border border-white rounded-md' href="#projects">Explore Our Work &rarr;</a>
                 </StaggerFadeUp>
             </div>
-            <ProjectListClient  />
+            <ProjectListClient
+                initialProjects={initialProjects}
+                initialPagination={initialPagination}
+                fetchFailed={fetchFailed}
+            />
             <CtaSection/>
         </>
     )

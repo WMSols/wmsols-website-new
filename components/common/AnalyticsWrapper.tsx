@@ -7,8 +7,12 @@ export default function AnalyticsWrapper({ gaId }: { gaId: string }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    // Delay injection by 1.5 seconds to let Lighthouse finish its initial load test
-    const timer = setTimeout(() => setIsMounted(true), 1500);
+    const mount = () => setIsMounted(true);
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(mount, { timeout: 2000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const timer = setTimeout(mount, 2000);
     return () => clearTimeout(timer);
   }, []);
 
