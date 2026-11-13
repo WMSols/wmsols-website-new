@@ -2,6 +2,7 @@ import { absolutePageMetadata } from "@/lib/seo";
 import SubPageHero from "../components/SubPageHero";
 import SubPageFeatures from "../components/SubPageFeatures";
 import SubPageCTA from "../components/SubPageCTA";
+import OdooRelatedLinks from "../components/OdooRelatedLinks";
 import { 
   developmentHeroData, 
   developmentFeaturesData, 
@@ -37,6 +38,7 @@ export default function OdooDevelopmentPage() {
         buttonLabel={subPageCTAData.buttonLabel}
         href={subPageCTAData.href}
       />
+      <OdooRelatedLinks currentPath="/odoo/development" />
     </div>
   );
 }

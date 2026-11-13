@@ -2,6 +2,7 @@ import { absolutePageMetadata } from "@/lib/seo";
 import SubPageHero from "../components/SubPageHero";
 import SubPageFeatures from "../components/SubPageFeatures";
 import SubPageCTA from "../components/SubPageCTA";
+import OdooRelatedLinks from "../components/OdooRelatedLinks";
 import { supportHeroData, supportFeaturesData } from "@/data/odoo-pages/supportMaintenanceData";
 import { subPageCTAData } from "@/data/odoo-pages/developmentData";
 
@@ -17,6 +18,7 @@ export default function OdooSupportPage() {
       <SubPageHero {...supportHeroData} />
       <SubPageFeatures {...supportFeaturesData} />
       <SubPageCTA {...subPageCTAData} />
+      <OdooRelatedLinks currentPath="/odoo/support-maintenance" />
     </div>
   );
 }

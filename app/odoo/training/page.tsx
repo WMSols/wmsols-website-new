@@ -2,6 +2,7 @@ import { absolutePageMetadata } from "@/lib/seo";
 import SubPageHero from "../components/SubPageHero";
 import SubPageFeatures from "../components/SubPageFeatures";
 import SubPageCTA from "../components/SubPageCTA";
+import OdooRelatedLinks from "../components/OdooRelatedLinks";
 import { trainingHeroData, trainingFeaturesData } from "@/data/odoo-pages/trainingData";
 import { subPageCTAData } from "@/data/odoo-pages/developmentData";
 
@@ -17,6 +18,7 @@ export default function OdooTrainingPage() {
       <SubPageHero {...trainingHeroData} />
       <SubPageFeatures {...trainingFeaturesData} />
       <SubPageCTA {...subPageCTAData} />
+      <OdooRelatedLinks currentPath="/odoo/training" />
     </div>
   );
 }

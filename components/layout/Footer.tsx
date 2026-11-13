@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
           
           {/* Column 1: Brand & Socials */}
-          <div className="lg:col-span-4 pr-4">
+          <div className="lg:col-span-3 pr-4">
             <Logo />
             <p className="mt-6 text-gray-400 text-sm leading-relaxed max-w-sm">
               We craft digital solutions that empower businesses to thrive in an ever-evolving technological landscape. Your vision, our expertise.
@@ -71,11 +71,11 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Column 3: Services */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-4">
             <h2 className="text-lg font-medium font-sans text-white mb-6">
               {footerData[1].item}
             </h2>
-            <ul className="space-y-4">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
               {footerData[1].children?.map((link, index) => (
                 <li key={index}>
                   <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">

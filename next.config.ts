@@ -38,6 +38,11 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: '/index.html',
+        destination: '/',
+        statusCode: 301,
+      },
       // Old site blog path
       {
         source: '/blog',

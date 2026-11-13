@@ -2,6 +2,7 @@ import { absolutePageMetadata } from "@/lib/seo";
 import SubPageHero from "../components/SubPageHero";
 import SubPageFeatures from "../components/SubPageFeatures";
 import SubPageCTA from "../components/SubPageCTA";
+import OdooRelatedLinks from "../components/OdooRelatedLinks";
 import { customizationHeroData, customizationFeaturesData } from "@/data/odoo-pages/customizationData";
 import { subPageCTAData } from "@/data/odoo-pages/developmentData";
 
@@ -17,6 +18,7 @@ export default function OdooCustomizationPage() {
       <SubPageHero {...customizationHeroData} />
       <SubPageFeatures {...customizationFeaturesData} />
       <SubPageCTA {...subPageCTAData} />
+      <OdooRelatedLinks currentPath="/odoo/customization" />
     </div>
   );
 }

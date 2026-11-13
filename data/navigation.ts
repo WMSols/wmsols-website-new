@@ -139,7 +139,15 @@ export const footerData = [
       { item: "AI Automation", href: "/services/ai-automation" },
       { item: "UI/UX Design", href: "/services/ui-ux-design" },
       { item: "Database Architecture", href: "/services/database-architecture" },
-      { item: "Data Analytics", href: "/services/data-analytics" }
+      { item: "Data Analytics", href: "/services/data-analytics" },
+      { item: "Digital Strategy", href: "/services/digital-strategy" },
+      { item: "Odoo", href: "/odoo" },
+      { item: "Odoo Development", href: "/odoo/development" },
+      { item: "Odoo Customization", href: "/odoo/customization" },
+      { item: "Odoo Integration", href: "/odoo/integration" },
+      { item: "Odoo Support & Maintenance", href: "/odoo/support-maintenance" },
+      { item: "Odoo Migration", href: "/odoo/migration" },
+      { item: "Odoo Training", href: "/odoo/training" }
     ]
   },
   {

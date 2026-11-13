@@ -36,9 +36,6 @@ export const metadata: Metadata = {
     "AI automation services",
     "digital transformation company"
   ],
-  alternates: {
-    canonical: "https://www.wmsols.com/",
-  },
   openGraph: {
     title: "WMsols | Custom Software Development & Digital Solutions Agency",
     description:

@@ -14,6 +14,27 @@ export interface NavItem {
   children?: NavItem[];
 }
 
+function collectNavLinks(items: NavItem[]): NavItem[] {
+  const links: NavItem[] = [];
+  const seen = new Set<string>();
+
+  const walk = (nodes: NavItem[]) => {
+    for (const node of nodes) {
+      const key = `${node.href}|${node.item}`;
+      if (node.href.startsWith('/') && !seen.has(key)) {
+        seen.add(key);
+        links.push(node);
+      }
+      if (node.children?.length) walk(node.children);
+    }
+  };
+
+  walk(items);
+  return links;
+}
+
+const crawlableNavLinks = collectNavLinks(navigationData);
+
 // --- LOGO ---
 const Logo: React.FC<{ isLightMode?: boolean }> = ({ isLightMode }) => (
   <Link 
@@ -93,6 +114,16 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-24 flex items-center justify-between">
         
         <Logo isLightMode={isLightMode && !isOpen} />
+
+        <nav aria-label="All pages" className="sr-only">
+          <ul>
+            {crawlableNavLinks.map((link) => (
+              <li key={`${link.href}|${link.item}`}>
+                <Link href={link.href}>{link.item}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         {/* ========================================= */}
         {/* DESKTOP NAVIGATION                        */}
